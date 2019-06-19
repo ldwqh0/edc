@@ -32,7 +32,6 @@ instance.interceptors.response.use(response => {
   store.commit('addError', err)
   return Promise.reject(response)
 }, error => {
-  debugger
   store.commit('loadingComplete')
   let { response: { status } } = error
   if (status === 401) {

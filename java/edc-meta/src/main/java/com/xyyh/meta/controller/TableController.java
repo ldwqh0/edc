@@ -3,6 +3,8 @@ package com.xyyh.meta.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class TableController {
 	@GetMapping("{id}")
 	public TableDto get(@PathVariable("id") Long id) {
 		return tableConverter.toDto(tableService.findById(id));
+	}
+
+	@PutMapping("{id}")
+	public TableDto update(@PathVariable("id") Long id, @RequestBody TableDto table) {
+		return tableConverter.toDto(tableService.update(id, table));
 	}
 
 }

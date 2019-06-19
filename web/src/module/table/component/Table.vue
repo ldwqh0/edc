@@ -2,29 +2,29 @@
   <div class="edc-table">
     <el-row>
       <el-col>
-        <el-button @click="addColumn">新增</el-button>
+        <el-button @click="addColumn">新增字段</el-button>
       </el-col>
     </el-row>
-    {{ table }}
-    <table style="width: 100%;">
-      <tr>
-        <th>字段名称</th>
-        <th>字段名称(数据库)</th>
-        <th>字段长度</th>
-      </tr>
-      <tr v-for="(column,index) in table.columns" :key="index">
-        <td>
-          <el-form>
-            <el-form-item>
-              <el-input v-model="column.name"/>
+    <el-form ref="form"
+             :model="table">
+      <el-table :data="table.columns">
+        <el-table-column label="字段名称">
+          <template v-slot="{$index,row}">
+            <el-form-item :prop="`table.columns[${$index}].name`"
+                          :rules="columnRules.columnName">
+              <el-input v-model="row.name"/>
             </el-form-item>
-          </el-form>
-        </td>
-        <!--        <td>{{ column.name }}</td>-->
-        <td>{{ column.fieldName }}</td>
-        <td>{{ column.length }}</td>
-      </tr>
-    </table>
+            {{ row }}
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <el-row>
+        <el-col :span="24">
+          <el-button @click="save">确定</el-button>
+        </el-col>
+      </el-row>
+    </el-form>
   </div>
 </template>
 
@@ -43,11 +43,22 @@
       columns: []
     }
 
+    columnRules = {
+      columnName: [{
+        required: true,
+        message: '请输入字段名称'
+      }]
+    }
+
     @TableModule.Action('loadTable')
     loadTable
 
     created () {
       this.loadTable({ id: this.id }).then(({ data }) => (this.table = data))
+    }
+
+    save () {
+      this.$refs['form'].validate()
     }
 
     addColumn () {
