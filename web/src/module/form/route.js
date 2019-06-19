@@ -1,10 +1,10 @@
 export default [{
-  path: '/tables',
+  path: '/forms',
   component: () => import('@/components/templates/HeaderTemplate'),
   children: [{
-    name: 'table',
+    name: 'form',
     path: ':id',
     props: true,
-    component: () => import('./component/Table')
+    component: () => import('./component/EdcForm')
   }]
 }]

@@ -8,6 +8,9 @@ export default {
   actions: {
     loadTable ({ state: { url } }, { id }) {
       return Vue.http.get(`${url}/${id}`)
+    },
+    update ({ state: { url } }, data) {
+      return Vue.http.put(`${url}/${data.id}`, data)
     }
   }
 }

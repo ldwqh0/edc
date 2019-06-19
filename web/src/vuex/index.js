@@ -52,7 +52,7 @@ export default new Store({
       if (menus && menus.length > 0 && matched !== undefined && matched !== null) {
         return [...findParents(matched), matched]
       } else {
-        return []
+        return [{ id: 1, title: '首页' }]
       }
     },
     /**

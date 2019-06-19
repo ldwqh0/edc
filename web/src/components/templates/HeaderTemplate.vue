@@ -38,11 +38,7 @@
           {{ crumb.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
-      <el-container>
-        <el-main>
-          <router-view/>
-        </el-main>
-      </el-container>
+      <router-view/>
     </el-main>
   </el-container>
 </template>
@@ -59,7 +55,7 @@
       MenuItem
     }
   })
-  export default class Template extends Vue {
+  export default class HeaderTemplate extends Vue {
     @securityModule.Getter('menuTree')
     menus
 
@@ -154,9 +150,8 @@
     }
 
     .app-main {
-      padding: 0;
-
       .el-breadcrumb { /*重新定义导航面包屑的样式*/
+        margin: -20px -20px 10px -20px;
         padding: 10px;
         background: #D9DBDB;
       }
