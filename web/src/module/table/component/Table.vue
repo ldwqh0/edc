@@ -10,7 +10,7 @@
       <el-table :data="table.columns">
         <el-table-column label="字段名称">
           <template v-slot="{$index,row}">
-            <el-form-item :prop="`table.columns[${$index}].name`"
+            <el-form-item :prop="`columns[${$index}].name`"
                           :rules="columnRules.columnName">
               <el-input v-model="row.name"/>
             </el-form-item>
