@@ -13,5 +13,4 @@ public class TableDto implements Serializable {
 	private Long id;
 	private String name;
 	private List<Column> columns;
-
 }

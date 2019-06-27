@@ -1,6 +1,7 @@
 <template>
   <div class="edc-table">
     <el-form ref="form"
+             label-width="80px"
              :model="table">
       <el-row>
         <el-col :span="12">
@@ -15,6 +16,7 @@
             <el-table-column label="字段名称" prop="name">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].name`"
+                              label-width="0px"
                               :rules="columnRules.columnName">
                   <el-input v-model="row.name"/>
                 </el-form-item>
@@ -23,6 +25,7 @@
             <el-table-column label="字段名称(英文)">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].fieldName`"
+                              label-width="0px"
                               :rules="columnRules.fieldName">
                   <el-input v-model="row.fieldName"/>
                 </el-form-item>
@@ -31,6 +34,7 @@
             <el-table-column label="字段类型">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].type`"
+                              label-width="0px"
                               :rules="columnRules.fieldName">
                   <el-select v-model="row.type">
                     <el-option value="STRING" label="字符串"/>
@@ -42,16 +46,39 @@
             </el-table-column>
             <el-table-column type="expand">
               <template v-slot="{row}">
-                <el-form-item :prop="`columns[${$index}].nullable`">
-                  <el-checkbox v-model="row.nullable">可以为空</el-checkbox>
-                </el-form-item>
-                <el-form-item label-width="80px"
-                              :prop="`columns[${$index}].length`"
-                              label="字段长度">
-                  <el-input v-model.number="row.length"
-                            type="number"
-                            placeholder="字段长度"/>
-                </el-form-item>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item :prop="`columns[${$index}].nullable`">
+                      <el-checkbox v-model="row.nullable">可以为空</el-checkbox>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item :prop="`columns[${$index}].length`"
+                                  label="字段长度">
+                      <el-input v-model.number="row.length"
+                                type="number"
+                                placeholder="字段长度"/>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item :prop="`columns[${$index}].min`"
+                                  label="最小值">
+                      <el-input v-model.number="row.min"
+                                type="number"
+                                placeholder="最小值"/>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item :prop="`columns[${$index}].max`"
+                                  label="最大值">
+                      <el-input v-model.number="row.max"
+                                type="number"
+                                placeholder="最小值"/>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
               </template>
             </el-table-column>
             <el-table-column>
