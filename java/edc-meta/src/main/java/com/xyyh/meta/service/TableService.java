@@ -16,4 +16,6 @@ public interface TableService {
 
 	public Page<Table> find(String keywords, Pageable pageable);
 
+	public Table save(TableDto table);
+
 }

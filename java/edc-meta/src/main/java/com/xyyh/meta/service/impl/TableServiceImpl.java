@@ -50,4 +50,12 @@ public class TableServiceImpl implements TableService {
 		return tableRepository.findAll(condition, pageable);
 	}
 
+	@Override
+	@Transactional
+	public Table save(TableDto table) {
+		Table result = new Table();
+		tableConverter.copyProperties(result, table);
+		return tableRepository.save(result);
+	}
+
 }

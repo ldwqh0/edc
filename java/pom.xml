@@ -21,5 +21,43 @@
 
 	<modules>
 		<module>edc-meta</module>
+		<module>edc-data-common</module>
+		<module>edc-data-mongo-impl</module>
+		<module>edc-app</module>
+		<module>edc-autoconfigure</module>
+		<module>edc-spring-boot-starter</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-meta</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-data-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-data-mongo-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-autoconfigure</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+
+
+	</dependencyManagement>
+
 </project>

@@ -18,8 +18,9 @@ import lombok.Setter;
 public class Table extends AbstractEntity {
 	private static final long serialVersionUID = 6295989944983358320L;
 
-	@javax.persistence.Column(name = "name_")
+	@javax.persistence.Column(name = "name_", unique = true)
 	private String name;
+
 	@ElementCollection
 	@CollectionTable(name = "edc_table_column_", joinColumns = {
 			@JoinColumn(name = "table_id_", referencedColumnName = "id_")

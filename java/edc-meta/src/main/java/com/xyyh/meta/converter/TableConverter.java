@@ -18,6 +18,13 @@ public class TableConverter extends AbstractConverter<Table, TableDto> {
 		return dto;
 	}
 
+	public TableDto toTableDto(Table model) {
+		TableDto dto = new TableDto();
+		dto.setId(model.getId());
+		dto.setName(model.getName());
+		return dto;
+	}
+
 	@Override
 	public Table copyProperties(Table model, TableDto dto) {
 		model.setName(dto.getName());
