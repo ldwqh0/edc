@@ -6,5 +6,9 @@ export default [{
     path: ':id',
     props: true,
     component: () => import('./component/Table')
+  }, {
+    name: 'tables',
+    path: '',
+    component: () => import('./component/Tables')
   }]
 }]

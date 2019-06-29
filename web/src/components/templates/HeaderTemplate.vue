@@ -101,8 +101,8 @@
     }
 
     created () {
-      this.loadUserInfo()
-      this.loadMenu()
+      // this.loadUserInfo()
+      // this.loadMenu()
     }
   }
 </script>
