@@ -7,7 +7,9 @@ const router = new Router({
   routes: [{
     name: 'default',
     path: '/',
-    redirect: '/index'
+    redirect: {
+      name: 'tables'
+    }
   }, {
     name: 'login',
     path: '/login',

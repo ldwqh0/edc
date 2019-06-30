@@ -1,11 +1,22 @@
 <template>
   <div class="edc-table">
     <el-form ref="form"
+             inline
+             label-position="left"
              label-width="80px"
              :model="table">
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="表名称" :prop="name" label-width="80px">
+        <el-col :span="24">
+          <el-form-item label="表名称"
+                        prop="name"
+                        label-width="80px"
+                        inline>
+            <el-input type="text" v-model="table.name"/>
+          </el-form-item>
+          <el-form-item label="英文名称"
+                        prop="name"
+                        label-width="80px"
+                        inline>
             <el-input type="text" v-model="table.name"/>
           </el-form-item>
         </el-col>
@@ -103,7 +114,7 @@
 
 <script>
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
 
   const TableModule = namespace('table')
@@ -111,6 +122,9 @@
   export default class Table extends Vue {
     @Prop()
     id
+
+    // 记录表单是否改变
+    saveState = true
 
     table = {
       columns: []
@@ -131,15 +145,17 @@
       }]
     }
 
+    @TableModule.Action('loadTables')
+    loadTables
+
     @TableModule.Action('loadTable')
     loadTable
 
     @TableModule.Action('update')
     update
 
-    created () {
-      this.loadTable({ id: this.id }).then(({ data }) => (this.table = data))
-    }
+    @TableModule.Action('save')
+    saveTable
 
     /**
      * 删除表的列
@@ -149,10 +165,37 @@
       this.table.columns.splice(index, 1)
     }
 
+    beforeRouteUpdate (to, from, next) {
+      let p = this.saveState ? Promise.resolve() : this.$confirm('是否离开当前页面?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      p.then(() => {
+        next()
+      }).catch(() => {
+        next(false)
+      })
+    }
+
     save () {
       this.$refs['form'].validate().then(() => {
-        this.update(this.table)
+        return this.id === 'new' ? this.saveTable(this.table) : this.update(this.table)
+      }).then(() => {
+        this.saveState = true
+        this.loadTables()
       })
+    }
+
+    @Watch('id', { immediate: true })
+    load (id) {
+      let p = id === 'new' ? Promise.resolve({ columns: [] }) : this.loadTable({ id: this.id }).then(({ data }) => data)
+      p.then(data => (this.table = data)).then(() => (this.saveState = true))
+    }
+
+    @Watch('table', { deep: true })
+    changeState () {
+      this.saveState = false
     }
 
     addColumn () {

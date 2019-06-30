@@ -14,6 +14,7 @@ import store from './vuex'
 import { httpInstance, router, tableHttpInstance } from './config'
 import { AjaxPlugin, EleDateFormater } from './plugins'
 import EleDataTables from 'element-datatables'
+import { Component } from 'vue-property-decorator'
 // 载入模拟数据，在对接后端服务器接口时，取消掉
 // import '../data'
 
@@ -33,6 +34,8 @@ Vue.use(table, { store, router })
 Vue.use(form, { store, router })
 
 console.log('Created By ldwqh0@outlook.com')
+
+Component.registerHooks(['beforeRouteEnter', 'beforeRouteUpdate'])
 
 /**
  *  一定要使用 render函数创建app,这样就不需要依赖完整的esm，也就是不需要打包vue的编译模块了，

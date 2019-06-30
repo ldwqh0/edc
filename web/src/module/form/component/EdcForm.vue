@@ -33,7 +33,7 @@
   import { namespace } from 'vuex-class'
 
   const tableModule = namespace('table')
-
+  const formModule = namespace('form')
   @Component
   export default class EdcForm extends Vue {
     table = { columns: [] }
@@ -47,6 +47,9 @@
     data = {}
     @tableModule.Action('loadTable')
     loadTable
+
+    @formModule.Action('saveData')
+    saveData
 
     @Prop()
     id
@@ -83,7 +86,9 @@
     }
 
     save () {
-      this.$refs['form'].validate()
+      this.$refs['form'].validate().then(() => {
+        return this.saveData({ id: this.id, data: this.data })
+      })
     }
   }
 </script>
