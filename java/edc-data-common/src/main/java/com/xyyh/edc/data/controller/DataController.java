@@ -18,10 +18,9 @@ public class DataController {
 	@Autowired
 	private EdcDataService dataService;
 
-	@PostMapping("{name}")
-	public Object save(@PathVariable("name") String name, @RequestBody Map<String, Object> data) {
-		dataService.save(name, data);
-
+	@PostMapping("{id}")
+	public Object save(@PathVariable("id") Long id, @RequestBody Map<String, Object> data) {
+		dataService.save(id, data);
 		return data;
 	}
 }

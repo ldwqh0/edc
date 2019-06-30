@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface EdcDataService {
 
-	public void save(String name, Map<String, Object> data);
+	public Map<String,Object> save(Long id, Map<String, Object> data);
 
 }

@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.dm.springboot.autoconfigure.uap.UapAutoConfiguration,\
+com.xyyh.edc.autoconfigure.EdcAutoConfiguration,\
+com.xyyh.edc.autoconfigure.EdcMetaAutoConfiguration
