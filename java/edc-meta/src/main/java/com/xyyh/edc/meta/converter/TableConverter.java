@@ -1,10 +1,10 @@
-package com.xyyh.meta.converter;
+package com.xyyh.edc.meta.converter;
 
 import org.springframework.stereotype.Component;
 
 import com.dm.common.converter.AbstractConverter;
-import com.xyyh.meta.dto.TableDto;
-import com.xyyh.meta.entity.Table;
+import com.xyyh.edc.meta.dto.TableDto;
+import com.xyyh.edc.meta.entity.Table;
 
 @Component
 public class TableConverter extends AbstractConverter<Table, TableDto> {

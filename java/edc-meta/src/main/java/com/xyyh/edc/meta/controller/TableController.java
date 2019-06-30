@@ -1,4 +1,4 @@
-package com.xyyh.meta.controller;
+package com.xyyh.edc.meta.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dm.common.dto.TableResult;
-import com.xyyh.meta.converter.TableConverter;
-import com.xyyh.meta.dto.TableDto;
-import com.xyyh.meta.service.TableService;
+import com.xyyh.edc.meta.converter.TableConverter;
+import com.xyyh.edc.meta.dto.TableDto;
+import com.xyyh.edc.meta.service.TableService;
 
 @RestController
 @RequestMapping("tables")

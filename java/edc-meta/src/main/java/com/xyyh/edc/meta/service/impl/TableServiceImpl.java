@@ -1,4 +1,4 @@
-package com.xyyh.meta.service.impl;
+package com.xyyh.edc.meta.service.impl;
 
 import java.util.Optional;
 
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.BooleanBuilder;
-import com.xyyh.meta.converter.TableConverter;
-import com.xyyh.meta.dto.TableDto;
-import com.xyyh.meta.entity.QTable;
-import com.xyyh.meta.entity.Table;
-import com.xyyh.meta.repository.TableRepository;
-import com.xyyh.meta.service.TableService;
+import com.xyyh.edc.meta.converter.TableConverter;
+import com.xyyh.edc.meta.dto.TableDto;
+import com.xyyh.edc.meta.entity.QTable;
+import com.xyyh.edc.meta.entity.Table;
+import com.xyyh.edc.meta.repository.TableRepository;
+import com.xyyh.edc.meta.service.TableService;
 
 @Service
 public class TableServiceImpl implements TableService {

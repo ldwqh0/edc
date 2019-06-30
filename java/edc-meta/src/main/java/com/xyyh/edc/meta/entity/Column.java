@@ -1,4 +1,4 @@
-package com.xyyh.meta.entity;
+package com.xyyh.edc.meta.entity;
 
 import java.io.Serializable;
 

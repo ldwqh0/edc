@@ -1,12 +1,12 @@
-package com.xyyh.meta.service;
+package com.xyyh.edc.meta.service;
 
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.xyyh.meta.dto.TableDto;
-import com.xyyh.meta.entity.Table;
+import com.xyyh.edc.meta.dto.TableDto;
+import com.xyyh.edc.meta.entity.Table;
 
 public interface TableService {
 

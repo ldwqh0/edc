@@ -1,11 +1,11 @@
-package com.xyyh.meta.dto;
+package com.xyyh.edc.meta.dto;
 
 import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.xyyh.meta.entity.Column;
+import com.xyyh.edc.meta.entity.Column;
 
 import lombok.Data;
 
