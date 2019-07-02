@@ -34,6 +34,9 @@ public class Column implements Serializable {
 	@javax.persistence.Column(name = "field_name_", length = 200)
 	private String fieldName;
 
+	@javax.persistence.Column(name = "is_id_cloumn_")
+	private boolean idColumn;
+
 	/**
 	 * 指定字段的取值范围， 对于数值型，进行值校验，对于字符串，进行长度校验
 	 */
@@ -64,4 +67,5 @@ public class Column implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@javax.persistence.Column(name = "type_", length = 50)
 	private Types type;
+
 }
