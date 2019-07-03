@@ -25,6 +25,10 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	@Transactional
 	public Map<String, Object> save(Long id, Map<String, Object> data) {
 		Optional<Table> table = tableService.findById(id);
+
+		// 主键的判定
+		// 主键的映射
+		// 唯一键的控制
 		if (table.isPresent()) {
 //			data.put("_id", "asd");
 			return mongoTemplate.save(data, table.get().getName());

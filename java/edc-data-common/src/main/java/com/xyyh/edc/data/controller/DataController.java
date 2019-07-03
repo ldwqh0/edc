@@ -23,4 +23,15 @@ public class DataController {
 		dataService.save(id, data);
 		return data;
 	}
+
+	// 获取
+	public Object get(@PathVariable Long tableId, @PathVariable String dataId) {
+		return dataId;
+	}
+	
+	// 删除
+	
+	// 修改
+	
+	// 查询
 }
