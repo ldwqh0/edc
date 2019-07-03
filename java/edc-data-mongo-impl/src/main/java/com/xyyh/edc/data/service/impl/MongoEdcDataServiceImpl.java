@@ -26,7 +26,7 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	public Map<String, Object> save(Long id, Map<String, Object> data) {
 		Optional<Table> table = tableService.findById(id);
 		if (table.isPresent()) {
-			data.put("_id", "asd");
+//			data.put("_id", "asd");
 			return mongoTemplate.save(data, table.get().getName());
 		} else {
 			return null;
