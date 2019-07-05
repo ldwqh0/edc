@@ -30,7 +30,7 @@
   }
 </script>
 <style lang="less">
-  @import "./style/themes/default.less";
+  @import './style/themes/default.less';
 
   .el-input__icon {
     line-height: 28px;
