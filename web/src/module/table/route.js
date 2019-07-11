@@ -1,6 +1,6 @@
 export default [{
   path: '/tables',
-  component: () => import('@/components/templates/HeaderTemplate'),
+  component: () => import('@/components/templates/LeftTemplate'),
   children: [{
     name: 'tables',
     path: '',

@@ -5,7 +5,7 @@
     <template slot="title"> {{ item.title }}</template>
     <menu-item v-for="(submenu,index) in item.submenus"
                :item="submenu"
-               :key="index"/>
+               :key="index" />
   </el-submenu>
   <el-menu-item v-else
                 @click="toTarget(item)"
@@ -16,16 +16,16 @@
 
 <script>
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import {Component, Prop} from 'vue-property-decorator'
 
   @Component({
     name: 'menu-item'
   })
   export default class MenuItem extends Vue {
-    @Prop({ default: () => ({}) })
+    @Prop({default: () => ({})})
     item
 
-    toTarget ({ type = 'COMPONENT', url = '/', openInNewWindow = false } = {
+    toTarget ({type = 'COMPONENT', url = '/', openInNewWindow = false} = {
       type: 'COMPONENT',
       url: '/',
       openInNewWindow: false

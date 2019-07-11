@@ -4,10 +4,10 @@
     <el-form class="content" v-if="!useSso">
       <div class="title">枣庄智慧旅游云大数据平台</div>
       <el-form-item label="用户名：" label-width="80px">
-        <el-input v-model="data.username"/>
+        <el-input v-model="data.username" />
       </el-form-item>
       <el-form-item label="密码：" label-width="80px">
-        <el-input v-model="data.password"/>
+        <el-input v-model="data.password" />
       </el-form-item>
       <el-button @click="login" type="primary">登录</el-button>
     </el-form>
@@ -16,8 +16,8 @@
 
 <script>
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
+  import {Component, Prop} from 'vue-property-decorator'
+  import {namespace} from 'vuex-class'
   import qs from 'qs'
   import translateUrl from './translateUrl'
 
@@ -39,10 +39,10 @@
     @Prop({})
     redirect
 
-    @Prop({ default: () => '' })
+    @Prop({default: () => ''})
     code
 
-    @Prop({ default: () => '' })
+    @Prop({default: () => ''})
     state
 
     // 是否启用单点登录，这是一个全局变量
@@ -66,19 +66,20 @@
       if (this.useSso) {
         if (this.code !== '' && this.state !== '') {
           // 自动登录
-          this.doLogin({ code: this.code, state: this.state, current_uri: getCurrentPath() }).then(this.goHome)
+          this.doLogin({code: this.code, state: this.state, current_uri: getCurrentPath()}).then(this.goHome)
         } else {
           // 如果没有检测到授权码，发起一次登录请求，获取跳转链接
-          this.doLogin().then(() => {})
-            .catch(({ response: { data: { redirect_url: redirectUrl } } }) => {
+          this.doLogin().then(() => {
+          })
+            .catch(({response: {data: {redirect_url: redirectUrl}}}) => {
               // 保存当前会话地址
               if (this.redirect) {
                 sessionStorage.setItem('savedRedirect', this.redirect)
               }
 
               let [server, paramStr] = redirectUrl.split('?')
-              let { protocol, host } = window.location
-              let { pathname } = translateUrl(server)
+              let {protocol, host} = window.location
+              let {pathname} = translateUrl(server)
               let parameters = qs.parse(paramStr)
               server = `${protocol}//${host}/${pathname}`
               parameters.redirect_uri = getCurrentPath()

@@ -19,7 +19,7 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
-  entry: ['@babel/polyfill', './src'],
+  entry: ['core-js/stable', 'regenerator-runtime/runtime', './src'],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
@@ -49,10 +49,10 @@ module.exports = {
           /node_modules/.test(file)
           // 一律要编译vue文件
           && !/\.vue\.js/.test(file) //
-          // element中的文件也要编译，貌似element中的文件编译不完全
-          && !/element-ui(\\|\/)(src|packages)/.test(file)
-          // 这个包里面启用了package.json中的module.源码中的文件存在部分es6代码，不能直接压缩
-          && !/resize-detector(\\|\/)(esm)/.test(file)
+        // element中的文件也要编译，貌似element中的文件编译不完全
+        // && !/element-ui(\\|\/)(src|packages)/.test(file)
+        // 这个包里面启用了package.json中的module.源码中的文件存在部分es6代码，不能直接压缩
+        // && !/resize-detector(\\|\/)(esm)/.test(file)
       }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

@@ -11,13 +11,13 @@
                         prop="name"
                         label-width="80px"
                         inline>
-            <el-input type="text" v-model="table.name"/>
+            <el-input type="text" v-model="table.name" />
           </el-form-item>
           <el-form-item label="英文名称"
                         prop="name"
                         label-width="80px"
                         inline>
-            <el-input type="text" v-model="table.name"/>
+            <el-input type="text" v-model="table.name" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -29,7 +29,7 @@
                 <el-form-item :prop="`columns[${$index}].name`"
                               label-width="0px"
                               :rules="columnRules.columnName">
-                  <el-input v-model="row.name"/>
+                  <el-input v-model="row.name" />
                 </el-form-item>
               </template>
             </el-table-column>
@@ -38,7 +38,7 @@
                 <el-form-item :prop="`columns[${$index}].fieldName`"
                               label-width="0px"
                               :rules="columnRules.fieldName">
-                  <el-input v-model="row.fieldName"/>
+                  <el-input v-model="row.fieldName" />
                 </el-form-item>
               </template>
             </el-table-column>
@@ -48,9 +48,13 @@
                               label-width="0px"
                               :rules="columnRules.fieldName">
                   <el-select v-model="row.type">
-                    <el-option value="STRING" label="字符串"/>
-                    <el-option value="DECIMAL" label="数字"/>
-                    <el-option value="DATETIME" label="日期"/>
+                    <el-option value="INTEGER" label="整数" />
+                    <el-option value="STRING" label="字符串" />
+                    <el-option value="DECIMAL" label="实数" />
+                    <el-option value="DATE" label="日期" />
+                    <el-option value="DATETIME" label="日期和时间" />
+                    <el-option value="BOOLEAN" label="布尔值" />
+                    <el-option value="BINARY" label="二进制值" />
                   </el-select>
                 </el-form-item>
               </template>
@@ -68,7 +72,7 @@
                                   label="字段长度">
                       <el-input v-model.number="row.length"
                                 type="number"
-                                placeholder="字段长度"/>
+                                placeholder="字段长度" />
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -78,7 +82,7 @@
                                   label="最小值">
                       <el-input v-model.number="row.min"
                                 type="number"
-                                placeholder="最小值"/>
+                                placeholder="最小值" />
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -86,7 +90,7 @@
                                   label="最大值">
                       <el-input v-model.number="row.max"
                                 type="number"
-                                placeholder="最小值"/>
+                                placeholder="最小值" />
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -114,8 +118,8 @@
 
 <script>
   import Vue from 'vue'
-  import { Component, Prop, Watch } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
+  import {Component, Prop, Watch} from 'vue-property-decorator'
+  import {namespace} from 'vuex-class'
 
   const TableModule = namespace('table')
   @Component
@@ -187,13 +191,13 @@
       })
     }
 
-    @Watch('id', { immediate: true })
+    @Watch('id', {immediate: true})
     load (id) {
-      let p = id === 'new' ? Promise.resolve({ columns: [] }) : this.loadTable({ id: this.id }).then(({ data }) => data)
+      let p = id === 'new' ? Promise.resolve({columns: []}) : this.loadTable({id: this.id}).then(({data}) => data)
       p.then(data => (this.table = data)).then(() => (this.saveState = true))
     }
 
-    @Watch('table', { deep: true })
+    @Watch('table', {deep: true})
     changeState () {
       this.saveState = false
     }

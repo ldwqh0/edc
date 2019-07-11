@@ -1,6 +1,6 @@
 export default [{
   path: '/forms',
-  component: () => import('@/components/templates/HeaderTemplate'),
+  component: () => import('@/components/templates/LeftTemplate'),
   children: [{
     name: 'form',
     path: ':id',

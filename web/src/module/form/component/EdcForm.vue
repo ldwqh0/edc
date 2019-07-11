@@ -9,9 +9,9 @@
           <el-form-item :label="column.name"
                         :rules="getRules(column)"
                         :prop="`${column.fieldName}`">
-            <el-input v-if="column.type==='STRING'" v-model="data[column.fieldName]"/>
-            <el-input type="number" v-if="column.type==='DECIMAL'" v-model="data[column.fieldName]"/>
-            <el-date-picker v-if="column.type==='DATETIME'" v-model="data[column.fieldName]"/>
+            <el-input v-if="column.type==='STRING'" v-model="data[column.fieldName]" />
+            <el-input type="number" v-if="column.type==='DECIMAL'" v-model="data[column.fieldName]" />
+            <el-date-picker v-if="column.type==='DATETIME'" v-model="data[column.fieldName]" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -27,14 +27,14 @@
 <script>
   import Vue from 'vue'
 
-  import { Component, Prop } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
+  import {Component, Prop} from 'vue-property-decorator'
+  import {namespace} from 'vuex-class'
 
   const tableModule = namespace('table')
   const formModule = namespace('form')
   @Component
   export default class EdcForm extends Vue {
-    table = { columns: [] }
+    table = {columns: []}
 
     get rules () {
       this.table.columns.map(column => {
@@ -80,12 +80,12 @@
     }
 
     created () {
-      this.loadTable({ id: this.id }).then(({ data }) => (this.table = data))
+      this.loadTable({id: this.id}).then(({data}) => (this.table = data))
     }
 
     save () {
       this.$refs['form'].validate().then(() => {
-        return this.saveData({ id: this.id, data: this.data })
+        return this.saveData({id: this.id, data: this.data})
       })
     }
   }
