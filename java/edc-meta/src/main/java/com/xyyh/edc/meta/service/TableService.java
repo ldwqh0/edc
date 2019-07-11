@@ -18,4 +18,6 @@ public interface TableService {
 
 	public Table save(TableDto table);
 
+	public Optional<Table> findByName(String collection);
+
 }

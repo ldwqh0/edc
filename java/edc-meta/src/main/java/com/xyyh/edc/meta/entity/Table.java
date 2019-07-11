@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,6 +27,7 @@ public class Table extends AbstractEntity {
 	private String name;
 
 	@ElementCollection
+	@OrderBy("order ASC")
 	@CollectionTable(name = "edc_table_column_", joinColumns = {
 			@JoinColumn(name = "table_id_", referencedColumnName = "id_")
 	})

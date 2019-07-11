@@ -58,4 +58,9 @@ public class TableServiceImpl implements TableService {
 		return tableRepository.save(result);
 	}
 
+	@Override
+	public Optional<Table> findByName(String name) {
+		return tableRepository.findByName(name);
+	}
+
 }

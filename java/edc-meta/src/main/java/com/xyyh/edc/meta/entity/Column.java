@@ -17,9 +17,34 @@ public class Column implements Serializable {
 	private static final long serialVersionUID = -69338300850276439L;
 
 	public enum Types {
+		/**
+		 * 整数类型
+		 */
+		INTEGER,
+		/**
+		 * 实数类型
+		 */
 		DECIMAL,
+		/**
+		 * 字符串类型
+		 */
 		STRING,
-		DATETIME
+		/**
+		 * 日期
+		 */
+		DATE,
+		/**
+		 * 日期时间
+		 */
+		DATETIME,
+		/**
+		 * boolean类型
+		 */
+		BOOLEAN,
+		/**
+		 * 二进制
+		 */
+		BINARY
 	}
 
 	/**
@@ -60,6 +85,9 @@ public class Column implements Serializable {
 	 */
 	@javax.persistence.Column(name = "nullable_", nullable = true)
 	private Boolean nullable = Boolean.TRUE;
+
+	@javax.persistence.Column(name = "sort_")
+	private Integer order;
 
 	/**
 	 * 字段类型
