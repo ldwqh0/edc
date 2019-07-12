@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ table }}
     <el-form :model="data"
              label-width="80px"
              ref="form">
@@ -11,6 +10,7 @@
                         :prop="`${column.fieldName}`">
             <el-input v-if="column.type==='STRING'" v-model="data[column.fieldName]" />
             <el-input type="number" v-if="column.type==='DECIMAL'" v-model="data[column.fieldName]" />
+            <el-input type="number" v-if="column.type==='INTEGER'" v-model="data[column.fieldName]" />
             <el-date-picker v-if="column.type==='DATETIME'" v-model="data[column.fieldName]" />
           </el-form-item>
         </el-col>
@@ -43,6 +43,7 @@
     }
 
     data = {}
+
     @tableModule.Action('loadTable')
     loadTable
 
@@ -50,7 +51,13 @@
     saveData
 
     @Prop()
-    id
+    tableId
+
+    @Prop({default: () => 'new'})
+    dataId
+
+    @formModule.Action('loadData')
+    loadData
 
     getRules (column) {
       let result = []
@@ -80,12 +87,21 @@
     }
 
     created () {
-      this.loadTable({id: this.id}).then(({data}) => (this.table = data))
+      this.loadTable({id: this.tableId}).then(({data}) => (this.table = data))
+        .then(table => {
+          if (this.dataId !== 'new') {
+            return this.loadData({table, data: {id: this.dataId}}).then(({data}) => {
+              this.data = data
+            })
+          }
+        })
     }
 
     save () {
       this.$refs['form'].validate().then(() => {
-        return this.saveData({id: this.id, data: this.data})
+        return this.saveData({table: this.table, data: this.data})
+      }).then(() => {
+        this.$router.go(-1)
       })
     }
   }

@@ -58,5 +58,4 @@ public class TableController {
 			return TableResult.failure(draw, pageable, e.getMessage());
 		}
 	}
-
 }

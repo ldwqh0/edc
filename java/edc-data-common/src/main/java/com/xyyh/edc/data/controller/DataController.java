@@ -20,7 +20,7 @@ import com.xyyh.edc.data.service.EdcDataService;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("edc/datas")
+@RequestMapping("datas")
 public class DataController {
 
 	@Autowired
@@ -47,7 +47,6 @@ public class DataController {
 	 * @return
 	 */
 	@GetMapping("{collection}/{id}")
-	@ResponseStatus(CREATED)
 	public Object get(@PathVariable("collection") String collection, @PathVariable("id") Object dataId) {
 		return dataService.findOne(collection, dataId);
 	}
