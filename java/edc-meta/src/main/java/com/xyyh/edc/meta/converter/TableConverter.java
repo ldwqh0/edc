@@ -1,5 +1,6 @@
 package com.xyyh.edc.meta.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.dm.common.converter.AbstractConverter;
@@ -10,12 +11,15 @@ import com.xyyh.util.StreamUtils;
 @Component
 public class TableConverter extends AbstractConverter<Table, TableDto> {
 
+	@Autowired
+	private ColumnConverter columnConverter;
+
 	@Override
 	protected TableDto toDtoActual(Table model) {
 		TableDto dto = new TableDto();
 		dto.setId(model.getId());
 		dto.setName(model.getName());
-		dto.setColumns(model.getColumns());
+		dto.setColumns(columnConverter.toDto(model.getColumns()));
 		return dto;
 	}
 
@@ -33,7 +37,7 @@ public class TableConverter extends AbstractConverter<Table, TableDto> {
 		StreamUtils.forEach(dto.getColumns().stream(), (index, item) -> {
 			item.setOrder(index);
 		});
-		model.setColumns(dto.getColumns());
+//		model.setColumns(dto.getColumns());
 		return model;
 	}
 

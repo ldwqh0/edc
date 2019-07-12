@@ -14,6 +14,7 @@ import com.xyyh.edc.meta.converter.TableConverter;
 import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.entity.QTable;
 import com.xyyh.edc.meta.entity.Table;
+import com.xyyh.edc.meta.exception.DdlCancelException;
 import com.xyyh.edc.meta.listener.DdlEventArgs;
 import com.xyyh.edc.meta.listener.TableDdlEventListener;
 import com.xyyh.edc.meta.repository.TableRepository;
@@ -51,7 +52,7 @@ public class TableServiceImpl implements TableService {
 		try {
 			tableDdlEventListenere.beforeCreate(args);
 			if (args.isCancel()) {
-				throw new RuntimeException("create canceled");
+				throw new DdlCancelException("create canceled");
 			} else {
 				tableConverter.copyProperties(result, table);
 				Table result_ = tableRepository.save(result);
@@ -63,7 +64,7 @@ public class TableServiceImpl implements TableService {
 			throw e;
 		} finally {
 			if (args.isCancel()) {
-				throw new RuntimeException("create canceled");
+				throw new DdlCancelException("create canceled");
 			}
 		}
 	}

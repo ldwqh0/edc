@@ -1,13 +1,17 @@
 package com.xyyh.edc.meta.listener.impl;
 
-import com.xyyh.edc.data.service.EdcDataService;
+import org.springframework.stereotype.Component;
+
+import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.listener.DdlEventArgs;
 import com.xyyh.edc.meta.listener.TableDdlEventListener;
 
+@Component
 public class EdcTableMongoDdlEventListener implements TableDdlEventListener {
 
 	@Override
 	public void beforeCreate(DdlEventArgs args) {
+		args.setCancel(true);
 		args.getOldData();
 		// TODO Auto-generated method stub
 
@@ -15,6 +19,7 @@ public class EdcTableMongoDdlEventListener implements TableDdlEventListener {
 
 	@Override
 	public void created(DdlEventArgs args) {
+		
 		// TODO Auto-generated method stub
 
 	}
@@ -33,8 +38,11 @@ public class EdcTableMongoDdlEventListener implements TableDdlEventListener {
 
 	@Override
 	public void updated(DdlEventArgs args) {
-		args.getOldData();// 获取创建之前的数据
-		args.getNewData(); // 获取更新之后的数据
+		
+		TableDto old = args.getOldData();// 获取创建之前的数据
+		
+		TableDto newMeta = args.getNewData(); // 获取更新之后的数据
+		
 		args.setCancel(true); // 是否取消后续操做，如果设置为true,会取消后续的操作
 		// TODO Auto-generated method stub
 

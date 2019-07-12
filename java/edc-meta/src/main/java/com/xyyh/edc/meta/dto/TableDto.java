@@ -15,5 +15,5 @@ public class TableDto implements Serializable {
 	private static final long serialVersionUID = -4660389644726562389L;
 	private Long id;
 	private String name;
-	private List<Column> columns;
+	private List<ColumnDto> columns;
 }
