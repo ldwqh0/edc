@@ -27,6 +27,7 @@
 		<module>edc-app</module>
 		<module>edc-autoconfigure</module>
 		<module>edc-spring-boot-starter</module>
+		<module>edc-spring-boot-starter-mongodb</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -53,6 +54,11 @@
 			<dependency>
 				<groupId>com.xyyh</groupId>
 				<artifactId>edc-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-spring-boot-starter-mongodb</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
