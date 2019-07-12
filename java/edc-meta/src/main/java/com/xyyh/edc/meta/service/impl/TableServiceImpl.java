@@ -14,6 +14,8 @@ import com.xyyh.edc.meta.converter.TableConverter;
 import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.entity.QTable;
 import com.xyyh.edc.meta.entity.Table;
+import com.xyyh.edc.meta.listener.DdlEventArgs;
+import com.xyyh.edc.meta.listener.TableDdlEventListener;
 import com.xyyh.edc.meta.repository.TableRepository;
 import com.xyyh.edc.meta.service.TableService;
 
@@ -28,6 +30,13 @@ public class TableServiceImpl implements TableService {
 
 	private final QTable qTable = QTable.table;
 
+	private TableDdlEventListener tableDdlEventListenere = new EmptyTableDdlEventListener();
+
+	@Autowired(required = false)
+	public void setTableDdlEventListenere(TableDdlEventListener tableDdlEventListenere) {
+		this.tableDdlEventListenere = tableDdlEventListenere;
+	}
+
 	@Override
 	public Optional<Table> findById(Long id) {
 		return tableRepository.findById(id);
@@ -37,8 +46,26 @@ public class TableServiceImpl implements TableService {
 	@Transactional
 	public Table update(Long id, TableDto table) {
 		Table result = tableRepository.getOne(id);
-		tableConverter.copyProperties(result, table);
-		return tableRepository.save(result);
+		DdlEventArgs args = new DdlEventArgs();
+		args.setOldData(tableConverter.toDto(result));
+		try {
+			tableDdlEventListenere.beforeCreate(args);
+			if (args.isCancel()) {
+				throw new RuntimeException("create canceled");
+			} else {
+				tableConverter.copyProperties(result, table);
+				Table result_ = tableRepository.save(result);
+				args.setNewData(tableConverter.toDto(result_));
+				tableDdlEventListenere.created(args);
+				return result_;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (args.isCancel()) {
+				throw new RuntimeException("create canceled");
+			}
+		}
 	}
 
 	@Override
@@ -61,6 +88,55 @@ public class TableServiceImpl implements TableService {
 	@Override
 	public Optional<Table> findByName(String name) {
 		return tableRepository.findByName(name);
+	}
+
+	private static class EmptyTableDdlEventListener implements TableDdlEventListener {
+
+		@Override
+		public void beforeCreate(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void created(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void createFailed(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void beforeUpdate(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void updated(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void updateFailed(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void beforeDelete(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void deleted(DdlEventArgs args) {
+
+		}
+
+		@Override
+		public void deleteFailed(DdlEventArgs args) {
+
+		}
+
 	}
 
 }

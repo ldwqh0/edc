@@ -1,18 +1,18 @@
 package com.xyyh.edc.meta.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
+import com.dm.common.entity.AbstractEntity;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Embeddable
 @Getter
 @Setter
-public class Column implements Serializable {
+@Entity
+public class Column extends AbstractEntity {
 
 	private static final long serialVersionUID = -69338300850276439L;
 

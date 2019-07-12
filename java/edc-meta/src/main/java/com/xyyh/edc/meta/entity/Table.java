@@ -3,10 +3,11 @@ package com.xyyh.edc.meta.entity;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
@@ -26,7 +27,7 @@ public class Table extends AbstractEntity {
 	@javax.persistence.Column(name = "name_", unique = true)
 	private String name;
 
-	@ElementCollection
+	@OneToMany(cascade = CascadeType.ALL)
 	@OrderBy("order ASC")
 	@CollectionTable(name = "edc_table_column_", joinColumns = {
 			@JoinColumn(name = "table_id_", referencedColumnName = "id_")
