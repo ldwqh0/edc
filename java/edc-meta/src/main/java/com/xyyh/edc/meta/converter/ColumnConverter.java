@@ -11,14 +11,33 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 
 	@Override
 	protected ColumnDto toDtoActual(Column model) {
-		// TODO Auto-generated method stub
-		return null;
+		ColumnDto dto = new ColumnDto();
+		dto.setFieldName(model.getFieldName());
+		dto.setId(model.getId());
+		dto.setIdColumn(model.isIdColumn());
+		dto.setLength(model.getLength());
+		dto.setMax(model.getMax());
+		dto.setMin(model.getMin());
+		dto.setName(model.getName());
+		dto.setNullable(model.getNullable());
+		dto.setOrder(model.getOrder());
+		dto.setType(model.getType());
+		return dto;
 	}
 
 	@Override
-	public Column copyProperties(Column model, ColumnDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Column copyProperties(final Column model, ColumnDto dto) {
+		model.setFieldName(dto.getFieldName());
+		model.setIdColumn(dto.isIdColumn());
+		model.setLength(dto.getLength());
+		model.setMax(dto.getMax());
+		model.setMin(dto.getMin());
+		model.setName(dto.getName());
+		model.setNullable(dto.getNullable());
+		// 在数据写入时不要设置顺序
+//		model.setOrder(dto.getOrder());
+		model.setType(dto.getType());
+		return model;
 	}
 
 }

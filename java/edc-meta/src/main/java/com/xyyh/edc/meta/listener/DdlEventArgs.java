@@ -26,4 +26,9 @@ public class DdlEventArgs implements Serializable {
 	 */
 	private boolean cancel;
 
+	/**
+	 * 如果发生错误时，相应的错误信息
+	 */
+	private Throwable thorwable;
+
 }

@@ -1,7 +1,9 @@
 package com.xyyh.edc.meta.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xyyh.edc.meta.entity.Column.Types;
 
 import lombok.Data;
@@ -48,4 +50,9 @@ public class ColumnDto implements Serializable {
 	 * 字段类型
 	 */
 	private Types type;
+
+	@JsonIgnore
+	public boolean isNew() {
+		return Objects.isNull(id);
+	}
 }

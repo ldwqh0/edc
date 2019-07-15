@@ -18,6 +18,8 @@ public interface TableService {
 
 	public Table save(TableDto table);
 
+	public void delete(Long id);
+
 	public Optional<Table> findByName(String collection);
 
 }

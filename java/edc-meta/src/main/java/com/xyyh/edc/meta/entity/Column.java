@@ -86,7 +86,7 @@ public class Column extends AbstractEntity {
 	@javax.persistence.Column(name = "nullable_", nullable = true)
 	private Boolean nullable = Boolean.TRUE;
 
-	@javax.persistence.Column(name = "sort_")
+	@javax.persistence.Column(name = "order_")
 	private Integer order;
 
 	/**

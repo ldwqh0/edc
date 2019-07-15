@@ -1,17 +1,12 @@
 package com.xyyh.edc.meta.entity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.Transient;
-
-import org.apache.commons.collections4.CollectionUtils;
 
 import com.dm.common.entity.AbstractEntity;
 
@@ -29,19 +24,7 @@ public class Table extends AbstractEntity {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@OrderBy("order ASC")
-	@CollectionTable(name = "edc_table_column_", joinColumns = {
-			@JoinColumn(name = "table_id_", referencedColumnName = "id_")
-	})
+	@JoinColumn(name = "table_id_")
 	private List<Column> columns;
 
-	@Transient
-	private List<Column> getIdColumn() {
-		if (CollectionUtils.isNotEmpty(columns)) {
-			columns.stream().filter(c -> c.isIdColumn()).collect(Collectors.toList());
-		} else {
-
-		}
-
-		return null;
-	}
 }
