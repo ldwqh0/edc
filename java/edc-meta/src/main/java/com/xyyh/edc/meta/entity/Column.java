@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "edc_table_column_")
 public class Column extends AbstractEntity {
 
 	private static final long serialVersionUID = -69338300850276439L;
