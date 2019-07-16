@@ -28,5 +28,20 @@
 			<artifactId>edc-data-common</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.xyyh</groupId>
+			<artifactId>edc-data-mongo-impl</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>bson</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.xyyh</groupId>
+			<artifactId>edc-data-mysql-impl</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>

@@ -29,6 +29,7 @@
 		<module>edc-spring-boot-starter</module>
 		<module>edc-spring-boot-starter-mongodb</module>
 		<module>edc-data-mysql-impl</module>
+		<module>edc-spring-boot-starter-mysql</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -65,6 +66,11 @@
 			<dependency>
 				<groupId>com.xyyh</groupId>
 				<artifactId>edc-spring-boot-starter-mongodb</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-spring-boot-starter-mysql</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
