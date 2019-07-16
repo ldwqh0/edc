@@ -112,7 +112,7 @@ public class TableServiceImpl implements TableService {
 	@Transactional
 	public Table save(TableDto table) {
 		DdlEventArgs args = new DdlEventArgs();
-		args.setOldData(null);
+		args.setOldData(table);
 		tableDdlEventListenere.beforeCreate(args);
 		try {
 			if (args.isCancel()) {
