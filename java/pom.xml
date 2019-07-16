@@ -28,6 +28,7 @@
 		<module>edc-autoconfigure</module>
 		<module>edc-spring-boot-starter</module>
 		<module>edc-spring-boot-starter-mongodb</module>
+		<module>edc-data-mysql-impl</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -44,6 +45,11 @@
 			<dependency>
 				<groupId>com.xyyh</groupId>
 				<artifactId>edc-data-mongo-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh</groupId>
+				<artifactId>edc-data-mysql-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

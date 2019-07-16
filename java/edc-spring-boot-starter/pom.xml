@@ -33,9 +33,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.xyyh</groupId>
 			<artifactId>edc-spring-boot-starter-mongodb</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>com.xyyh</groupId>
+			<artifactId>edc-data-mysql-impl</artifactId>
 		</dependency>
 	</dependencies>
 </project>
