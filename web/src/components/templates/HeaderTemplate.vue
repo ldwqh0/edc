@@ -81,7 +81,7 @@
     currentUser
 
     get systemMenus () {
-      let menus = this.menus.filter(menu => menu.name === '数据中心')
+      const menus = this.menus.filter(menu => menu.name === '数据中心')
       if (menus !== null && menus !== undefined && menus.length > 0) {
         return menus[0].submenus
       } else {
@@ -90,7 +90,7 @@
     }
 
     get displayUsername () {
-      let {fullname, username} = this.currentUser
+      const {fullname, username} = this.currentUser
       return fullname === undefined || fullname === null ? username : fullname
     }
 

@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 router.afterEach((to, from) => {
-  let matched = to.matched[to.matched.length - 1]
+  const matched = to.matched[to.matched.length - 1]
   store.commit('updateMatched', matched)
   store.commit('updateRouting', false)
 })

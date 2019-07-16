@@ -167,7 +167,7 @@ export default Vue.extend({
         return
       }
 
-      let chart = echarts.init(this.$el, this.theme, this.initOptions)
+      const chart = echarts.init(this.$el, this.theme, this.initOptions)
 
       if (this.group) {
         chart.group = this.group
@@ -262,7 +262,7 @@ export default Vue.extend({
       }, { deep: !this.watchShallow })
     }
 
-    let watched = ['theme', 'initOptions', 'autoResize', 'manualUpdate', 'watchShallow']
+    const watched = ['theme', 'initOptions', 'autoResize', 'manualUpdate', 'watchShallow']
     watched.forEach(prop => {
       this.$watch(prop, () => {
         this.refresh()

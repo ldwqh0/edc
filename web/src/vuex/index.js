@@ -35,10 +35,10 @@ export default new Store({
      * 面包屑
      */
     crumbs (state, { matched }) {
-      let menus = state.security.menus
+      const menus = state.security.menus
 
-      let findParents = (menu) => {
-        let result = []
+      const findParents = (menu) => {
+        const result = []
         if (menu.parent) {
           let parent = menus.find(({ id }) => id === menu.parent.id)
           while (parent) {

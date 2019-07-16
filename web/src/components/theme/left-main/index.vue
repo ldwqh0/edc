@@ -28,7 +28,7 @@
                  background-color="#1D2023">
           <menu-item v-for="(menu,index) in menus"
                      :key="index"
-                     :item="menu"/>
+                     :item="menu" />
         </el-menu>
       </el-aside>
       <el-main v-loading="routing">
@@ -43,7 +43,7 @@
             </el-breadcrumb>
           </el-col>
         </el-row>
-        <router-view/>
+        <router-view />
       </el-main>
     </el-container>
   </el-container>
@@ -88,7 +88,7 @@
     currentUser
 
     get displayUsername () {
-      let { fullname, username } = this.currentUser
+      const { fullname, username } = this.currentUser
       return fullname === undefined || fullname === null ? username : fullname
     }
 

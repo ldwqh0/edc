@@ -60,7 +60,7 @@
     loadData
 
     getRules (column) {
-      let result = []
+      const result = []
       if (column.nullable) {
 
       } else {

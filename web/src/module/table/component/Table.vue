@@ -170,7 +170,7 @@
     }
 
     beforeRouteUpdate (to, from, next) {
-      let p = this.saveState ? Promise.resolve() : this.$confirm('是否离开当前页面?', '提示', {
+      const p = this.saveState ? Promise.resolve() : this.$confirm('是否离开当前页面?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -193,7 +193,7 @@
 
     @Watch('id', {immediate: true})
     load (id) {
-      let p = id === 'new' ? Promise.resolve({columns: []}) : this.loadTable({id: this.id}).then(({data}) => data)
+      const p = id === 'new' ? Promise.resolve({columns: []}) : this.loadTable({id: this.id}).then(({data}) => data)
       p.then(data => (this.table = data)).then(() => (this.saveState = true))
     }
 

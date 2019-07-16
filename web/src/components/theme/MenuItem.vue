@@ -32,7 +32,7 @@
     }) {
       if (type === 'COMPONENT') {
         if (openInNewWindow) {
-          let target = this.$router.resolve(url)
+          const target = this.$router.resolve(url)
           window.open(target.url, '_blank')
         } else {
           this.$router.push(url)

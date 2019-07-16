@@ -24,7 +24,7 @@
   const oauthModule = namespace('security')
 
   function getCurrentPath () {
-    let {
+    const {
       protocol,
       host,
       pathname
@@ -49,11 +49,11 @@
     useSso = USE_SSO
 
     data = {
-      'grant_type': 'password',
-      'client_id': 'ownerapp',
-      'client_secret': '123456',
-      'username': 'admin',
-      'password': '123456'
+      grant_type: 'password',
+      client_id: 'ownerapp',
+      client_secret: '123456',
+      username: 'admin',
+      password: '123456'
     }
 
     @oauthModule.Action('token')
@@ -78,9 +78,9 @@
               }
 
               let [server, paramStr] = redirectUrl.split('?')
-              let {protocol, host} = window.location
-              let {pathname} = translateUrl(server)
-              let parameters = qs.parse(paramStr)
+              const {protocol, host} = window.location
+              const {pathname} = translateUrl(server)
+              const parameters = qs.parse(paramStr)
               server = `${protocol}//${host}/${pathname}`
               parameters.redirect_uri = getCurrentPath()
               window.location.href = `${server}?${qs.stringify(parameters)}`
@@ -91,13 +91,13 @@
 
     goHome () {
       // 如果保存的有历史，要返回历史
-      let savedUrl = sessionStorage.getItem('savedRedirect')
+      const savedUrl = sessionStorage.getItem('savedRedirect')
       if (
         savedUrl !== null &&
         savedUrl !== undefined &&
         savedUrl !== ''
       ) {
-        let route = JSON.parse(savedUrl)
+        const route = JSON.parse(savedUrl)
         this.$router.replace(route)
       } else {
         this.$router.push({
