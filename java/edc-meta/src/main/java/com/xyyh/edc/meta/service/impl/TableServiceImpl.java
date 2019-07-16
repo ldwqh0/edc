@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Objects;
 import com.querydsl.core.BooleanBuilder;
 import com.xyyh.edc.meta.converter.ColumnConverter;
 import com.xyyh.edc.meta.converter.TableConverter;
@@ -68,6 +69,19 @@ public class TableServiceImpl implements TableService {
 			if (args.isCancel()) {
 				return null;
 			} else {
+				List<ColumnDto> columns_ = table.getColumns();
+				List<Column> _columns = result.getColumns();
+				// 删除更新时不包含的列
+				if (CollectionUtils.isNotEmpty(_columns)) {
+					if (CollectionUtils.isEmpty(columns_)) {
+						columnRepository.deleteInBatch(_columns);
+					} else {
+						List<Column> columnToDelete = _columns.stream().filter(
+								item -> !columns_.stream().anyMatch(c -> Objects.equal(c.getId(), item.getId())))
+								.collect(Collectors.toList());
+						columnRepository.deleteInBatch(columnToDelete);
+					}
+				}
 				copyProperties(result, table);
 				Table result_ = tableRepository.save(result);
 				args.setNewData(tableConverter.toDto(result_));

@@ -16,7 +16,7 @@
           </el-form>
         </el-col>
       </el-row>
-      <el-scrollbar wrap-class="table-list-wrapper">
+      <el-scrollbar style="flex: 1;" wrap-class="table-list-wrapper">
         <el-row>
           <el-col :span="24">
             <ul>
@@ -29,7 +29,7 @@
       </el-scrollbar>
     </el-aside>
     <el-main style="padding: 0 5px;">
-      <el-scrollbar>
+      <el-scrollbar style="height: 100%;" wrap-class="table-columns-wrapper">
         <router-view />
       </el-scrollbar>
     </el-main>
@@ -73,6 +73,11 @@
 </script>
 <style>
   .table-list-wrapper {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .table-columns-wrapper {
     height: 100%;
     overflow-x: hidden;
   }
