@@ -9,9 +9,7 @@
         </el-form>
       </el-col>
     </el-row>
-    <el-datatables :ajax="ajax"
-                   v-if="table"
-                   ref="table">
+    <el-datatables :ajax="ajax" v-if="table" ref="table">
       <el-table-column v-for="column in table.columns"
                        :prop="column.fieldName"
                        :label="column.name"
@@ -27,8 +25,8 @@
 </template>
 <script>
   import Vue from 'vue'
-  import {Component, Prop} from 'vue-property-decorator'
-  import {namespace} from 'vuex-class'
+  import { Component, Prop } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import ElDatatables from 'element-datatables'
 
   const tableModule = namespace('table')
@@ -59,19 +57,19 @@
     delData
 
     created () {
-      this.loadTable({id: this.tableId}).then(({data}) => {
+      this.loadTable({ id: this.tableId }).then(({ data }) => {
         this.table = data
       })
     }
 
-    del ({_id: dataId}) {
-      this.delData({table: this.table, data: {id: dataId}}).then(() => {
+    del ({ _id: dataId }) {
+      this.delData({ table: this.table, data: { id: dataId } }).then(() => {
         this.$refs['table'].reloadData()
       })
     }
 
     add () {
-      this.$router.push({name: 'form', params: {tableId: this.tableId}})
+      this.$router.push({ name: 'form', params: { tableId: this.tableId } })
     }
   }
 </script>

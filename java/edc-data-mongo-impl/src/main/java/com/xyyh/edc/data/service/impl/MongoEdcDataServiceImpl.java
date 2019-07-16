@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +53,17 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	}
 
 	@Override
-	public Object findOne(String collection, Object dataId) {
+	public Object findOne(final String collection, final Object dataId) {
 		Optional<Table> table = tableService.findByName(collection);
 		if (table.isPresent()) {
 			Table t = table.get();
-			ObjectId id = new ObjectId(String.valueOf(dataId));
-			return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id)), Map.class, collection);
+			Object id_;
+			if (CollectionUtils.isNotEmpty(t.getColumns()) && t.getColumns().stream().anyMatch(Column::isIdColumn)) {
+				id_ = String.valueOf(dataId);
+			} else {
+				id_ = new ObjectId(String.valueOf(dataId));
+			}
+			return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id_)), Map.class, collection);
 		} else {
 			return null;
 		}
