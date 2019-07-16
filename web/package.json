@@ -10,7 +10,8 @@
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
     "ts-compile": "tsc",
-    "fix": "eslint --fix --ext .js,.vue src"
+    "fix": "eslint --fix --ext .js,.vue src",
+    "reinstall": "npm install --registry https://registry.npm.taobao.org"
   },
   "dependencies": {
     "animate.css": "^3.7.0",
