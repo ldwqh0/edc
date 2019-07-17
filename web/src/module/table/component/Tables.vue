@@ -1,11 +1,11 @@
 <template>
   <el-container class="edc-tables" style="height: 100%;">
     <el-aside style="display: flex;flex-direction: column;"
-              width="280px">
+              width="250px">
       <el-row>
         <el-col :span="24">
           <el-form inline>
-            <el-form-item>
+            <el-form-item style="width: 150px">
               <el-input type="text"
                         placeholder="输入表名称"
                         v-model="tableFilter.keywords" />
@@ -19,9 +19,12 @@
       <el-scrollbar style="flex: 1;" wrap-class="table-list-wrapper">
         <el-row>
           <el-col :span="24">
-            <ul>
-              <li v-for="{id,name} in visibleTables" :key="id">
+            <ul class="tables">
+              <li class="table-li"
+                  v-for="{id,name} in visibleTables"
+                  :key="id">
                 <el-link @click="toTable(id)">{{ name }}</el-link>
+                <el-link class="table-delete" @click="delTable(id)">删除</el-link>
               </li>
             </ul>
           </el-col>
@@ -54,6 +57,9 @@
     @tableModule.State('tables')
     tables
 
+    @tableModule.Action('del')
+    del
+
     get visibleTables () {
       return this.tables.filter(({name}) => name.indexOf(this.tableFilter.keywords) > -1)
     }
@@ -69,6 +75,12 @@
     toTable (id) {
       this.$router.replace({name: 'table', params: {id}})
     }
+
+    delTable (id) {
+      this.del({id}).then(() => {
+        this.loadTables()
+      })
+    }
   }
 </script>
 <style>
@@ -83,5 +95,17 @@
   }
 </style>
 <style lang="less" scoped>
+  .tables {
+    .table-delete {
+      float: right;
+      display: none;
+    }
+
+    li:hover {
+      .table-delete {
+        display: inline;
+      }
+    }
+  }
 
 </style>

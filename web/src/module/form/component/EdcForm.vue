@@ -11,7 +11,8 @@
             <el-input v-if="column.type==='STRING'" v-model="data[column.fieldName]" />
             <el-input type="number" v-if="column.type==='DECIMAL'" v-model="data[column.fieldName]" />
             <el-input type="number" v-if="column.type==='INTEGER'" v-model="data[column.fieldName]" />
-            <el-date-picker v-if="column.type==='DATETIME'" v-model="data[column.fieldName]" />
+            <el-date-picker v-if="column.type==='DATE'" v-model="data[column.fieldName]" />
+            <el-date-picker type="datetime" v-if="column.type==='DATETIME'" v-model="data[column.fieldName]" />
           </el-form-item>
         </el-col>
       </el-row>

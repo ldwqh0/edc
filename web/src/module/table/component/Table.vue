@@ -60,7 +60,7 @@
               </template>
             </el-table-column>
             <el-table-column type="expand">
-              <template v-slot="{row}">
+              <template v-slot="{$index,row}">
                 <el-row>
                   <el-col :span="12">
                     <el-form-item :prop="`columns[${$index}].nullable`">
@@ -185,8 +185,9 @@
     save () {
       this.$refs['form'].validate().then(() => {
         return this.id === 'new' ? this.saveTable(this.table) : this.update(this.table)
-      }).then(() => {
+      }).then(({data: {id}}) => {
         this.saveState = true
+        this.$router.replace({name: 'table', params: {id}})
         this.loadTables()
       })
     }
@@ -203,7 +204,14 @@
     }
 
     addColumn () {
-      this.table.columns.push({})
+      // 添加一列，设置列的默认值，如果某个属性没有设置默认值，会导致expand失效
+      this.table.columns.push({
+        nullable: true,
+        type: 'STRING',
+        length: null,
+        min: null,
+        max: null
+      })
     }
   }
 </script>
