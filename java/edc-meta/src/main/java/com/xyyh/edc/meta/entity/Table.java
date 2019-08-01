@@ -19,8 +19,11 @@ import lombok.Setter;
 public class Table extends AbstractEntity {
 	private static final long serialVersionUID = 6295989944983358320L;
 
-	@javax.persistence.Column(name = "name_", unique = true)
+	@javax.persistence.Column(name = "name_", unique = true, nullable = false)
 	private String name;
+
+	@javax.persistence.Column(name = "title_", nullable = false)
+	private String title;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@OrderBy("order ASC")

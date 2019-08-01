@@ -4,7 +4,7 @@
 
 const path = require('path')
 
-const assetsPublicPath = '/dc/'
+const assetsPublicPath = '/edc/'
 
 module.exports = {
   assetsPublicPath,

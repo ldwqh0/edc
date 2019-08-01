@@ -18,6 +18,7 @@ public class TableConverter extends AbstractConverter<Table, TableDto> {
 		TableDto dto = new TableDto();
 		dto.setId(model.getId());
 		dto.setName(model.getName());
+		dto.setTitle(model.getTitle());
 		dto.setColumns(columnConverter.toDto(model.getColumns()));
 		return dto;
 	}
@@ -26,12 +27,14 @@ public class TableConverter extends AbstractConverter<Table, TableDto> {
 		TableDto dto = new TableDto();
 		dto.setId(model.getId());
 		dto.setName(model.getName());
+		dto.setTitle(model.getTitle());
 		return dto;
 	}
 
 	@Override
 	public Table copyProperties(Table model, TableDto dto) {
 		model.setName(dto.getName());
+		model.setTitle(dto.getTitle());
 		return model;
 	}
 

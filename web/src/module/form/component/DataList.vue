@@ -10,10 +10,10 @@
       </el-col>
     </el-row>
     <el-datatables :ajax="ajax" v-if="table" ref="table">
-      <el-table-column v-for="column in table.columns"
-                       :prop="column.fieldName"
-                       :label="column.name"
-                       :key="column.order" />
+      <el-table-column v-for="{name,order, formAttributes:{title=name}={}} in table.columns"
+                       :prop="name"
+                       :label="title"
+                       :key="order" />
       <el-table-column>
         <template v-slot="scope">
           <router-link :to="{name:'form',params:{tableId:table.id,dataId:scope.row._id}}">编辑</router-link>
@@ -25,8 +25,8 @@
 </template>
 <script>
   import Vue from 'vue'
-  import {Component, Prop} from 'vue-property-decorator'
-  import {namespace} from 'vuex-class'
+  import { Component, Prop } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import ElDatatables from 'element-datatables'
 
   const tableModule = namespace('table')
@@ -57,13 +57,13 @@
     delData
 
     created () {
-      this.loadTable({id: this.tableId}).then(({data}) => {
+      this.loadTable({ id: this.tableId }).then(({ data }) => {
         this.table = data
       })
     }
 
-    del ({_id: dataId}) {
-      this.delData({table: this.table, data: {id: dataId}}).then(() => {
+    del ({ _id: dataId }) {
+      this.delData({ table: this.table, data: { id: dataId } }).then(() => {
         this.$refs['table'].reloadData()
       })
     }

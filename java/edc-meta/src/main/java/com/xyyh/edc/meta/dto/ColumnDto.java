@@ -17,22 +17,7 @@ public class ColumnDto implements Serializable {
 
 	private String name;
 
-	/**
-	 * 列字段名称
-	 */
-	private String fieldName;
-
 	private boolean idColumn;
-
-	/**
-	 * 指定字段的取值范围， 对于数值型，进行值校验，对于字符串，进行长度校验
-	 */
-	private Integer min;
-
-	/**
-	 * 指定字段的取值范围
-	 */
-	private Integer max;
 
 	/**
 	 * 字段长度
@@ -44,12 +29,17 @@ public class ColumnDto implements Serializable {
 	 */
 	private Boolean nullable = Boolean.TRUE;
 
+	/**
+	 * 字段排序
+	 */
 	private Integer order;
 
 	/**
 	 * 字段类型
 	 */
 	private Types type;
+
+	private ColumnFormAttributesDto formAttributes;
 
 	@JsonIgnore
 	public boolean isNew() {

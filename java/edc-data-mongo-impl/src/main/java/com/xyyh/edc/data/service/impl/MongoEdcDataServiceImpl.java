@@ -2,10 +2,10 @@ package com.xyyh.edc.data.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +23,8 @@ import com.xyyh.edc.meta.entity.Column;
 import com.xyyh.edc.meta.entity.Table;
 import com.xyyh.edc.meta.service.TableService;
 import com.xyyh.util.StreamUtils;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.core.query.Criteria.where;;
 
 @Service
 public class MongoEdcDataServiceImpl implements EdcDataService {
@@ -53,25 +54,40 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	}
 
 	@Override
-	public Object findOne(final String collection, final Object dataId) {
+	public Object update(String collection, String dataId, Map<String, Object> data) {
 		Optional<Table> table = tableService.findByName(collection);
 		if (table.isPresent()) {
-			Table t = table.get();
-			Object id_;
-			if (CollectionUtils.isNotEmpty(t.getColumns()) && t.getColumns().stream().anyMatch(Column::isIdColumn)) {
-				id_ = String.valueOf(dataId);
+			Object exist = findOne(collection, dataId);
+			if (Objects.isNull(exist)) {
+				// TODO 如果不存在
+				return null;
 			} else {
-				id_ = new ObjectId(String.valueOf(dataId));
+				if (ObjectId.isValid(dataId)) {
+					data.put("_id", new ObjectId(dataId));
+				} else {
+					data.put("_id", data);
+				}
+				return mongoTemplate.save(data, table.get().getName());
 			}
-			return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id_)), Map.class, collection);
 		} else {
 			return null;
 		}
 	}
 
 	@Override
-	public void deleteById(String collection, Object dataId) {
-		mongoTemplate.remove(new Query(Criteria.where("_id").is(dataId)), collection);
+	public Object findOne(final String collection, final String dataId) {
+		Optional<Table> table = tableService.findByName(collection);
+		if (table.isPresent()) {
+			// 如果是_id是ObjectId的字符串的话，一定会查找为ObjectId
+			return mongoTemplate.findOne(query(where("_id").is(dataId)), Map.class, collection);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void deleteById(String collection, String dataId) {
+		mongoTemplate.remove(query(where("_id").is(dataId)), collection);
 	}
 
 	@Override
@@ -99,7 +115,7 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	 */
 	private String getId(Table table, Map<String, Object> data) {
 		return StreamUtils.reduce(table.getColumns().stream().filter(Column::isIdColumn), new StringBuilder(),
-				(builder, current) -> builder.append(current)).toString();
+				(builder, current) -> builder.append(data.get(current.getName()))).toString();
 	}
 
 }

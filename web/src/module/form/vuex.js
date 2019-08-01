@@ -2,16 +2,19 @@ import Vue from 'vue'
 
 export default {
   namespaced: true,
-  state: {url: `${CONTEXT_PATH}d/datas`},
+  state: { url: `${CONTEXT_PATH}d/datas` },
   actions: {
-    saveData ({state: {url}}, {table: {name}, data}) {
+    saveData ({ state: { url } }, { table: { name }, data }) {
       return Vue.http.post(`${url}/${name}`, data)
     },
-    loadData ({state: {url}}, {table: {name}, data: {id}}) {
+    loadData ({ state: { url } }, { table: { name }, data: { id } }) {
       return Vue.http.get(`${url}/${name}/${id}`)
     },
-    delData ({state: {url}}, {table: {name}, data: {id}}) {
+    delData ({ state: { url } }, { table: { name }, data: { id } }) {
       return Vue.http.delete(`${url}/${name}/${id}`)
+    },
+    updateData ({ state: { url } }, { table: { name }, dataId, data }) {
+      return Vue.http.put(`${url}/${name}/${dataId}`, data)
     }
   }
 }

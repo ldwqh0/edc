@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,14 @@ public class DataController {
 		return dataService.save(collection, data);
 	}
 
+	@PutMapping("{collection}/{dataId}")
+	public Object update(
+			@PathVariable("collection") String collection,
+			@PathVariable("dataId") String dataId,
+			@RequestBody Map<String, Object> data) {
+		return dataService.update(collection, dataId, data);
+	}
+
 	/**
 	 * 获取指定数据集，指定ID的数据
 	 * 
@@ -47,7 +56,7 @@ public class DataController {
 	 * @return
 	 */
 	@GetMapping("{collection}/{id}")
-	public Object get(@PathVariable("collection") String collection, @PathVariable("id") Object dataId) {
+	public Object get(@PathVariable("collection") String collection, @PathVariable("id") String dataId) {
 		return dataService.findOne(collection, dataId);
 	}
 
@@ -59,7 +68,7 @@ public class DataController {
 	 */
 	@DeleteMapping("{collection}/{id}")
 	@ResponseStatus(NO_CONTENT)
-	public void delete(@PathVariable("collection") String collection, @PathVariable("id") Object dataId) {
+	public void delete(@PathVariable("collection") String collection, @PathVariable("id") String dataId) {
 		dataService.deleteById(collection, dataId);
 	}
 

@@ -1,14 +1,24 @@
 package com.xyyh.edc.meta.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.dm.common.entity.AbstractEntity;
 
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 字段列的存储属性
+ * 
+ * @author LiDong
+ *
+ */
 @Getter
 @Setter
 @Entity(name = "edc_table_column_")
@@ -53,26 +63,8 @@ public class Column extends AbstractEntity {
 	@javax.persistence.Column(name = "name_", length = 200)
 	private String name;
 
-	/**
-	 * 列字段名称
-	 */
-	@javax.persistence.Column(name = "field_name_", length = 200)
-	private String fieldName;
-
 	@javax.persistence.Column(name = "is_id_cloumn_")
 	private boolean idColumn;
-
-	/**
-	 * 指定字段的取值范围， 对于数值型，进行值校验，对于字符串，进行长度校验
-	 */
-	@javax.persistence.Column(name = "min_")
-	private Integer min;
-
-	/**
-	 * 指定字段的取值范围
-	 */
-	@javax.persistence.Column(name = "max_")
-	private Integer max;
 
 	/**
 	 * 字段长度
@@ -95,5 +87,9 @@ public class Column extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	@javax.persistence.Column(name = "type_", length = 50)
 	private Types type;
+
+	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private ColumnFormAttributes formAttributes;
 
 }

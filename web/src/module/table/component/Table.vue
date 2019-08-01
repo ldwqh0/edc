@@ -1,6 +1,7 @@
 <template>
   <div class="edc-table">
     <el-form ref="form"
+             size="mini"
              inline
              label-position="left"
              label-width="80px"
@@ -8,44 +9,37 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="表名称"
-                        prop="name"
-                        label-width="80px"
-                        inline>
+                        prop="name">
             <el-input type="text" v-model="table.name" />
           </el-form-item>
-          <el-form-item label="英文名称"
-                        prop="name"
-                        label-width="80px"
-                        inline>
-            <el-input type="text" v-model="table.name" />
+          <el-form-item label="表标题"
+                        prop="name">
+            <el-input type="text" v-model="table.title" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-table :data="table.columns">
-            <el-table-column label="字段名称" prop="name">
+            <el-table-column label="键" width="40px" align="center">
+              <template v-slot="{$index,row}">
+                <el-form-item :prop="`columns[${$index}].idColumn`">
+                  <el-checkbox v-model="row.idColumn" @change="idColumnChange(row)" />
+                </el-form-item>
+              </template>
+            </el-table-column>
+
+            <el-table-column label="字段名称" align="left">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].name`"
-                              label-width="0px"
-                              :rules="columnRules.columnName">
+                              :rules="columnRules.name">
                   <el-input v-model="row.name" />
                 </el-form-item>
               </template>
             </el-table-column>
-            <el-table-column label="字段名称(英文)">
-              <template v-slot="{$index,row}">
-                <el-form-item :prop="`columns[${$index}].fieldName`"
-                              label-width="0px"
-                              :rules="columnRules.fieldName">
-                  <el-input v-model="row.fieldName" />
-                </el-form-item>
-              </template>
-            </el-table-column>
-            <el-table-column label="字段类型">
+            <el-table-column label="字段类型" align="left">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].type`"
-                              label-width="0px"
                               :rules="columnRules.fieldName">
                   <el-select v-model="row.type">
                     <el-option value="INTEGER" label="整数" />
@@ -59,45 +53,26 @@
                 </el-form-item>
               </template>
             </el-table-column>
-            <el-table-column type="expand">
+            <el-table-column label="字段长度" align="left">
               <template v-slot="{$index,row}">
-                <el-row>
-                  <el-col :span="12">
-                    <el-form-item :prop="`columns[${$index}].nullable`">
-                      <el-checkbox v-model="row.nullable">可以为空</el-checkbox>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item :prop="`columns[${$index}].length`"
-                                  label="字段长度">
-                      <el-input v-model.number="row.length"
-                                type="number"
-                                placeholder="字段长度" />
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-                <el-row>
-                  <el-col :span="12">
-                    <el-form-item :prop="`columns[${$index}].min`"
-                                  label="最小值">
-                      <el-input v-model.number="row.min"
-                                type="number"
-                                placeholder="最小值" />
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item :prop="`columns[${$index}].max`"
-                                  label="最大值">
-                      <el-input v-model.number="row.max"
-                                type="number"
-                                placeholder="最小值" />
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+                <el-form-item :prop="`columns[${$index}].length`">
+                  <el-input v-model.number="row.length"
+                            type="number"
+                            :disabled="row.type!=='STRING'"
+                            placeholder="字段长度" />
+                </el-form-item>
               </template>
             </el-table-column>
-            <el-table-column>
-              <template v-slot="{$index}">
+            <el-table-column label="可空" align="left">
+              <template v-slot="{$index,row}">
+                <el-form-item :prop="`columns[${$index}].nullable`">
+                  <el-checkbox :disabled="row.idColumn" v-model="row.nullable" />
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" align="left">
+              <template v-slot="{$index,row}">
+                <form-attributes v-model="row.formAttributes" :column="row">表单项配置</form-attributes>
                 <a href="javascript:void(0)" @click="deleteColumn($index)">删除</a>
               </template>
             </el-table-column>
@@ -118,11 +93,16 @@
 
 <script>
   import Vue from 'vue'
-  import {Component, Prop, Watch} from 'vue-property-decorator'
-  import {namespace} from 'vuex-class'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
+  import FormAttributes from './FormAttributes'
 
   const TableModule = namespace('table')
-  @Component
+  @Component({
+    components: {
+      FormAttributes
+    }
+  })
   export default class Table extends Vue {
     @Prop()
     id
@@ -134,12 +114,13 @@
       columns: []
     }
 
+    tableRules = {
+      name: [{}],
+      title: [{}]
+    }
+
     columnRules = {
-      columnName: [{
-        required: true,
-        message: '请输入字段中文名称'
-      }],
-      fieldName: [{
+      name: [{
         required: true,
         message: '请输入字段英文名称'
       }],
@@ -185,20 +166,20 @@
     save () {
       this.$refs['form'].validate().then(() => {
         return this.id === 'new' ? this.saveTable(this.table) : this.update(this.table)
-      }).then(({data: {id}}) => {
+      }).then(({ data: { id } }) => {
         this.saveState = true
-        this.$router.replace({name: 'table', params: {id}})
+        this.$router.replace({ name: 'table', params: { id } })
         this.loadTables()
       })
     }
 
-    @Watch('id', {immediate: true})
+    @Watch('id', { immediate: true })
     load (id) {
-      const p = id === 'new' ? Promise.resolve({columns: []}) : this.loadTable({id: this.id}).then(({data}) => data)
+      const p = id === 'new' ? Promise.resolve({ columns: [] }) : this.loadTable({ id: this.id }).then(({ data }) => data)
       p.then(data => (this.table = data)).then(() => (this.saveState = true))
     }
 
-    @Watch('table', {deep: true})
+    @Watch('table', { deep: true })
     changeState () {
       this.saveState = false
     }
@@ -208,10 +189,19 @@
       this.table.columns.push({
         nullable: true,
         type: 'STRING',
-        length: null,
-        min: null,
-        max: null
+        length: 50,
+        formAttributes: {
+          min: null,
+          max: null,
+          title: null
+        }
       })
+    }
+
+    idColumnChange (row) {
+      if (row.idColumn) {
+        row.nullable = false
+      }
     }
   }
 </script>
@@ -229,16 +219,9 @@
     .el-table__row {
       td {
         vertical-align: top;
-
-        &.el-table__expand-column {
-          vertical-align: middle;
-        }
-      }
-
-      td:last-child {
-        vertical-align: middle;
       }
 
     }
+
   }
 </style>

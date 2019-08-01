@@ -18,19 +18,25 @@ public class MysqlEdcDataServiceImpl implements EdcDataService {
 	}
 
 	@Override
-	public Object findOne(String collection, Object dataId) {
+	public Object findOne(String collection, String dataId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteById(String collection, Object dataId) {
+	public void deleteById(String collection, String dataId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public Page<Object> list(String collection, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object update(String collection, String dataId, Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}

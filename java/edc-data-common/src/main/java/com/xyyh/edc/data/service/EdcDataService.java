@@ -9,10 +9,12 @@ public interface EdcDataService {
 
 	public Map<String, Object> save(String collection, Map<String, Object> data);
 
-	public Object findOne(String collection, Object dataId);
+	public Object findOne(String collection, String dataId);
 
-	public void deleteById(String collection, Object dataId);
+	public void deleteById(String collection, String dataId);
 
 	public Page<Object> list(String collection, Pageable pageable);
+
+	public Object update(String collection, String dataId, Map<String, Object> data);
 
 }

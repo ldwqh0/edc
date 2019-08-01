@@ -69,19 +69,6 @@ public class TableServiceImpl implements TableService {
 			if (args.isCancel()) {
 				return null;
 			} else {
-				List<ColumnDto> columns_ = table.getColumns();
-				List<Column> _columns = result.getColumns();
-				// 删除更新时不包含的列
-				if (CollectionUtils.isNotEmpty(_columns)) {
-					if (CollectionUtils.isEmpty(columns_)) {
-						columnRepository.deleteInBatch(_columns);
-					} else {
-						List<Column> columnToDelete = _columns.stream().filter(
-								item -> !columns_.stream().anyMatch(c -> Objects.equal(c.getId(), item.getId())))
-								.collect(Collectors.toList());
-						columnRepository.deleteInBatch(columnToDelete);
-					}
-				}
 				copyProperties(result, table);
 				Table result_ = tableRepository.save(result);
 				args.setNewData(tableConverter.toDto(result_));
@@ -94,7 +81,7 @@ public class TableServiceImpl implements TableService {
 			throw e;
 		} finally {
 			if (args.isCancel()) {
-				throw new DdlCancelException("create canceled");
+				throw new DdlCancelException("update canceled");
 			}
 		}
 	}
@@ -169,14 +156,30 @@ public class TableServiceImpl implements TableService {
 
 	private Table copyProperties(final Table table, TableDto dto) {
 		tableConverter.copyProperties(table, dto);
-		List<ColumnDto> columnDtos = dto.getColumns();
-		if (CollectionUtils.isNotEmpty(columnDtos)) {
-			List<Column> columns = StreamUtils.map(columnDtos.stream(), (index, item) -> {
+		List<ColumnDto> newColumns = dto.getColumns();
+		List<Column> modelColumns = table.getColumns();
+		// 删除列对象中，在原始对象中存在，但在新对象中不存在的列
+		if (!table.isNew() && CollectionUtils.isNotEmpty(modelColumns)) {
+			// 如果传入对象是空的，删除所有的原始列对象
+			if (CollectionUtils.isEmpty(newColumns)) {
+				columnRepository.deleteInBatch(modelColumns);
+			} else {
+				// 否则找出所有在原始列列表中存在，但在新列表中不存在的对象，并删除
+				List<Column> columnToDelete = modelColumns.stream().filter(
+						item -> !newColumns.stream().anyMatch(c -> Objects.equal(c.getId(), item.getId())))
+						.collect(Collectors.toList());
+				columnRepository.deleteInBatch(columnToDelete);
+			}
+		}
+
+		if (CollectionUtils.isNotEmpty(newColumns)) {
+			List<Column> columns = StreamUtils.map(newColumns.stream(), (index, item) -> {
+				// 判断column是否新的
 				Column column = item.isNew() ? new Column() : columnRepository.getOne(item.getId());
 				column.setOrder(index);
 				return columnConverter.copyProperties(column, item);
 			}).collect(Collectors.toList());
-			table.setColumns(columnRepository.saveAll(columns));
+			table.setColumns(columns);
 		}
 		return table;
 	}
