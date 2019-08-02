@@ -1,4 +1,4 @@
-package com.edc.meta.api;
+package com.xyyh.edc.meta.api;
 
 import java.io.Serializable;
 

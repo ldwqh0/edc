@@ -1,4 +1,4 @@
-package com.edc.common.dto;
+package com.xyyh.edc.common.dto;
 
 import java.util.Collections;
 import java.util.List;

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.entity.Table;
 
-public interface TableService {
+public interface JpaTableService extends TableService {
 
 	public Optional<Table> findById(Long id);
 
@@ -20,6 +20,6 @@ public interface TableService {
 
 	public void delete(Long id);
 
-	public Optional<Table> findByName(String collection);
+//	public Optional<Table> findByName(String collection);
 
 }

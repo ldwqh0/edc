@@ -10,5 +10,4 @@ import com.xyyh.edc.meta.entity.Table;
 public interface TableRepository extends JpaRepository<Table, Long>, QuerydslPredicateExecutor<Table> {
 
 	public Optional<Table> findByName(String name);
-
 }

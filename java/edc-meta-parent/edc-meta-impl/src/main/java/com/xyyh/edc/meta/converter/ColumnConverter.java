@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Component;
 
+import com.xyyh.edc.meta.api.ColumnTypes;
 import com.xyyh.edc.meta.dto.ColumnDto;
 import com.xyyh.edc.meta.dto.ColumnFormAttributesDto;
 import com.xyyh.edc.meta.entity.Column;
@@ -20,8 +21,7 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 		dto.setLength(model.getLength());
 		dto.setName(model.getName());
 		dto.setNullable(model.getNullable());
-		dto.setOrder(model.getOrder());
-		dto.setType(model.getType());
+		dto.setType(ColumnTypes.valueOf(model.getType()));
 		dto.setFormAttributes(toColumnAttributesDto(model.getFormAttributes()));
 		return dto;
 	}
@@ -31,8 +31,8 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 		model.setIdColumn(dto.isIdColumn());
 		model.setLength(dto.getLength());
 		model.setName(dto.getName());
-		model.setNullable(dto.getNullable());
-		ColumnFormAttributesDto attributesSource = dto.getFormAttributes();
+		model.setNullable(dto.isNullable());
+		com.xyyh.edc.meta.api.ColumnFormAttributes attributesSource = dto.getFormAttributes();
 		if (Objects.isNull(attributesSource)) {
 			model.setFormAttributes(null);
 		} else {
@@ -46,7 +46,7 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 			attributes.setTitle(attributesSource.getTitle());
 			model.setFormAttributes(attributes);
 		}
-		model.setType(dto.getType());
+		model.setType(dto.getType().toString());
 		return model;
 	}
 
@@ -61,4 +61,5 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 			return dto;
 		}
 	}
+
 }

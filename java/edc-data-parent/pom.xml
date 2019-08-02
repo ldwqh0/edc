@@ -7,4 +7,7 @@
   </parent>
   <artifactId>edc-data-parent</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>edc-data-api</module>
+  </modules>
 </project>

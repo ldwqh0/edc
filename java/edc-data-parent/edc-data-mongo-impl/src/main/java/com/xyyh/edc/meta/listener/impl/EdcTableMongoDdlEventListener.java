@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.xyyh.edc.meta.listener.DdlEventArgs;
 import com.xyyh.edc.meta.listener.TableDdlEventListener;
 
+
 @Component
 public class EdcTableMongoDdlEventListener implements TableDdlEventListener {
 

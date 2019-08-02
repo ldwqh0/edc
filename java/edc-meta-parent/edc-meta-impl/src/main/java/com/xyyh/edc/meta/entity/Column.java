@@ -2,8 +2,6 @@ package com.xyyh.edc.meta.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -23,37 +21,6 @@ import lombok.Setter;
 public class Column extends AbstractEntity {
 
 	private static final long serialVersionUID = -69338300850276439L;
-
-	public enum Types {
-		/**
-		 * 整数类型
-		 */
-		INTEGER,
-		/**
-		 * 实数类型
-		 */
-		DECIMAL,
-		/**
-		 * 字符串类型
-		 */
-		STRING,
-		/**
-		 * 日期
-		 */
-		DATE,
-		/**
-		 * 日期时间
-		 */
-		DATETIME,
-		/**
-		 * boolean类型
-		 */
-		BOOLEAN,
-		/**
-		 * 二进制
-		 */
-		BINARY
-	}
 
 	/**
 	 * 列名称
@@ -82,9 +49,8 @@ public class Column extends AbstractEntity {
 	/**
 	 * 字段类型
 	 */
-	@Enumerated(EnumType.STRING)
 	@javax.persistence.Column(name = "type_", length = 50)
-	private Types type;
+	private String type;
 
 	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xyyh.edc</groupId>
-		<artifactId>edc-parent</artifactId>
+		<artifactId>edc-data-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>edc-data-common</artifactId>
@@ -28,6 +28,18 @@
 		<dependency>
 			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xyyh.edc</groupId>
+			<artifactId>edc-data-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xyyh.edc.meta</groupId>
+			<artifactId>edc-meta-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xyyh.edc.meta</groupId>
+			<artifactId>edc-meta-impl</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>com.xyyh.edc</groupId> <artifactId>edc-meta</artifactId> 
 			</dependency> -->

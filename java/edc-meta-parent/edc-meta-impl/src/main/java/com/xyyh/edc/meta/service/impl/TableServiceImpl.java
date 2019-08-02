@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Objects;
 import com.querydsl.core.BooleanBuilder;
+import com.xyyh.edc.meta.api.ColumnDefine;
+import com.xyyh.edc.meta.api.TableDefine;
 import com.xyyh.edc.meta.converter.ColumnConverter;
 import com.xyyh.edc.meta.converter.TableConverter;
 import com.xyyh.edc.meta.dto.ColumnDto;
@@ -26,11 +28,11 @@ import com.xyyh.edc.meta.listener.DdlEventArgs;
 import com.xyyh.edc.meta.listener.TableDdlEventListener;
 import com.xyyh.edc.meta.repository.ColumnRepository;
 import com.xyyh.edc.meta.repository.TableRepository;
-import com.xyyh.edc.meta.service.TableService;
+import com.xyyh.edc.meta.service.JpaTableService;
 import com.xyyh.util.StreamUtils;
 
 @Service
-public class TableServiceImpl implements TableService {
+public class TableServiceImpl implements JpaTableService {
 
 	@Autowired
 	private TableRepository tableRepository;
@@ -53,10 +55,10 @@ public class TableServiceImpl implements TableService {
 		this.tableDdlEventListenere = tableDdlEventListenere;
 	}
 
-	@Override
-	public Optional<Table> findById(Long id) {
-		return tableRepository.findById(id);
-	}
+//	@Override
+//	public Optional<Table> findById(Long id) {
+//		return tableRepository.findById(id);
+//	}
 
 	@Override
 	@Transactional
@@ -124,8 +126,13 @@ public class TableServiceImpl implements TableService {
 	}
 
 	@Override
-	public Optional<Table> findByName(String name) {
-		return tableRepository.findByName(name);
+	public Optional<TableDefine> findByName(String name) {
+		Optional<Table> table = tableRepository.findByName(name);
+		if (table.isPresent()) {
+			return Optional.of(tableConverter.toDto(table));
+		} else {
+			return Optional.ofNullable(null);
+		}
 	}
 
 	@Override
@@ -156,7 +163,7 @@ public class TableServiceImpl implements TableService {
 
 	private Table copyProperties(final Table table, TableDto dto) {
 		tableConverter.copyProperties(table, dto);
-		List<ColumnDto> newColumns = dto.getColumns();
+		List<ColumnDefine> newColumns = dto.getColumns();
 		List<Column> modelColumns = table.getColumns();
 		// 删除列对象中，在原始对象中存在，但在新对象中不存在的列
 		if (!table.isNew() && CollectionUtils.isNotEmpty(modelColumns)) {
@@ -177,7 +184,7 @@ public class TableServiceImpl implements TableService {
 				// 判断column是否新的
 				Column column = item.isNew() ? new Column() : columnRepository.getOne(item.getId());
 				column.setOrder(index);
-				return columnConverter.copyProperties(column, item);
+				return columnConverter.copyProperties(column, (ColumnDto) item);
 			}).collect(Collectors.toList());
 			table.setColumns(columns);
 		}
@@ -231,6 +238,12 @@ public class TableServiceImpl implements TableService {
 
 		}
 
+	}
+
+	@Override
+	public Optional<Table> findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

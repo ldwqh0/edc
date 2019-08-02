@@ -3,12 +3,14 @@ package com.xyyh.edc.meta.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.xyyh.edc.meta.api.ColumnFormAttributes;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ColumnFormAttributesDto implements Serializable {
+public class ColumnFormAttributesDto implements Serializable, ColumnFormAttributes {
 	private static final long serialVersionUID = 646150343127467359L;
 
 	/**

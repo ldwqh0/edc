@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edc.common.dto.TableResult;
+import com.xyyh.edc.common.dto.TableResult;
 import com.xyyh.edc.meta.converter.TableConverter;
 import com.xyyh.edc.meta.dto.TableDto;
-import com.xyyh.edc.meta.service.TableService;
+import com.xyyh.edc.meta.service.JpaTableService;
 
 @RestController
 @RequestMapping("tables")
 public class TableController {
 
 	@Autowired
-	private TableService tableService;
+	private JpaTableService tableService;
 
 	@Autowired
 	private TableConverter tableConverter;

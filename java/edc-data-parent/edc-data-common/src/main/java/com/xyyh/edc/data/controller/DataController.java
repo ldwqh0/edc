@@ -1,6 +1,7 @@
 package com.xyyh.edc.data.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edc.common.dto.TableResult;
+import com.xyyh.edc.common.dto.TableResult;
 import com.xyyh.edc.data.service.EdcDataService;
+import com.xyyh.edc.meta.api.TableDefine;
+import com.xyyh.edc.meta.service.JpaTableService;
+import com.xyyh.edc.meta.service.TableService;
+
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -26,6 +31,9 @@ public class DataController {
 
 	@Autowired
 	private EdcDataService dataService;
+
+	@Autowired
+	private TableService tableService;
 
 	/**
 	 * 将某个数据保存到某个数据集中
@@ -37,7 +45,12 @@ public class DataController {
 	@PostMapping("{collection}")
 	@ResponseStatus(CREATED)
 	public Object save(@PathVariable("collection") String collection, @RequestBody Map<String, Object> data) {
-		return dataService.save(collection, data);
+		Optional<TableDefine> tableDefine = tableService.findByName(collection);
+		if (tableDefine.isPresent()) {
+			return dataService.save(tableDefine.get(), data);
+		} else {
+			return null;
+		}
 	}
 
 	@PutMapping("{collection}/{dataId}")
@@ -45,7 +58,12 @@ public class DataController {
 			@PathVariable("collection") String collection,
 			@PathVariable("dataId") String dataId,
 			@RequestBody Map<String, Object> data) {
-		return dataService.update(collection, dataId, data);
+		Optional<TableDefine> tableDefine = tableService.findByName(collection);
+		if (tableDefine.isPresent()) {
+			return dataService.update(tableDefine.get(), dataId, data);
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -57,7 +75,12 @@ public class DataController {
 	 */
 	@GetMapping("{collection}/{id}")
 	public Object get(@PathVariable("collection") String collection, @PathVariable("id") String dataId) {
-		return dataService.findOne(collection, dataId);
+		Optional<TableDefine> tableDefine = tableService.findByName(collection);
+		if (tableDefine.isPresent()) {
+			return dataService.findOne(tableDefine.get(), dataId);
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -69,7 +92,10 @@ public class DataController {
 	@DeleteMapping("{collection}/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void delete(@PathVariable("collection") String collection, @PathVariable("id") String dataId) {
-		dataService.deleteById(collection, dataId);
+		Optional<TableDefine> tableDefine = tableService.findByName(collection);
+		if (tableDefine.isPresent()) {
+			dataService.deleteById(tableDefine.get(), dataId);
+		}
 	}
 
 	/**
@@ -85,6 +111,11 @@ public class DataController {
 			@PathVariable("collection") String collection,
 			@RequestParam("draw") Long draw,
 			@PageableDefault Pageable pageable) {
-		return TableResult.success(draw, dataService.list(collection, pageable));
+		Optional<TableDefine> tableDefine = tableService.findByName(collection);
+		if (tableDefine.isPresent()) {
+			return TableResult.success(draw, dataService.list(tableDefine.get(), pageable));
+		} else {
+			return TableResult.failure(draw, pageable, "指定数据定义不存在");
+		}
 	}
 }

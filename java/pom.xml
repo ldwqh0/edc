@@ -61,6 +61,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.xyyh.edc</groupId>
+				<artifactId>edc-data-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh.edc</groupId>
 				<artifactId>edc-data-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -77,6 +82,16 @@
 			<dependency>
 				<groupId>com.xyyh.edc</groupId>
 				<artifactId>edc-autoconfigure</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh.edc.meta</groupId>
+				<artifactId>edc-meta-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh.edc.meta</groupId>
+				<artifactId>edc-meta-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
