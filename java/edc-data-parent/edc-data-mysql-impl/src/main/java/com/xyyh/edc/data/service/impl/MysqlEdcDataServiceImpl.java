@@ -4,39 +4,39 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import com.xyyh.edc.data.service.EdcDataService;
+import com.xyyh.edc.meta.api.TableDefine;
 
-@Service
+//@Service
 public class MysqlEdcDataServiceImpl implements EdcDataService {
 
 	@Override
-	public Map<String, Object> save(String collection, Map<String, Object> data) {
+	public Map<String, Object> save(TableDefine table, Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object findOne(String collection, String dataId) {
+	public Object findOne(TableDefine table, String dataId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteById(String collection, String dataId) {
+	public void deleteById(TableDefine table, String dataId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Page<Object> list(String collection, Pageable pageable) {
+	public Page<Object> list(TableDefine table, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object update(String collection, String dataId, Map<String, Object> data) {
+	public Object update(TableDefine table, String dataId, Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -22,17 +22,14 @@
 	</properties>
 
 	<modules>
-		<module>edc-meta-parent</module>
-		<module>edc-data-common</module>
-		<module>edc-data-mongo-impl</module>
-		<module>edc-app</module>
+		<module>edc-common</module>
 		<module>edc-autoconfigure</module>
+		<module>edc-meta-parent</module>
+		<module>edc-data-parent</module>
 		<module>edc-spring-boot-starter</module>
 		<module>edc-spring-boot-starter-mongodb</module>
-		<module>edc-data-mysql-impl</module>
 		<module>edc-spring-boot-starter-mysql</module>
-		<module>edc-common</module>
-		<module>edc-data-parent</module>
+		<module>edc-app</module>
 	</modules>
 
 	<dependencyManagement>
@@ -76,7 +73,7 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.xyyh.edc</groupId>
+				<groupId>com.xyyh.edc.data</groupId>
 				<artifactId>edc-data-mysql-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>

@@ -10,7 +10,7 @@
 	<artifactId>edc-spring-boot-starter-mysql</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>com.xyyh.edc</groupId>
+			<groupId>com.xyyh.edc.data</groupId>
 			<artifactId>edc-data-mysql-impl</artifactId>
 		</dependency>
 		<dependency>

@@ -12,5 +12,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>edc-data-api</module>
+		<module>edc-data-common</module>
+		<module>edc-data-mongo-impl</module>
+		<module>edc-data-mysql-impl</module>
 	</modules>
 </project>
