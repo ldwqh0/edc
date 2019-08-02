@@ -21,7 +21,7 @@
 	</properties>
 
 	<modules>
-		<module>edc-meta</module>
+		<module>edc-meta-parent</module>
 		<module>edc-data-common</module>
 		<module>edc-data-mongo-impl</module>
 		<module>edc-app</module>

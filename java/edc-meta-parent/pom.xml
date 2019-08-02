@@ -8,7 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.xyyh.edc.meta</groupId>
-	<artifactId>meta-parent</artifactId>
+	<artifactId>edc-meta-parent</artifactId>
 	<packaging>pom</packaging>
 	<modules>
 		<module>edc-meta-api</module>
