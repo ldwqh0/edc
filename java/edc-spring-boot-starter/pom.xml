@@ -11,10 +11,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.xyyh.edc</groupId>
-			<artifactId>edc-meta</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-data-common</artifactId>
 		</dependency>
 		<dependency>

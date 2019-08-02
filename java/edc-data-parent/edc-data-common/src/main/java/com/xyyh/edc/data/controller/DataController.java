@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xyyh.edc.common.dto.TableResult;
 import com.xyyh.edc.data.service.EdcDataService;
 import com.xyyh.edc.meta.api.TableDefine;
-import com.xyyh.edc.meta.service.JpaTableService;
 import com.xyyh.edc.meta.service.TableService;
 
 import static org.springframework.http.HttpStatus.*;
