@@ -50,7 +50,7 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.xyyh</groupId>
+			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-common</artifactId>
 		</dependency>
 		<dependency>
