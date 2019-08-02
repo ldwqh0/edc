@@ -5,11 +5,15 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.domain.Persistable;
+
+import com.xyyh.edc.meta.api.InputControls;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -54,6 +58,16 @@ public class ColumnFormAttributes implements Persistable<Long> {
 	 */
 	@Column(name = "max_")
 	private BigDecimal max;
+
+	@Column(name = "input_control_")
+	@Enumerated(EnumType.STRING)
+	private InputControls inputControl;
+
+	@Column(name = "true_label_")
+	private String trueLabel;
+
+	@Column(name = "false_label_")
+	private String falseLabel;
 
 	@Override
 	public boolean isNew() {

@@ -55,10 +55,10 @@ public class TableServiceImpl implements JpaTableService {
 		this.tableDdlEventListenere = tableDdlEventListenere;
 	}
 
-//	@Override
-//	public Optional<Table> findById(Long id) {
-//		return tableRepository.findById(id);
-//	}
+	@Override
+	public Optional<Table> findById(Long id) {
+		return tableRepository.findById(id);
+	}
 
 	@Override
 	@Transactional
@@ -172,10 +172,11 @@ public class TableServiceImpl implements JpaTableService {
 				columnRepository.deleteInBatch(modelColumns);
 			} else {
 				// 否则找出所有在原始列列表中存在，但在新列表中不存在的对象，并删除
-				List<Column> columnToDelete = modelColumns.stream().filter(
-						item -> !newColumns.stream().anyMatch(c -> Objects.equal(c.getId(), item.getId())))
+				List<Column> columnToDelete = modelColumns.stream()
+						.filter(item -> !newColumns.stream().anyMatch(c -> Objects.equal(c.getId(), item.getId())))
 						.collect(Collectors.toList());
-				columnRepository.deleteInBatch(columnToDelete);
+				columnRepository.deleteAll(columnToDelete);
+//				columnRepository.deleteInBatch(columnToDelete);
 			}
 		}
 
@@ -238,12 +239,6 @@ public class TableServiceImpl implements JpaTableService {
 
 		}
 
-	}
-
-	@Override
-	public Optional<Table> findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

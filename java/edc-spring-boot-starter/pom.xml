@@ -30,6 +30,10 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.xyyh.edc.meta</groupId>
+			<artifactId>edc-meta-impl</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-spring-boot-starter-mongodb</artifactId>
 		</dependency>

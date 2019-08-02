@@ -11,11 +11,11 @@ public interface EdcDataService {
 
 	public Map<String, Object> save(TableDefine table, Map<String, Object> data);
 
-	public Object findOne(TableDefine table, String dataId);
+	public Map<String, Object> findOne(TableDefine table, String dataId);
 
 	public void deleteById(TableDefine table, String dataId);
 
-	public Page<Object> list(TableDefine table, Pageable pageable);
+	public Page<Map<String, Object>> list(TableDefine table, Pageable pageable);
 
-	public Object update(TableDefine table, String dataId, Map<String, Object> data);
+	public Map<String, Object> update(TableDefine table, String dataId, Map<String, Object> data);
 }

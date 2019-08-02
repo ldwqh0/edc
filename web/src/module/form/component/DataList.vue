@@ -10,10 +10,20 @@
       </el-col>
     </el-row>
     <el-datatables :ajax="ajax" v-if="table" ref="table">
-      <el-table-column v-for="{name,order, formAttributes:{title=name}={}} in table.columns"
-                       :prop="name"
-                       :label="title"
-                       :key="order" />
+      <template v-for="{name, order, type, formAttributes:{title,trueLabel,falseLabel}} in table.columns">
+        <el-table-column v-if="type==='BOOLEAN'"
+                         :key="order"
+                         :label="title||name">
+          <template v-slot="{row}">
+            <!--对于Boolean的类型要单独处理-->
+            {{ (row[name]===null || row[name]===undefined)?'':( row[name]?trueLabel:falseLabel) }}
+          </template>
+        </el-table-column>
+        <el-table-column v-else
+                         :prop="name"
+                         :label="title||name"
+                         :key="order" />
+      </template>
       <el-table-column>
         <template v-slot="scope">
           <router-link :to="{name:'form',params:{tableId:table.id,dataId:scope.row._id}}">编辑</router-link>

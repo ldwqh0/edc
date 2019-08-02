@@ -53,13 +53,12 @@ public class DataController {
 	}
 
 	@PutMapping("{collection}/{dataId}")
-	public Object update(
-			@PathVariable("collection") String collection,
-			@PathVariable("dataId") String dataId,
+	public Object update(@PathVariable("collection") String collection, @PathVariable("dataId") String dataId,
 			@RequestBody Map<String, Object> data) {
 		Optional<TableDefine> tableDefine = tableService.findByName(collection);
 		if (tableDefine.isPresent()) {
-			return dataService.update(tableDefine.get(), dataId, data);
+			Object r = dataService.update(tableDefine.get(), dataId, data);
+			return r;
 		} else {
 			return null;
 		}
@@ -106,9 +105,7 @@ public class DataController {
 	 * @return
 	 */
 	@GetMapping(value = "{collection}", params = "draw")
-	public TableResult<Object> list(
-			@PathVariable("collection") String collection,
-			@RequestParam("draw") Long draw,
+	public TableResult<?> list(@PathVariable("collection") String collection, @RequestParam("draw") Long draw,
 			@PageableDefault Pageable pageable) {
 		Optional<TableDefine> tableDefine = tableService.findByName(collection);
 		if (tableDefine.isPresent()) {

@@ -10,10 +10,25 @@
             :rules="getRules(column)"
             :prop="`${column.name}`">
             <el-input v-if="column.type==='STRING'" v-model="data[column.name]" />
-            <el-input type="number" v-if="column.type==='DECIMAL'" v-model="data[column.name]" />
-            <el-input type="number" v-if="column.type==='INTEGER'" v-model="data[column.name]" />
+            <!--数字输入框有个问题即我们输入数字之后，再删除所有的输入内容，我们得到的值是"",即空字符串-->
+            <el-input-number
+              v-if="column.type==='DECIMAL'"
+              v-model="data[column.name]" />
+            <el-input-number
+              v-if="column.type==='INTEGER'"
+              v-model="data[column.name]" />
             <el-date-picker v-if="column.type==='DATE'" v-model="data[column.name]" />
             <el-date-picker type="datetime" v-if="column.type==='DATETIME'" v-model="data[column.name]" />
+            <template v-if="column.type==='BOOLEAN'">
+              <el-select v-if="column.formAttributes.inputControl==='SELECT'" v-model="data[column.name]">
+                <el-option :value="true" :label="column.formAttributes.trueLabel" />
+                <el-option :value="false" :label="column.formAttributes.falseLabel" />
+              </el-select>
+              <el-radio-group v-else v-model="data[column.name]">
+                <el-radio :label="true">{{ column.formAttributes.trueLabel }}</el-radio>
+                <el-radio :label="false">{{ column.formAttributes.falseLabel }}</el-radio>
+              </el-radio-group>
+            </template>
           </el-form-item>
         </el-col>
       </el-row>
@@ -77,21 +92,44 @@
         })
       }
       // 组合长度校验
-      if (type === 'STRING') {
-        if (isNumber(min)) {
+      switch (type) {
+        case 'STRING':
+          if (isNumber(min)) {
+            result.push({
+              type: 'string',
+              min,
+              message: `长度不能少于${min}`
+            })
+          }
+          if (isNumber(max)) {
+            result.push({
+              type: 'string',
+              max,
+              message: `长度能超过${max}`
+            })
+          }
+          break
+        case 'INTEGER':
+        case 'DECIMAL':
           result.push({
-            type: 'string',
-            min,
-            message: `长度不能少于${min}`
+            type: 'number',
+            message: '请输入数字'
           })
-        }
-        if (isNumber(max)) {
-          result.push({
-            type: 'string',
-            max,
-            message: `长度能超过${max}`
-          })
-        }
+          if (isNumber(min)) {
+            result.push({
+              type: 'number',
+              min,
+              message: `值能小于${min}`
+            })
+          }
+          if (isNumber(max)) {
+            result.push({
+              type: 'number',
+              max,
+              message: `值不能大于${max}`
+            })
+          }
+          break
       }
 
       return result

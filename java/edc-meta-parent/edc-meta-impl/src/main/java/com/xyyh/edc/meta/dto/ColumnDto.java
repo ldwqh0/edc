@@ -3,10 +3,13 @@ package com.xyyh.edc.meta.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.xyyh.edc.meta.api.ColumnDefine;
 import com.xyyh.edc.meta.api.ColumnFormAttributes;
 import com.xyyh.edc.meta.api.ColumnTypes;
 
+@JsonInclude(Include.NON_NULL)
 public class ColumnDto implements Serializable, ColumnDefine {
 
 	private static final long serialVersionUID = 5373677095536709827L;

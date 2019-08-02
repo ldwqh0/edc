@@ -10,11 +10,6 @@
 	<artifactId>edc-meta-impl</artifactId>
 
 	<dependencies>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
-			</dependency> -->
-
-		<!-- <dependency> <groupId>com.dm</groupId> <artifactId>dm-common</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -47,7 +42,6 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.xyyh.edc</groupId>

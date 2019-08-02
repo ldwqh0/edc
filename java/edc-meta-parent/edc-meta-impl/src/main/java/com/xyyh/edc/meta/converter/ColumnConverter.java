@@ -21,7 +21,7 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 		dto.setLength(model.getLength());
 		dto.setName(model.getName());
 		dto.setNullable(model.getNullable());
-		dto.setType(ColumnTypes.valueOf(model.getType()));
+		dto.setType(model.getType());
 		dto.setFormAttributes(toColumnAttributesDto(model.getFormAttributes()));
 		return dto;
 	}
@@ -44,9 +44,12 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 			attributes.setMax(attributesSource.getMax());
 			attributes.setMin(attributesSource.getMin());
 			attributes.setTitle(attributesSource.getTitle());
+			attributes.setInputControl(attributesSource.getInputControl());
+			attributes.setTrueLabel(attributesSource.getTrueLabel());
+			attributes.setFalseLabel(attributesSource.getFalseLabel());
 			model.setFormAttributes(attributes);
 		}
-		model.setType(dto.getType().toString());
+		model.setType(dto.getType());
 		return model;
 	}
 
@@ -58,6 +61,9 @@ public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {
 			dto.setMax(source.getMax());
 			dto.setTitle(source.getTitle());
 			dto.setMin(source.getMin());
+			dto.setInputControl(source.getInputControl());
+			dto.setTrueLabel(source.getTrueLabel());
+			dto.setFalseLabel(source.getFalseLabel());
 			return dto;
 		}
 	}

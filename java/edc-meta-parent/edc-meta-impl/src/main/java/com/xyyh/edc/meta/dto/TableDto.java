@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.xyyh.edc.meta.api.ColumnDefine;
@@ -21,6 +23,10 @@ public class TableDto implements Serializable, TableDefine {
 	private List<ColumnDto> columns;
 
 	public List<ColumnDefine> getColumns() {
-		return columns.stream().map(a -> a).collect(Collectors.toList());
+		if (CollectionUtils.isEmpty(columns)) {
+			return null;
+		} else {
+			return columns.stream().map(a -> a).collect(Collectors.toList());
+		}
 	}
 }

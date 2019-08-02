@@ -2,9 +2,13 @@ package com.xyyh.edc.meta.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import com.xyyh.edc.meta.api.ColumnTypes;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -49,8 +53,9 @@ public class Column extends AbstractEntity {
 	/**
 	 * 字段类型
 	 */
+	@Enumerated(EnumType.STRING)
 	@javax.persistence.Column(name = "type_", length = 50)
-	private String type;
+	private ColumnTypes type;
 
 	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn

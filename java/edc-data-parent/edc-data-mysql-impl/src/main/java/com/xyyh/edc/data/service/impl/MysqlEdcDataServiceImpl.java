@@ -18,7 +18,7 @@ public class MysqlEdcDataServiceImpl implements EdcDataService {
 	}
 
 	@Override
-	public Object findOne(TableDefine table, String dataId) {
+	public Map<String, Object> findOne(TableDefine table, String dataId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -26,19 +26,20 @@ public class MysqlEdcDataServiceImpl implements EdcDataService {
 	@Override
 	public void deleteById(TableDefine table, String dataId) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public Page<Object> list(TableDefine table, Pageable pageable) {
+	public Page<Map<String, Object>> list(TableDefine table, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object update(TableDefine table, String dataId, Map<String, Object> data) {
+	public Map<String, Object> update(TableDefine table, String dataId, Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

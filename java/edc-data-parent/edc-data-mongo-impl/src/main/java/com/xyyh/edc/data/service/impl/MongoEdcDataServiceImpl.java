@@ -27,9 +27,6 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;;
 @Service
 public class MongoEdcDataServiceImpl implements EdcDataService {
 
-//	@Autowired
-//	private TableService tableService;
-
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
@@ -46,8 +43,9 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	}
 
 	@Override
-	public Object update(TableDefine table, String dataId, Map<String, Object> data) {
-		Object exist = findOne(table, dataId);
+	@Transactional
+	public Map<String, Object> update(TableDefine table, String dataId, Map<String, Object> data) {
+		Map<String, Object> exist = findOne(table, dataId);
 		if (Objects.isNull(exist)) {
 			// TODO 如果不存在
 			return null;
@@ -55,32 +53,33 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 			if (ObjectId.isValid(dataId)) {
 				data.put("_id", new ObjectId(dataId));
 			} else {
-				data.put("_id", data);
+				data.put("_id", dataId);
 			}
 			return mongoTemplate.save(data, table.getName());
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object findOne(final TableDefine collection, final String dataId) {
+	public Map<String, Object> findOne(final TableDefine table, final String dataId) {
 		// 如果是_id是ObjectId的字符串的话，一定会查找为ObjectId
-		return mongoTemplate.findOne(query(where("_id").is(dataId)), Map.class, collection.getName());
+		return mongoTemplate.findOne(query(where("_id").is(dataId)), Map.class, table.getName());
 	}
 
 	@Override
-	public void deleteById(TableDefine collection, String dataId) {
-		mongoTemplate.remove(query(where("_id").is(dataId)), collection.getName());
+	public void deleteById(TableDefine table, String dataId) {
+		mongoTemplate.remove(query(where("_id").is(dataId)), table.getName());
 	}
 
 	@Override
-	public Page<Object> list(TableDefine collection, Pageable pageable) {
+	public Page<Map<String, Object>> list(TableDefine table, Pageable pageable) {
 		Query query = new Query();
-		long count = mongoTemplate.count(query, collection.getName());
+		long count = mongoTemplate.count(query, table.getName());
 		query.skip(pageable.getOffset()).limit(pageable.getPageSize());
 		@SuppressWarnings("rawtypes")
-		List<Map> list = mongoTemplate.find(query, Map.class, collection.getName());
-		return new PageImpl<Object>(
-				list.stream().map(i -> i).collect(Collectors.toList()), pageable, count);
+		List<Map> list = mongoTemplate.find(query, Map.class, table.getName());
+		return new PageImpl<Map<String, Object>>(list.stream().map(i -> i).collect(Collectors.toList()), pageable,
+				count);
 	}
 
 	/**
@@ -92,7 +91,7 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	 * @param data
 	 * @return
 	 */
-	private String getId(TableDefine table, Map<String, Object> data) {
+	private String getId(TableDefine table, Map<String, ?> data) {
 		return StreamUtils.reduce(table.getColumns().stream().filter(ColumnDefine::isIdColumn), new StringBuilder(),
 				(builder, current) -> builder.append(data.get(current.getName()))).toString();
 	}
