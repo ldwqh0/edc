@@ -28,12 +28,12 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.xyyh.edc</groupId>
+			<groupId>com.xyyh.edc.data</groupId>
 			<artifactId>edc-data-common</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.xyyh.edc</groupId>
+			<groupId>com.xyyh.edc.data</groupId>
 			<artifactId>edc-data-mongo-impl</artifactId>
 			<optional>true</optional>
 		</dependency>

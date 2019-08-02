@@ -10,7 +10,7 @@
 	<artifactId>edc-spring-boot-starter</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>com.xyyh.edc</groupId>
+			<groupId>com.xyyh.edc.data</groupId>
 			<artifactId>edc-data-common</artifactId>
 		</dependency>
 		<dependency>
