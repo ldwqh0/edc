@@ -7,37 +7,20 @@
 		<artifactId>edc-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>edc-meta</artifactId>
-	<dependencies>
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency> -->
-
-		<dependency>
-			<groupId>com.dm</groupId>
-			<artifactId>dm-common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!-- <dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>javax.persistence-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-		</dependency> -->
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.mysema.maven</groupId>
-				<artifactId>apt-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<groupId>com.xyyh.edc.meta</groupId>
+	<artifactId>meta-parent</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>edc-meta-api</module>
+		<module>edc-meta-impl</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.xyyh.edc.meta</groupId>
+				<artifactId>edc-meta-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

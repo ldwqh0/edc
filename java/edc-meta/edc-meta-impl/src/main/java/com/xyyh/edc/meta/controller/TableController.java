@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dm.common.dto.TableResult;
+import com.edc.common.dto.TableResult;
 import com.xyyh.edc.meta.converter.TableConverter;
 import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.service.TableService;

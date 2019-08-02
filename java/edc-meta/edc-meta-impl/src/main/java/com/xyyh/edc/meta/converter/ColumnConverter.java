@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Component;
 
-import com.dm.common.converter.AbstractConverter;
 import com.xyyh.edc.meta.dto.ColumnDto;
 import com.xyyh.edc.meta.dto.ColumnFormAttributesDto;
 import com.xyyh.edc.meta.entity.Column;

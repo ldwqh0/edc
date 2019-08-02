@@ -3,7 +3,6 @@ package com.xyyh.edc.meta.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.dm.common.converter.AbstractConverter;
 import com.xyyh.edc.meta.dto.TableDto;
 import com.xyyh.edc.meta.entity.Table;
 

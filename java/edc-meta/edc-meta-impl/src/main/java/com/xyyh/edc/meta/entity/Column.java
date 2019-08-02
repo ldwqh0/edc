@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-import com.dm.common.entity.AbstractEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 

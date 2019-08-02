@@ -7,11 +7,12 @@
 		<artifactId>edc-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>edc-data-common</artifactId>
+	<artifactId>edc-common</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -25,11 +26,5 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.xyyh</groupId>
-			<artifactId>edc-common</artifactId>
-		</dependency>
-		<!-- <dependency> <groupId>com.xyyh</groupId> <artifactId>edc-meta</artifactId> 
-			</dependency> -->
 	</dependencies>
 </project>
