@@ -1,9 +1,9 @@
 package com.xyyh.edc.data.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -71,6 +71,7 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 		mongoTemplate.remove(query(where("_id").is(dataId)), table.getName());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Page<Map<String, Object>> list(TableDefine table, Pageable pageable) {
 		Query query = new Query();
@@ -78,8 +79,11 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 		query.skip(pageable.getOffset()).limit(pageable.getPageSize());
 		@SuppressWarnings("rawtypes")
 		List<Map> list = mongoTemplate.find(query, Map.class, table.getName());
-		return new PageImpl<Map<String, Object>>(list.stream().map(i -> i).collect(Collectors.toList()), pageable,
-				count);
+		List<Map<String, Object>> r = new ArrayList<>();
+		list.forEach(i -> r.add(i));
+		// 以下代码会IDE便宜不会报错，但maven便宜报错
+		// List<Map<String, Object>> r2 = list.stream().map(i -> i).collect(Collectors.toList());
+		return new PageImpl<Map<String, Object>>(r, pageable, count);
 	}
 
 	/**
