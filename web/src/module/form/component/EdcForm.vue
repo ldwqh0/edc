@@ -8,15 +8,18 @@
           <el-form-item
             :label="(column.formAttributes && column.formAttributes.title) || column.name"
             :rules="getRules(column)"
-            :prop="`${column.name}`">
-            <el-input v-if="column.type==='STRING'" v-model="data[column.name]" />
+            :prop="column.name">
+            <text-control v-if="column.type==='STRING'" :column="column" v-model="data[column.name]" />
             <!--数字输入框有个问题即我们输入数字之后，再删除所有的输入内容，我们得到的值是"",即空字符串-->
-            <el-input-number
-              v-if="column.type==='DECIMAL'"
-              v-model="data[column.name]" />
-            <el-input-number
-              v-if="column.type==='INTEGER'"
-              v-model="data[column.name]" />
+            <number-control v-if="column.type==='DECIMAL' || column.type==='INTEGER'"
+                            :column="column"
+                            v-model="data[column.name]" />
+            <!--            <el-input-number-->
+            <!--              v-if="column.type==='DECIMAL'"-->
+            <!--              v-model="data[column.name]" />-->
+            <!--            <el-input-number-->
+            <!--              v-if="column.type==='INTEGER'"-->
+            <!--              v-model="data[column.name]" />-->
             <el-date-picker v-if="column.type==='DATE'" v-model="data[column.name]" />
             <el-date-picker type="datetime" v-if="column.type==='DATETIME'" v-model="data[column.name]" />
             <template v-if="column.type==='BOOLEAN'">
@@ -47,10 +50,17 @@
   import { Component, Prop } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import isNumber from 'lodash/isNumber'
+  import TextControl from './controles/TextControl'
+  import NumberControl from './controles/NumberControl'
 
   const tableModule = namespace('table')
   const formModule = namespace('form')
-  @Component
+  @Component({
+    components: {
+      TextControl,
+      NumberControl
+    }
+  })
   export default class EdcForm extends Vue {
     table = { columns: [] }
 

@@ -2,7 +2,9 @@ package com.xyyh.edc.data.controller;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xyyh.edc.common.dto.TableResult;
+import com.xyyh.edc.common.utils.StreamUtils;
 import com.xyyh.edc.data.service.EdcDataService;
+import com.xyyh.edc.meta.api.ColumnDefine;
 import com.xyyh.edc.meta.api.TableDefine;
 import com.xyyh.edc.meta.service.TableService;
 
@@ -46,8 +50,11 @@ public class DataController {
 	public Object save(@PathVariable("collection") String collection, @RequestBody Map<String, Object> data) {
 		Optional<TableDefine> tableDefine = tableService.findByName(collection);
 		if (tableDefine.isPresent()) {
-			return dataService.save(tableDefine.get(), data);
+			TableDefine table = tableDefine.get();
+			String dataId = generateId(table, data);
+			return dataService.save(tableDefine.get(), dataId, data);
 		} else {
+			// TODO 异常处理
 			return null;
 		}
 	}
@@ -60,6 +67,7 @@ public class DataController {
 			Object r = dataService.update(tableDefine.get(), dataId, data);
 			return r;
 		} else {
+			// 异常处理
 			return null;
 		}
 	}
@@ -113,5 +121,23 @@ public class DataController {
 		} else {
 			return TableResult.failure(draw, pageable, "指定数据定义不存在");
 		}
+	}
+
+	/**
+	 * 根据表定义和数据获取数据ID,<br>
+	 * 将所有的ID字段的字符串值相加，获得对象ID
+	 *
+	 * 
+	 * @param table
+	 * @param data
+	 * @return
+	 */
+	private String generateId(TableDefine table, Map<String, ?> data) {
+		String existId = StreamUtils.reduce(table.getColumns().stream().filter(ColumnDefine::isIdColumn),
+				new StringBuilder(), (builder, current) -> builder.append(data.get(current.getName()))).toString();
+		if (StringUtils.isBlank(existId)) {
+			existId = UUID.randomUUID().toString();
+		}
+		return existId;
 	}
 }

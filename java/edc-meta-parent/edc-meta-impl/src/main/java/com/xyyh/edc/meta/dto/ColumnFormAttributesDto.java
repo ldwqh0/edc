@@ -47,4 +47,6 @@ public class ColumnFormAttributesDto implements Serializable, ColumnFormAttribut
 	 */
 	private String falseLabel;
 
+	private String options;
+
 }

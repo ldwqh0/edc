@@ -29,6 +29,10 @@
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -42,9 +46,23 @@
 
 	<profiles>
 		<profile>
-			<id>mariadb@local</id>
+			<id>h2@local</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>-</profiles.active>
+				<datasource.url>jdbc:h2:~/edc</datasource.url>
+				<datasource.driver>org.h2.Driver</datasource.driver>
+				<datasource.username>sa</datasource.username>
+				<datasource.password></datasource.password>
+				<datasource.platform>org.hibernate.dialect.H2Dialect</datasource.platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>mariadb@local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<profiles.active>localhost-mariadb</profiles.active>

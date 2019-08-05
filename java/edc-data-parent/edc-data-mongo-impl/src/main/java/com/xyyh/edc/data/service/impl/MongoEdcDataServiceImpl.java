@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +15,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xyyh.edc.common.utils.StreamUtils;
 import com.xyyh.edc.data.service.EdcDataService;
-import com.xyyh.edc.meta.api.ColumnDefine;
 import com.xyyh.edc.meta.api.TableDefine;
 
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -32,13 +29,8 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 
 	@Override
 	@Transactional
-	public Map<String, Object> save(TableDefine table, Map<String, Object> data) {
-		// 根据表元数据判断数据ID
-		// 如果没有指定ID列，使用默认的ID列
-		String dataId = getId(table, data);
-		if (StringUtils.isNotBlank(dataId)) {
-			data.put("_id", dataId);
-		}
+	public Map<String, Object> save(TableDefine table, String dataId, Map<String, Object> data) {
+		data.put("_id", data);
 		return mongoTemplate.save(data, table.getName());
 	}
 
@@ -82,22 +74,8 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 		List<Map<String, Object>> r = new ArrayList<>();
 		list.forEach(i -> r.add(i));
 		// 以下代码会IDE便宜不会报错，但maven便宜报错
-		// List<Map<String, Object>> r2 = list.stream().map(i -> i).collect(Collectors.toList());
+		// List<Map<String, Object>> r2 = list.stream().map(i ->
+		// i).collect(Collectors.toList());
 		return new PageImpl<Map<String, Object>>(r, pageable, count);
 	}
-
-	/**
-	 * 根据表定义和数据获取数据ID,<br>
-	 * 将所有的ID字段的字符串值相加，获得对象ID
-	 *
-	 * 
-	 * @param table
-	 * @param data
-	 * @return
-	 */
-	private String getId(TableDefine table, Map<String, ?> data) {
-		return StreamUtils.reduce(table.getColumns().stream().filter(ColumnDefine::isIdColumn), new StringBuilder(),
-				(builder, current) -> builder.append(data.get(current.getName()))).toString();
-	}
-
 }

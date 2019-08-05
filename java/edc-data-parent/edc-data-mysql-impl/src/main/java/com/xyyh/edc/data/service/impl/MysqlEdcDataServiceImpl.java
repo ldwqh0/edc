@@ -12,7 +12,7 @@ import com.xyyh.edc.meta.api.TableDefine;
 public class MysqlEdcDataServiceImpl implements EdcDataService {
 
 	@Override
-	public Map<String, Object> save(TableDefine table, Map<String, Object> data) {
+	public Map<String, Object> save(TableDefine table,String dataId, Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -19,17 +19,52 @@
               <el-input type="text" v-model.trim="data.title" />
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="控件类型" prop="inputControl">
+              <el-select v-model="data.inputControl">
+                <template v-if="column.type==='STRING'">
+                  <el-option value="TEXTBOX" label="文本框" />
+                  <el-option value="RADIO" label="单选按钮" />
+                  <el-option value="SELECT" label="下拉选择框" />
+                </template>
+                <template v-else-if="column.type==='INTEGER' || column.type==='DECIMAL'">
+                  <el-option value="NUMBERINPUT" label="数字输入框" />
+                  <el-option value="SLIDER" label="滑块" />
+                </template>
+                <template v-else-if="column.type==='DATE'">
+                  <el-option value="DATEPICKER" label="日期选择框" />
+                </template>
+                <template v-else-if="column.type==='DATETIME'">
+                  <el-option value="DATETIMEPICKER" label="日期时间选择框" />
+                </template>
+                <template v-else-if="column.type==='BOOLEAN'">
+                  <el-option value="RADIO" label="单选组" />
+                  <el-option value="SELECT" label="下拉选择框" />
+                </template>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row v-if="column.type==='STRING' && (data.inputControl==='RADIO' || data.inputControl==='SELECT')">
+          <el-col :span="24">
+            <el-form-item label="选项值" prop="options">
+              <el-input type="textarea"
+                        v-model="data.options"
+                        :placeholder="optionPlaceholder" />
+            </el-form-item>
+          </el-col>
         </el-row>
         <!--字符串的最大值和最小值设定-->
         <el-row v-if="column.type==='STRING'">
           <el-col :span="12">
             <el-form-item label="最小长度" prop="min">
-              <el-input clearable type="number" v-model="data.min" />
+              <el-input-number clearable type="number" v-model.number="data.min" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大长度" prop="max">
-              <el-input type="number" v-model="data.max" />
+              <el-input-number type="number" v-model.number="data.max" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -37,12 +72,12 @@
         <el-row v-if="column.type==='INTEGER' || column.type==='DECIMAL'">
           <el-col :span="12">
             <el-form-item label="最小值" prop="min">
-              <el-input type="number" v-model="data.min" />
+              <el-input-number type="number" v-model.number="data.min" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大值" prop="max">
-              <el-input type="number" v-model="data.max" />
+              <el-input-number type="number" v-model.number="data.max" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -76,20 +111,12 @@
         </el-row>
 
         <el-row v-if="column.type==='BOOLEAN'">
-          <el-col :span="8">
-            <el-form-item label="控件类型">
-              <el-select v-model="data.inputControl">
-                <el-option value="RADIO" label="单选按钮" />
-                <el-option value="SELECT" label="下拉选" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="真值标签" prop="trueLabel">
               <el-input v-model="data.trueLabel" />
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="假值标签" prop="falseLabel">
               <el-input v-model="data.falseLabel" />
             </el-form-item>
@@ -123,6 +150,10 @@
     column
 
     visible = false
+
+    optionPlaceholder = `请输入选项值,每组值用换行隔开
+每组值可用":"分割,":"前的值表示控件的值,":"后的值表示控件的显示标签
+`
 
     data = {
       title: null,

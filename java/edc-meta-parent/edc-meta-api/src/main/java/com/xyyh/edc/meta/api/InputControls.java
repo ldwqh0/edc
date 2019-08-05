@@ -30,5 +30,17 @@ public enum InputControls {
 	/**
 	 * 日期选择框
 	 */
-	DATEPICKER
+	DATEPICKER,
+	/**
+	 * 日期时间选择框
+	 */
+	DATETIMEPICKER,
+	/**
+	 * 数字输入框
+	 */
+	NUMBERINPUT,
+	/**
+	 * 滑块
+	 */
+	SLIDER
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
@@ -68,6 +69,13 @@ public class ColumnFormAttributes implements Persistable<Long> {
 
 	@Column(name = "false_label_")
 	private String falseLabel;
+
+	/**
+	 * 选项列表，使用某个符号分割，应该是换行符
+	 */
+	@Column(name = "options_")
+	@Lob
+	private String options;
 
 	@Override
 	public boolean isNew() {

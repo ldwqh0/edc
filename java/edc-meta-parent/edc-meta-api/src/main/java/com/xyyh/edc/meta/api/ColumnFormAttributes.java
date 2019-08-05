@@ -45,4 +45,11 @@ public interface ColumnFormAttributes extends Serializable {
 	 * @return
 	 */
 	public String getFalseLabel();
+
+	/**
+	 * 在字符控件的情况下，如果使用下拉选或者单选时，选项的列表
+	 * 
+	 * @return
+	 */
+	public String getOptions();
 }
