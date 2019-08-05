@@ -46,8 +46,19 @@ public interface ColumnFormAttributes extends Serializable {
 	 */
 	public String getFalseLabel();
 
+	public ValueSourceTypes getValueSourceType();
+
 	/**
-	 * 在字符控件的情况下，如果使用下拉选或者单选时，选项的列表
+	 * 该选项字段的固定值域
+	 * 
+	 * @return
+	 */
+	public String getFixedValue();
+	
+	public FixedValueTypes getFixedValueType();
+
+	/**
+	 * 列表单的额外条件，使用json保存的字符串
 	 * 
 	 * @return
 	 */

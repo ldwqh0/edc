@@ -42,5 +42,9 @@ public enum InputControls {
 	/**
 	 * 滑块
 	 */
-	SLIDER
+	SLIDER,
+	/**
+	 * 级联选择器
+	 */
+	CASCADER
 }

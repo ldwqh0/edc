@@ -8,6 +8,10 @@
   <el-radio-group v-else-if="column.formAttributes.inputControl==='RADIO'" :value="value" @input="emitValue">
     <el-radio v-for="{label,value} in options" :label="value" :key="value">{{ label }}</el-radio>
   </el-radio-group>
+  <el-cascader v-else-if="column.formAttributes.inputControl==='CASCADER'"
+               :value="value"
+               @input="emitValue"
+               :options="cascaderProps" />
   <el-input v-else
             :value="value"
             @input="emitValue" />
@@ -32,6 +36,19 @@
 
     emitValue (v) {
       this.$emit('input', v)
+    }
+
+    /**
+     * 级联选择器的属性
+     * @returns {{children: string, label: string, emitPath: boolean, value: string}}
+     */
+    get cascaderProps () {
+      return {
+        children: '',
+        value: '',
+        label: '',
+        emitPath: false
+      }
     }
 
     get options () {

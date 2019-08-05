@@ -14,7 +14,9 @@ import javax.persistence.OneToOne;
 
 import org.springframework.data.domain.Persistable;
 
+import com.xyyh.edc.meta.api.FixedValueTypes;
 import com.xyyh.edc.meta.api.InputControls;
+import com.xyyh.edc.meta.api.ValueSourceTypes;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -69,6 +71,17 @@ public class ColumnFormAttributes implements Persistable<Long> {
 
 	@Column(name = "false_label_")
 	private String falseLabel;
+
+	@Column(name = "value_source_type_")
+	@Enumerated(EnumType.STRING)
+	private ValueSourceTypes valueSourceType;
+
+	@Column(name = "fixed_value_type_")
+	private FixedValueTypes fixedValueType;
+
+	@Column(name = "fixed_value_")
+	@Lob
+	private String fixedValue;
 
 	/**
 	 * 选项列表，使用某个符号分割，应该是换行符
