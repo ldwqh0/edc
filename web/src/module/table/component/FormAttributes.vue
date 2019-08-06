@@ -49,10 +49,11 @@
 
         <template
           v-if="column.type==='STRING' && (data.inputControl==='RADIO' || data.inputControl==='SELECT'|| data.inputControl==='CASCADER')">
+          <!--确定选项来源-->
           <el-row>
             <el-col :span="12">
               <el-form-item label="选项来源" prop="valueSourceType">
-                <el-select v-model="data.valueSourceType">
+                <el-select v-model="data.valueSourceType" @change="data.fixedValue=''">
                   <el-option value="FIXED_VALUE" label="固定值" />
                   <el-option value="TABLE" label="现有表" />
                 </el-select>
@@ -60,7 +61,7 @@
             </el-col>
             <el-col :span="12" v-if="data.valueSourceType==='FIXED_VALUE'">
               <el-form-item label="值类型" prop="fixedValueType">
-                <el-select v-model="data.fixedValueType">
+                <el-select v-model="data.fixedValueType" @change="fixedValueTypeChanged">
                   <el-option value="JSON" label="JSON数组" />
                   <el-option value="VL" label="value:label列表" />
                 </el-select>
@@ -69,14 +70,16 @@
             <el-col :span="12" v-if="data.valueSourceType==='TABLE'">
               <el-form-item label="表名称" prop="fixedValue">
                 <el-select v-model="data.fixedValue">
-                  <el-option value="table1" label="表1" />
-                  <el-option value="table2" label="表2" />
+                  <el-option v-for="{id,name,title} in tables"
+                             :value="id+''"
+                             :label="title"
+                             :key="id" />
                 </el-select>
               </el-form-item>
             </el-col>
           </el-row>
 
-          <!--级联选择器，下拉选，单选按钮的固定值配置框-->
+          <!--级联选择器，下拉选，单选按钮的固定值输入框-->
           <el-row v-if="data.valueSourceType==='FIXED_VALUE'">
             <el-col :span="24">
               <el-form-item label="选项值" prop="fixedValue">
@@ -87,32 +90,69 @@
               </el-form-item>
             </el-col>
           </el-row>
+
         </template>
 
-        <!--如果是级联选择器，需要定义级联选择器的配置-->
-        <el-row v-if="data.inputControl==='CASCADER'">
-          <el-col :span="8">
-            <el-form-item label="父级属性">
-              <el-select v-model="options.parent">
-                <el-option v-for="p in properties" :key="p" :value="p" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="标签属性">
-              <el-select v-model="options.label">
-                <el-option v-for="p in properties" :key="p" :value="p" />
-              </el-select>
-            </el-form-item>
-          </el-col><el-col :span="8">
-            <el-form-item label="值属性">
-              <el-select v-model="options.value">
-                <el-option v-for="p in properties" :key="p" :value="p" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <!--如果是级联选择控件，需要配置选择项目-->
+        <!--如果固定值是json格式，需要指定值的label键名，value键名-->
+        <template v-if="data.valueSourceType==='TABLE' || data.fixedValueType==='JSON'">
+          <!--如果是级联选择器，需要定义级联选择器的配置-->
+          <el-row v-if="data.inputControl==='CASCADER'">
+            <el-col :span="8">
+              <el-form-item label="父级属性">
+                <el-select v-model="options.parent">
+                  <el-option v-for="{label,value} in properties"
+                             :key="value"
+                             :value="value"
+                             :label="label" />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="标签属性">
+                <el-select v-model="options.label">
+                  <el-option v-for="{label,value} in properties"
+                             :key="value"
+                             :value="value"
+                             :label="label" />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="值属性">
+                <el-select v-model="options.value">
+                  <el-option v-for="{label,value} in properties"
+                             :key="value"
+                             :value="value"
+                             :label="label" />
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
 
+          <el-row v-if="data.inputControl==='SELECT' || data.inputControl==='RADIO'">
+            <el-col :span="12">
+              <el-form-item label="标签属性">
+                <el-select v-model="options.label">
+                  <el-option v-for="{label,value} in properties"
+                             :key="value"
+                             :value="value"
+                             :label="label" />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="值属性">
+                <el-select v-model="options.value">
+                  <el-option v-for="{label,value} in properties"
+                             :key="value"
+                             :value="value"
+                             :label="label" />
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </template>
         <!--字符串的最大值和最小值设定-->
         <el-row v-if="column.type==='STRING' && data.inputControl==='TEXTBOX'">
           <el-col :span="12">
@@ -196,9 +236,11 @@
 
 <script>
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
   import isNumber from 'lodash/isNumber'
+  import { namespace } from 'vuex-class'
 
+  const tableModule = namespace('table')
   @Component
   export default class FormAttributes extends Vue {
     @Prop({ default: () => {} })
@@ -207,6 +249,17 @@
     @Prop({ default: () => {} })
     column
 
+    @tableModule.State('tables')
+    tables
+
+    @tableModule.Action('loadTable')
+    loadTable
+
+    selectedTable = {}
+
+    /**
+     * 对话框是否可见
+     */
     visible = false
 
     get fixedValuePlaceholder () {
@@ -218,6 +271,9 @@
       }
     }
 
+    /**
+     * formColumnAttributes
+     */
     data = {
       title: null,
       min: null,
@@ -275,10 +331,12 @@
         // 尝试从字符串中解析附加属性
         d.options = JSON.parse(d.options)
       } catch (e) {
-        console.error(e)
-      }
-      if (!d.options) {
-        d.options = {}
+        // 指定默认的级联选择器/下拉选择器的标签配置
+        d.options = {
+          value: 'value',
+          label: 'label',
+          parent: 'parent'
+        }
       }
       this.$set(this, 'data', d)
       this.visible = true
@@ -297,25 +355,54 @@
      */
     get properties () {
       // 如果选项的值域是固定值
-      if (this.data.valueSourceType === 'FIXED_VALUE') {
-        if (this.data.fixedValueType === 'JSON') {
+      const { valueSourceType, fixedValueType, fixedValue } = this.data
+      if (valueSourceType === 'FIXED_VALUE') {
+        let r = []
+        if (fixedValueType === 'JSON') {
           try {
-            const opts = JSON.parse(this.data.fixedValue)
+            // 尝试进行json数据解析
+            const opts = JSON.parse(fixedValue)
             if (opts && opts instanceof Array && opts.length > 0) {
-              return Object.keys(opts[0])
+              r = Object.keys(opts[0])
             }
           } catch (e) {
           }
-        } else if (this.data.fixedValueType === 'VL') {
-          return ['value', 'label']
+        } else if (fixedValueType === 'VL') {
+          r = ['value', 'label', 'parent']
         }
-        // 尝试进行json数据解析
+        return r.map(it => ({ label: it, value: it }))
+      } else if (valueSourceType === 'TABLE') {
+        const { columns } = this.selectedTable
+        if (columns) {
+          return columns.map(({
+            name,
+            formAttributes: { title = name } = { title: name }
+          }) => ({
+            label: title,
+            value: name
+          }))
+        }
       }
       return []
     }
 
     get options () {
       return this.data.options
+    }
+
+    fixedValueTypeChanged (v) {
+      if (v === 'VL') {
+        this.$set(this.data, 'options', { value: 'value', label: 'label', parent: 'parent' })
+      }
+    }
+
+    @Watch('data.fixedValue', { immediate: true })
+    loadTableInfo (id) {
+      if (this.data.valueSourceType === 'TABLE') {
+        this.loadTable({ id }).then(({ data }) => {
+          this.selectedTable = data
+        })
+      }
     }
   }
 </script>

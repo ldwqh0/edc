@@ -25,7 +25,7 @@
     "qs": "^6.5.1",
     "regenerator-runtime": "^0.13.2",
     "resize-detector": "^0.2.0",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.2",
     "underscore": "^1.9.1",
     "vue": "^2.5.20",
     "vue-property-decorator": "^8.2.0",

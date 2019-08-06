@@ -14,4 +14,6 @@ public interface TableService {
 	 */
 	public Optional<TableDefine> findByName(String collection);
 
+	public Optional<TableDefine> findOneById(Long tableId);
+
 }

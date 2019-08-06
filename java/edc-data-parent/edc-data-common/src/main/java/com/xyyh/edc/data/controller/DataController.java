@@ -1,5 +1,6 @@
 package com.xyyh.edc.data.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -120,6 +121,24 @@ public class DataController {
 			return TableResult.success(draw, dataService.list(tableDefine.get(), pageable));
 		} else {
 			return TableResult.failure(draw, pageable, "指定数据定义不存在");
+		}
+	}
+
+	/**
+	 * 获取某个表的所有数据，谨慎使用
+	 * 
+	 * @param tableId
+	 * @param pageable
+	 * @return
+	 */
+	@GetMapping(value = ("tableId"), params = "!draw")
+	public List<?> list(@PathVariable("id") Long tableId,
+			@PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+		Optional<TableDefine> tableDefine = tableService.findOneById(tableId);
+		if (tableDefine.isPresent()) {
+			return dataService.list(tableDefine.get(), pageable).getContent();
+		} else {
+			return null;
 		}
 	}
 

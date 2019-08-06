@@ -30,7 +30,7 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 	@Override
 	@Transactional
 	public Map<String, Object> save(TableDefine table, String dataId, Map<String, Object> data) {
-		data.put("_id", data);
+		data.put("_id", dataId);
 		return mongoTemplate.save(data, table.getName());
 	}
 

@@ -126,6 +126,16 @@ public class TableServiceImpl implements JpaTableService {
 	}
 
 	@Override
+	public Optional<TableDefine> findOneById(Long tableId) {
+		Optional<Table> table = findById(tableId);
+		if (table.isPresent()) {
+			return Optional.of(tableConverter.toDto(table));
+		} else {
+			return Optional.ofNullable(null);
+		}
+	}
+
+	@Override
 	public Optional<TableDefine> findByName(String name) {
 		Optional<Table> table = tableRepository.findByName(name);
 		if (table.isPresent()) {
