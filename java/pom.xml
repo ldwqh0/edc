@@ -32,6 +32,8 @@
 		<module>edc-spring-boot-starter-mongodb</module>
 		<module>edc-spring-boot-starter-mysql</module>
 		<module>edc-app</module>
+		<module>edc-form-design</module>
+		<module>edc-search</module>
 	</modules>
 
 	<dependencyManagement>

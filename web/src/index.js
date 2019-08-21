@@ -11,27 +11,30 @@ import VueRouter from 'vue-router'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './vuex'
-import {httpInstance, router, tableHttpInstance} from './config'
-import {AjaxPlugin, EleDateFormater} from './plugins'
+import { httpInstance, router, tableHttpInstance } from './config'
+import { AjaxPlugin, EleDateFormater } from './plugins'
 import EleDataTables from 'element-datatables'
-import {Component} from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 // 载入模拟数据，在对接后端服务器接口时，取消掉
 // import '../data'
+import './iconfont/iconfont.css'
 
 import {
   table,
-  form
+  form,
+  formDesign
 } from './module'
 
 Vue.config.productionTip = false
 Vue.use(ElementUi)
-Vue.use(EleDataTables, {httpInstance: tableHttpInstance}) // 注入表格实例，并且对表格启用一个全新的http实例
+Vue.use(EleDataTables, { httpInstance: tableHttpInstance }) // 注入表格实例，并且对表格启用一个全新的http实例
 
 Vue.use(VueRouter)
 Vue.use(AjaxPlugin, httpInstance)
 Vue.use(EleDateFormater)
-Vue.use(table, {store, router})
-Vue.use(form, {store, router})
+Vue.use(table, { store, router })
+Vue.use(form, { store, router })
+Vue.use(formDesign, { store, router })
 
 console.log('Created By ldwqh0@outlook.com')
 
