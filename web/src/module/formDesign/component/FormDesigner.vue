@@ -1,3 +1,4 @@
+<!--表单设计器-->
 <template>
   <el-container>
     <el-aside width="250px">
@@ -16,7 +17,6 @@
           </a>
         </li>
       </draggable>
-
       <div class="widget-cate">布局字段</div>
       <draggable tag="ul"
                  :list="layoutComponents"
@@ -31,7 +31,16 @@
         </li>
       </draggable>
     </el-aside>
-    <widget-form :data="data" />
+    <el-main>
+      <widget-form :data="data" @active-change="activeItem=$event" />
+    </el-main>
+    <el-aside width="250px">
+      <el-button @click="vis=true">预览</el-button>
+      <widget-properties v-model="activeItem" />
+    </el-aside>
+    <el-dialog :visible.sync="vis" v-if="vis">
+      <form-view :form="data" />
+    </el-dialog>
   </el-container>
 </template>
 
@@ -41,17 +50,29 @@
   import { Component } from 'vue-property-decorator'
   import { basicComponents, layoutComponents } from './componentsConfig'
   import WidgetForm from './WidgetForm'
+  import WidgetProperties from './widgetProperties'
+  import FormView from '../../form-viewer/FormViewer'
 
   @Component({
     components: {
       Draggable,
-      WidgetForm
+      WidgetForm,
+      WidgetProperties,
+      FormView
     }
   })
   export default class FormDesigner extends Vue {
     basicComponents = basicComponents
 
     layoutComponents = layoutComponents
+
+    activeItem = {}
+
+    /**
+     * 表单预览是否可见
+     * @type {boolean}
+     */
+    vis = false
 
     data = { list: [] }
   }

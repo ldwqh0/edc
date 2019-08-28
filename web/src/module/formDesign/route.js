@@ -5,6 +5,6 @@ export default [{
     name: 'design',
     path: '',
     props: true,
-    component: () => import('./component/FormDesigner')
+    component: () => import('./component')
   }]
 }]

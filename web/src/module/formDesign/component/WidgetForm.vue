@@ -1,79 +1,78 @@
+<!--设计表单-->
 <template>
-  <el-main>
-    <el-form label-width="80px">
-      <draggable class=""
-                 v-model="data.list"
-                 group="people"
-                 ghost-class="ghost"
-                 :animation="200"
-                 handle=".drag-widget"
-                 @add="handleWidgetAdd">
-        <transition-group name="fade" tag="div" class="widget-form-list">
-          <template v-for="(element, index) in data.list">
-            <template v-if="element.type === 'grid'">
-              <el-row class="widget-row widget-view"
-                      v-if="element.key"
-                      :key="element.key"
-                      type="flex"
-                      @click.native="select(element)"
-                      :class="{active: selectWidget.key == element.key}"
-                      :gutter="element.options.gutter ? element.options.gutter : 0"
-                      :justify="element.options.justify"
-                      :align="element.options.align">
-                <el-col v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
-                  <draggable v-model="col.list"
-                             :no-transition-on-drag="true"
-                             group="people"
-                             ghost-class="ghost"
-                             :animation="200"
-                             handle=".drag-widget"
-                             @add="handleWidgetColAdd($event, element, colIndex)">
-                    <transition-group name="fade" tag="div" class="widget-col-list">
-                      <template v-for="(el) in col.list">
-                        <div class="widget-view item-view"
-                             v-if="el.key"
-                             :key="el.key"
-                             @click.stop="select(el)"
-                             :class="{active: selectWidget.key == el.key}">
-                          <widget-view />
-                          <i class="iconfont icon-drag drag-widget" />
-                          <div class="widget-view-action">
-                            <!--复制作为保留功能-->
-                            <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
-                            <i class="iconfont icon-trash" />
-                          </div>
+  <el-form label-width="80px">
+    <draggable class=""
+               v-model="data.list"
+               group="people"
+               ghost-class="ghost"
+               :animation="200"
+               handle=".drag-widget"
+               @add="handleWidgetAdd">
+      <transition-group name="fade" tag="div" class="widget-form-list">
+        <template v-for="(element, index) in data.list">
+          <template v-if="element.type === 'grid'">
+            <el-row class="widget-row widget-view"
+                    v-if="element.key"
+                    :key="element.key"
+                    type="flex"
+                    @click.native="select(element)"
+                    :class="{active: selectWidget.key == element.key}"
+                    :gutter="element.options.gutter ? element.options.gutter : 0"
+                    :justify="element.options.justify"
+                    :align="element.options.align">
+              <el-col v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
+                <draggable v-model="col.list"
+                           :no-transition-on-drag="true"
+                           group="people"
+                           ghost-class="ghost"
+                           :animation="200"
+                           handle=".drag-widget"
+                           @add="handleWidgetColAdd($event, element, colIndex)">
+                  <transition-group name="fade" tag="div" class="widget-col-list">
+                    <template v-for="(el) in col.list">
+                      <div class="widget-view item-view"
+                           v-if="el.key"
+                           :key="el.key"
+                           @click.stop="select(el)"
+                           :class="{active: selectWidget.key == el.key}">
+                        <widget-view />
+                        <i class="iconfont icon-drag drag-widget" />
+                        <div class="widget-view-action">
+                          <!--复制作为保留功能-->
+                          <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
+                          <i class="iconfont icon-trash" />
                         </div>
-                      </template>
-                    </transition-group>
-                  </draggable>
-                </el-col>
-                <i class="iconfont icon-drag drag-widget" />
-                <div class="widget-view-action">
-                  <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)" />
-                </div>
-              </el-row>
-            </template>
-            <template v-else>
-              <!--只有在元素被添加，并且生成唯一key之后，才进行渲染-->
-              <div class="widget-view item-view"
-                   v-if="element.key"
-                   :key="element.key"
-                   @click="select(element)"
-                   :class="{active: selectWidget.key == element.key}">
-                <widget-view />
-                <i class="iconfont icon-drag drag-widget" />
-                <div class="widget-view-action" v-if="selectWidget.key == element.key">
-                  <!--复制作为保留功能-->
-                  <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
-                  <i class="iconfont icon-trash" />
-                </div>
+                      </div>
+                    </template>
+                  </transition-group>
+                </draggable>
+              </el-col>
+              <i class="iconfont icon-drag drag-widget" />
+              <div class="widget-view-action">
+                <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)" />
               </div>
-            </template>
+            </el-row>
           </template>
-        </transition-group>
-      </draggable>
-    </el-form>
-  </el-main>
+          <template v-else>
+            <!--只有在元素被添加，并且生成唯一key之后，才进行渲染-->
+            <div class="widget-view item-view"
+                 v-if="element.key"
+                 :key="element.key"
+                 @click="select(element)"
+                 :class="{active: selectWidget.key == element.key}">
+              <widget-view :value="element" />
+              <i class="iconfont icon-drag drag-widget" />
+              <div class="widget-view-action" v-if="selectWidget.key == element.key">
+                <!--复制作为保留功能-->
+                <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
+                <i class="iconfont icon-trash" />
+              </div>
+            </div>
+          </template>
+        </template>
+      </transition-group>
+    </draggable>
+  </el-form>
 </template>
 
 <script>
@@ -90,13 +89,14 @@
     }
   })
   export default class WidgetForm extends Vue {
-    @Prop()
+    @Prop({})
     data
 
     selectWidget = {}
 
     select (v) {
       this.selectWidget = v
+      this.$emit('active-change', v)
     }
 
     /**
@@ -104,15 +104,16 @@
      */
     addWidgetToList (index, list) {
       const item = JSON.parse(JSON.stringify(list[index]))
-      Object.assign(item, { key: randomKey(), rules: [] })
+      Object.assign(item, { key: randomKey() })
       this.$set(list, index, item)
+      this.select(item)
+      return item
     }
 
     handleWidgetAdd ({ newIndex }) {
       // 为拖拽到容器的元素添加唯一 key
       // 为新增的项目设置key
       this.addWidgetToList(newIndex, this.data.list)
-
       // if (this.data.list[newIndex].type === 'radio' || this.data.list[newIndex].type === 'checkbox' || this.data.list[newIndex].type === 'select') {
       //   this.$set(this.data.list, newIndex, {
       //     ...this.data.list[newIndex],
@@ -167,7 +168,6 @@
       //     }
       //   })
       // }
-      this.selectWidget = item
     }
   }
 </script>

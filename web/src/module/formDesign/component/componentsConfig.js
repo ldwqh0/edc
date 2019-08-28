@@ -1,6 +1,6 @@
 export const basicComponents = [
   {
-    type: 'input',
+    type: 'text',
     name: '单行文本',
     icon: 'icon-input',
     options: {
@@ -11,9 +11,14 @@ export const basicComponents = [
       pattern: '',
       placeholder: '',
       disabled: false
+    },
+    rules: {
+      type: 'string',
+      pattern: {},
+      required: { required: true, message: '请输入值' },
+      trigger: 'blur'
     }
-  },
-  {
+  }, {
     type: 'textarea',
     name: '多行文本',
     icon: 'icon-diy-com-textarea',
@@ -25,8 +30,7 @@ export const basicComponents = [
       pattern: '',
       placeholder: ''
     }
-  },
-  {
+  }, {
     type: 'number',
     name: '计数器',
     icon: 'icon-number',
@@ -40,8 +44,7 @@ export const basicComponents = [
       disabled: false,
       controlsPosition: ''
     }
-  },
-  {
+  }, {
     type: 'radio',
     name: '单选框组',
     icon: 'icon-radio-active',
@@ -74,8 +77,7 @@ export const basicComponents = [
       remoteFunc: '',
       disabled: false
     }
-  },
-  {
+  }, {
     type: 'checkbox',
     name: '多选框组',
     icon: 'icon-check-box',
@@ -105,8 +107,7 @@ export const basicComponents = [
       remoteFunc: '',
       disabled: false
     }
-  },
-  {
+  }, {
     type: 'time',
     name: '时间选择器',
     icon: 'icon-time',
@@ -125,8 +126,7 @@ export const basicComponents = [
       required: false,
       width: ''
     }
-  },
-  {
+  }, {
     type: 'date',
     name: '日期选择器',
     icon: 'icon-date',
@@ -145,8 +145,7 @@ export const basicComponents = [
       required: false,
       width: ''
     }
-  },
-  {
+  }, {
     type: 'rate',
     name: '评分',
     icon: 'icon-icon-test',
@@ -157,8 +156,7 @@ export const basicComponents = [
       allowHalf: false,
       required: false
     }
-  },
-  {
+  }, {
     type: 'color',
     name: '颜色选择器',
     icon: 'icon-color',
@@ -168,8 +166,7 @@ export const basicComponents = [
       showAlpha: false,
       required: false
     }
-  },
-  {
+  }, {
     type: 'select',
     name: '下拉选择框',
     icon: 'icon-select',
@@ -201,8 +198,7 @@ export const basicComponents = [
       },
       remoteFunc: ''
     }
-  },
-  {
+  }, {
     type: 'switch',
     name: '开关',
     icon: 'icon-switch',
