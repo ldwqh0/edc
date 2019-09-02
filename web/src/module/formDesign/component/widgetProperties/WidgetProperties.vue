@@ -1,8 +1,5 @@
 <template>
-  <!--  <div>-->
-  <!--    {{ value }}-->
   <text-property v-if="value.type==='text'" v-model="value" />
-  <!--  </div>-->
 </template>
 <script>
   import Vue from 'vue'
