@@ -164,7 +164,7 @@
     }
 
     save () {
-      this.$refs['form'].validate().then(() => {
+      this.$refs.form.validate().then(() => {
         return this.id === 'new' ? this.saveTable(this.table) : this.update(this.table)
       }).then(({ data: { id } }) => {
         this.saveState = true

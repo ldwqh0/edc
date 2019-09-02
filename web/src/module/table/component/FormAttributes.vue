@@ -343,7 +343,7 @@
     }
 
     submit () {
-      this.$refs['form'].validate().then(() => {
+      this.$refs.form.validate().then(() => {
         this.data.options = JSON.stringify(this.data.options)
         this.$emit('input', this.data)
         this.visible = false

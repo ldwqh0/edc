@@ -74,7 +74,7 @@
 
     del ({ _id: dataId }) {
       this.delData({ table: this.table, data: { id: dataId } }).then(() => {
-        this.$refs['table'].reloadData()
+        this.$refs.table.reloadData()
       })
     }
 

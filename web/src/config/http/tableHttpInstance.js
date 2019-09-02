@@ -6,7 +6,7 @@ const instance = axios.create()
 instance.interceptors.request.use(config => {
   const authorization = store.getters['security/token']
   if (authorization !== null) {
-    config.headers['Authorization'] = authorization
+    config.headers.Authorization = authorization
   }
   return config
 }, error => {

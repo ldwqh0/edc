@@ -1,6 +1,7 @@
 <!--表单设计器-->
 <template>
   <el-container>
+    <!--左侧为控件列表-->
     <el-aside width="250px">
       <draggable tag="ul"
                  :list="basicComponents"
@@ -31,12 +32,13 @@
         </li>
       </draggable>
     </el-aside>
+    <!--中间为表单设计页面-->
     <el-main>
       <widget-form :data="data" @active-change="activeItem=$event" />
     </el-main>
     <el-aside width="250px">
       <el-button @click="vis=true">预览</el-button>
-      <widget-properties v-model="activeItem" />
+      <widget-properties :widget="activeItem" />
     </el-aside>
     <el-dialog :visible.sync="vis" v-if="vis">
       <form-view :form="data" />
@@ -74,6 +76,10 @@
      */
     vis = false
 
+    /**
+     * 设计好的表单数据
+     * @type {{list: []}}
+     */
     data = { list: [] }
   }
 </script>

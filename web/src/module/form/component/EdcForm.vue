@@ -168,7 +168,7 @@
     }
 
     save () {
-      this.$refs['form'].validate().then(() => {
+      this.$refs.form.validate().then(() => {
         if (this.dataId === 'new') {
           return this.saveData({ table: this.table, data: this.data })
         } else {

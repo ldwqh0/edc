@@ -11,7 +11,7 @@ instance.interceptors.request.use(config => {
   }
   const authorization = store.getters['security/token']
   if (authorization !== null) {
-    config.headers['Authorization'] = authorization
+    config.headers.Authorization = authorization
   }
   store.commit('loading')
   return config

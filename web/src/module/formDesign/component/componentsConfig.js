@@ -1,17 +1,25 @@
+const commonOption = {
+  // 标题
+  label: '',
+  // 默认值
+  defaultValue: '',
+  // 提示文本
+  placeholder: '',
+  // 绑定的属性
+  model: '',
+  // 是否被禁用
+  disabled: false
+}
+
 export const basicComponents = [
   {
     type: 'text',
     name: '单行文本',
     icon: 'icon-input',
     options: {
-      width: '100%',
-      defaultValue: '',
-      required: false,
-      dataType: 'string',
-      pattern: '',
-      placeholder: '',
-      disabled: false
+      ...commonOption
     },
+    // 校验规则
     rules: {
       type: 'string',
       pattern: {},
@@ -22,27 +30,24 @@ export const basicComponents = [
     type: 'textarea',
     name: '多行文本',
     icon: 'icon-diy-com-textarea',
-    options: {
-      width: '100%',
-      defaultValue: '',
-      required: false,
-      disabled: false,
-      pattern: '',
-      placeholder: ''
+    options: { ...commonOption },
+    rules: {
+      type: 'string',
+      pattern: {},
+      required: { required: true, message: '请输入值' },
+      trigger: 'blur'
     }
   }, {
     type: 'number',
     name: '计数器',
     icon: 'icon-number',
     options: {
-      width: '',
-      required: false,
-      defaultValue: 0,
-      min: '',
-      max: '',
-      step: 1,
-      disabled: false,
-      controlsPosition: ''
+      ...commonOption,
+      min: 0,
+      max: 10000
+    },
+    rules: {
+      required: { required: true, message: '请输入值' }
     }
   }, {
     type: 'radio',

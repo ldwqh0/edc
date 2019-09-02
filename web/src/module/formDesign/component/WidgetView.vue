@@ -1,7 +1,9 @@
 <!--组件视图-->
 <template>
   <el-form-item :label="options.label">
-    <el-input type="text" :placeholder="options.placeholder" />
+    <el-input v-if="value.type==='text'" type="text" :placeholder="options.placeholder" />
+    <el-input v-else-if="value.type==='textarea'" type="textarea" :placeholder="options.placeholder" />
+    <el-input-number v-else-if="value.type==='number'" />
   </el-form-item>
 </template>
 
