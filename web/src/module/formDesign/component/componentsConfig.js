@@ -3,8 +3,6 @@ const commonOption = {
   label: '',
   // 默认值
   defaultValue: '',
-  // 提示文本
-  placeholder: '',
   // 绑定的属性
   model: '',
   // 是否被禁用
@@ -17,7 +15,8 @@ export const basicComponents = [
     name: '单行文本',
     icon: 'icon-input',
     options: {
-      ...commonOption
+      ...commonOption,
+      placeholder: ''
     },
     // 校验规则
     rules: {
@@ -30,7 +29,10 @@ export const basicComponents = [
     type: 'textarea',
     name: '多行文本',
     icon: 'icon-diy-com-textarea',
-    options: { ...commonOption },
+    options: {
+      ...commonOption,
+      placeholder: ''
+    },
     rules: {
       type: 'string',
       pattern: {},
@@ -54,63 +56,34 @@ export const basicComponents = [
     name: '单选框组',
     icon: 'icon-radio-active',
     options: {
-      inline: false,
-      defaultValue: '',
-      showLabel: false,
-      options: [
-        {
-          value: '选项1',
-          label: '选项1'
-        },
-        {
-          value: '选项2',
-          label: '选项2'
-        },
-        {
-          value: '选项3',
-          label: '选项3'
-        }
-      ],
-      required: false,
-      width: '',
-      remote: false,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label'
-      },
-      remoteFunc: '',
-      disabled: false
+      ...commonOption
+    },
+    rules: {
+      required: { required: true, message: '请输入值' }
+    },
+    dataSource: {
+      valueSourceType: 'FIXED_VALUE',
+      fixedValueType: 'VL',
+      fixedValue: '选项一', // 固定值
+      labelField: '', // 标签字段
+      valueField: ''// 值字段
     }
   }, {
     type: 'checkbox',
     name: '多选框组',
     icon: 'icon-check-box',
     options: {
-      inline: false,
-      defaultValue: [],
-      showLabel: false,
-      options: [
-        {
-          value: '选项1'
-        },
-        {
-          value: '选项2'
-        },
-        {
-          value: '选项3'
-        }
-      ],
-      required: false,
-      width: '',
-      remote: false,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label'
-      },
-      remoteFunc: '',
-      disabled: false
+      ...commonOption
+    },
+    rules: {
+      required: { required: true, message: '请输入值' }
+    },
+    dataSource: {
+      valueSourceType: 'FIXED_VALUE',
+      fixedValueType: 'VL',
+      fixedValue: '选项一', // 固定值
+      labelField: '', // 标签字段
+      valueField: ''// 值字段
     }
   }, {
     type: 'time',
