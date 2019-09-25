@@ -12,12 +12,3 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-
-.settings
-.project
-.factorypath
-target
-.classpath
-.springBeans
-.factorypath
-rebel.xml
