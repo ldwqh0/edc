@@ -13,7 +13,7 @@
             v-for="(item, index) in basicComponents"
             :key="index">
           <a>
-            <i class="icon iconfont" :class="item.icon" />
+            <i class="icon iconfont" :class="item.icon"/>
             <span>{{ item.name }}</span>
           </a>
         </li>
@@ -26,7 +26,7 @@
             v-for="(item, index) in layoutComponents"
             :key="index">
           <a>
-            <i class="icon iconfont" :class="item.icon" />
+            <i class="icon iconfont" :class="item.icon"/>
             <span>{{ item.name }}</span>
           </a>
         </li>
@@ -34,14 +34,14 @@
     </el-aside>
     <!--中间为表单设计页面-->
     <el-main>
-      <widget-form :data="data" @active-change="activeItem=$event" />
+      <widget-form :data="data" @active-change="activeItem=$event"/>
     </el-main>
     <el-aside width="250px">
       <el-button @click="vis=true">预览</el-button>
-      <widget-properties :widget="activeItem" />
+      <widget-properties :widget="activeItem"/>
     </el-aside>
     <el-dialog :visible.sync="vis" v-if="vis">
-      <form-view :form="data" />
+      <form-view :form="data"/>
     </el-dialog>
   </el-container>
 </template>

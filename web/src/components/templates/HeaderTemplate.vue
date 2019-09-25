@@ -8,11 +8,11 @@
                    active-text-color="#fff">
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-s-unfold" style="font-size: 30px;" />
+                <i class="el-icon-s-unfold" style="font-size: 30px;"/>
               </template>
               <menu-item v-for="menu in systemMenus"
                          :key="menu.id"
-                         :item="menu" />
+                         :item="menu"/>
             </el-submenu>
           </el-menu>
           <router-link class="title" to="/">EDC</router-link>
@@ -38,7 +38,7 @@
           {{ crumb.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
-      <router-view />
+      <router-view/>
     </el-main>
   </el-container>
 </template>

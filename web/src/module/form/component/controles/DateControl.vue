@@ -1,11 +1,11 @@
 <template>
   <el-date-picker v-if="column.type==='DATE'"
                   :value="value"
-                  @input="emitValue" />
+                  @input="emitValue"/>
   <el-date-picker v-else-if="column.type==='DATETIME'"
                   type="datetime"
                   :value="value"
-                  @input="emitValue" />
+                  @input="emitValue"/>
 </template>
 
 <script>

@@ -16,31 +16,31 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="标题" prop="title">
-              <el-input type="text" v-model.trim="data.title" />
+              <el-input type="text" v-model.trim="data.title"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="控件类型" prop="inputControl">
               <el-select v-model="data.inputControl">
                 <template v-if="column.type==='STRING'">
-                  <el-option value="TEXTBOX" label="文本框" />
-                  <el-option value="RADIO" label="单选按钮" />
-                  <el-option value="SELECT" label="下拉选择框" />
-                  <el-option value="CASCADER" label="级联选择框" />
+                  <el-option value="TEXTBOX" label="文本框"/>
+                  <el-option value="RADIO" label="单选按钮"/>
+                  <el-option value="SELECT" label="下拉选择框"/>
+                  <el-option value="CASCADER" label="级联选择框"/>
                 </template>
                 <template v-else-if="column.type==='INTEGER' || column.type==='DECIMAL'">
-                  <el-option value="NUMBERINPUT" label="数字输入框" />
-                  <el-option value="SLIDER" label="滑块" />
+                  <el-option value="NUMBERINPUT" label="数字输入框"/>
+                  <el-option value="SLIDER" label="滑块"/>
                 </template>
                 <template v-else-if="column.type==='DATE'">
-                  <el-option value="DATEPICKER" label="日期选择框" />
+                  <el-option value="DATEPICKER" label="日期选择框"/>
                 </template>
                 <template v-else-if="column.type==='DATETIME'">
-                  <el-option value="DATETIMEPICKER" label="日期时间选择框" />
+                  <el-option value="DATETIMEPICKER" label="日期时间选择框"/>
                 </template>
                 <template v-else-if="column.type==='BOOLEAN'">
-                  <el-option value="RADIO" label="单选组" />
-                  <el-option value="SELECT" label="下拉选择框" />
+                  <el-option value="RADIO" label="单选组"/>
+                  <el-option value="SELECT" label="下拉选择框"/>
                 </template>
               </el-select>
             </el-form-item>
@@ -54,16 +54,16 @@
             <el-col :span="12">
               <el-form-item label="选项来源" prop="valueSourceType">
                 <el-select v-model="data.valueSourceType" @change="data.fixedValue=''">
-                  <el-option value="FIXED_VALUE" label="固定值" />
-                  <el-option value="TABLE" label="现有表" />
+                  <el-option value="FIXED_VALUE" label="固定值"/>
+                  <el-option value="TABLE" label="现有表"/>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="12" v-if="data.valueSourceType==='FIXED_VALUE'">
               <el-form-item label="值类型" prop="fixedValueType">
                 <el-select v-model="data.fixedValueType" @change="fixedValueTypeChanged">
-                  <el-option value="JSON" label="JSON数组" />
-                  <el-option value="VL" label="value:label列表" />
+                  <el-option value="JSON" label="JSON数组"/>
+                  <el-option value="VL" label="value:label列表"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -73,7 +73,7 @@
                   <el-option v-for="{id,name,title} in tables"
                              :value="id+''"
                              :label="title"
-                             :key="id" />
+                             :key="id"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -86,7 +86,7 @@
                 <el-input type="textarea"
                           :rows="4"
                           v-model="data.fixedValue"
-                          :placeholder="fixedValuePlaceholder" />
+                          :placeholder="fixedValuePlaceholder"/>
               </el-form-item>
             </el-col>
           </el-row>
@@ -104,7 +104,7 @@
                   <el-option v-for="{label,value} in properties"
                              :key="value"
                              :value="value"
-                             :label="label" />
+                             :label="label"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -114,7 +114,7 @@
                   <el-option v-for="{label,value} in properties"
                              :key="value"
                              :value="value"
-                             :label="label" />
+                             :label="label"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -124,7 +124,7 @@
                   <el-option v-for="{label,value} in properties"
                              :key="value"
                              :value="value"
-                             :label="label" />
+                             :label="label"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -137,7 +137,7 @@
                   <el-option v-for="{label,value} in properties"
                              :key="value"
                              :value="value"
-                             :label="label" />
+                             :label="label"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -147,7 +147,7 @@
                   <el-option v-for="{label,value} in properties"
                              :key="value"
                              :value="value"
-                             :label="label" />
+                             :label="label"/>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -157,12 +157,12 @@
         <el-row v-if="column.type==='STRING' && data.inputControl==='TEXTBOX'">
           <el-col :span="12">
             <el-form-item label="最小长度" prop="min">
-              <el-input-number clearable type="number" v-model.number="data.min" />
+              <el-input-number clearable type="number" v-model.number="data.min"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大长度" prop="max">
-              <el-input-number type="number" v-model.number="data.max" />
+              <el-input-number type="number" v-model.number="data.max"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -170,12 +170,12 @@
         <el-row v-if="column.type==='INTEGER' || column.type==='DECIMAL'">
           <el-col :span="12">
             <el-form-item label="最小值" prop="min">
-              <el-input-number type="number" v-model.number="data.min" />
+              <el-input-number type="number" v-model.number="data.min"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大值" prop="max">
-              <el-input-number type="number" v-model.number="data.max" />
+              <el-input-number type="number" v-model.number="data.max"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -184,12 +184,12 @@
         <el-row v-if="column.type==='DATE'">
           <el-col :span="12">
             <el-form-item label="最小值" prop="min">
-              <el-date-picker v-model="minDate" />
+              <el-date-picker v-model="minDate"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大值" prop="max">
-              <el-date-picker v-model="maxDate" />
+              <el-date-picker v-model="maxDate"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -198,12 +198,12 @@
         <el-row v-if="column.type==='DATETIME'">
           <el-col :span="12">
             <el-form-item label="最小值">
-              <el-date-picker type="datetime" v-model="minDate" />
+              <el-date-picker type="datetime" v-model="minDate"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="最大值">
-              <el-date-picker type="datetime" v-model="maxDate" />
+              <el-date-picker type="datetime" v-model="maxDate"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -211,12 +211,12 @@
         <el-row v-if="column.type==='BOOLEAN'">
           <el-col :span="12">
             <el-form-item label="真值标签" prop="trueLabel">
-              <el-input v-model="data.trueLabel" />
+              <el-input v-model="data.trueLabel"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="假值标签" prop="falseLabel">
-              <el-input v-model="data.falseLabel" />
+              <el-input v-model="data.falseLabel"/>
             </el-form-item>
           </el-col>
         </el-row>

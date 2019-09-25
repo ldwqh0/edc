@@ -22,7 +22,7 @@
         <el-table-column v-else
                          :prop="name"
                          :label="title||name"
-                         :key="order" />
+                         :key="order"/>
       </template>
       <el-table-column>
         <template v-slot="scope">

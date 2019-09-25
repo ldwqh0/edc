@@ -35,21 +35,21 @@
                            :key="el.key"
                            @click.stop="select(el)"
                            :class="{active: selectWidget.key == el.key}">
-                        <widget-view />
-                        <i class="iconfont icon-drag drag-widget" />
+                        <widget-view/>
+                        <i class="iconfont icon-drag drag-widget"/>
                         <div class="widget-view-action">
                           <!--复制作为保留功能-->
                           <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
-                          <i class="iconfont icon-trash" />
+                          <i class="iconfont icon-trash"/>
                         </div>
                       </div>
                     </template>
                   </transition-group>
                 </draggable>
               </el-col>
-              <i class="iconfont icon-drag drag-widget" />
+              <i class="iconfont icon-drag drag-widget"/>
               <div class="widget-view-action">
-                <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)" />
+                <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"/>
               </div>
             </el-row>
           </template>
@@ -60,12 +60,12 @@
                  :key="element.key"
                  @click="select(element)"
                  :class="{active: selectWidget.key == element.key}">
-              <widget-view :value="element" />
-              <i class="iconfont icon-drag drag-widget" />
+              <widget-view :value="element"/>
+              <i class="iconfont icon-drag drag-widget"/>
               <div class="widget-view-action" v-if="selectWidget.key == element.key">
                 <!--复制作为保留功能-->
                 <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
-                <i class="iconfont icon-trash" />
+                <i class="iconfont icon-trash"/>
               </div>
             </div>
           </template>

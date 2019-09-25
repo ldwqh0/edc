@@ -1,10 +1,10 @@
 <!--组件视图-->
 <template>
   <el-form-item :label="options.label">
-    <el-input v-if="value.type==='text'" type="text" :placeholder="options.placeholder" />
-    <el-input v-else-if="value.type==='textarea'" type="textarea" :placeholder="options.placeholder" />
-    <el-input-number v-else-if="value.type==='number'" />
-    <radio-view v-else-if="value.type==='radio'" :widget="value" />
+    <el-input v-if="value.type==='text'" type="text" :placeholder="options.placeholder"/>
+    <el-input v-else-if="value.type==='textarea'" type="textarea" :placeholder="options.placeholder"/>
+    <el-input-number v-else-if="value.type==='number'"/>
+    <radio-view v-else-if="value.type==='radio'" :widget="value"/>
     <!--    <el-radio-group v-else-if="value.type==='radio'">-->
     <!--      <el-radio>ad</el-radio>-->
     <!--    </el-radio-group>-->

@@ -3,7 +3,7 @@
   <el-form :model="data" label-width="80px">
     {{ form }}
     <template v-for="widget in form.list">
-      <form-item :key="widget.key" :widget="widget" :data="data" />
+      <form-item :key="widget.key" :widget="widget" :data="data"/>
     </template>
   </el-form>
 </template>

@@ -10,11 +10,11 @@
         <el-col :span="24">
           <el-form-item label="表名称"
                         prop="name">
-            <el-input type="text" v-model="table.name" />
+            <el-input type="text" v-model="table.name"/>
           </el-form-item>
           <el-form-item label="表标题"
                         prop="name">
-            <el-input type="text" v-model="table.title" />
+            <el-input type="text" v-model="table.title"/>
           </el-form-item>
         </el-col>
       </el-row>
@@ -24,7 +24,7 @@
             <el-table-column label="键" width="40px" align="center">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].idColumn`">
-                  <el-checkbox v-model="row.idColumn" @change="idColumnChange(row)" />
+                  <el-checkbox v-model="row.idColumn" @change="idColumnChange(row)"/>
                 </el-form-item>
               </template>
             </el-table-column>
@@ -33,7 +33,7 @@
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].name`"
                               :rules="columnRules.name">
-                  <el-input v-model="row.name" />
+                  <el-input v-model="row.name"/>
                 </el-form-item>
               </template>
             </el-table-column>
@@ -42,13 +42,13 @@
                 <el-form-item :prop="`columns[${$index}].type`"
                               :rules="columnRules.fieldName">
                   <el-select v-model="row.type">
-                    <el-option value="INTEGER" label="整数" />
-                    <el-option value="STRING" label="字符串" />
-                    <el-option value="DECIMAL" label="实数" />
-                    <el-option value="DATE" label="日期" />
-                    <el-option value="DATETIME" label="日期和时间" />
-                    <el-option value="BOOLEAN" label="布尔值" />
-                    <el-option value="BINARY" label="二进制值" />
+                    <el-option value="INTEGER" label="整数"/>
+                    <el-option value="STRING" label="字符串"/>
+                    <el-option value="DECIMAL" label="实数"/>
+                    <el-option value="DATE" label="日期"/>
+                    <el-option value="DATETIME" label="日期和时间"/>
+                    <el-option value="BOOLEAN" label="布尔值"/>
+                    <el-option value="BINARY" label="二进制值"/>
                   </el-select>
                 </el-form-item>
               </template>
@@ -59,14 +59,14 @@
                   <el-input v-model.number="row.length"
                             type="number"
                             :disabled="row.type!=='STRING'"
-                            placeholder="字段长度" />
+                            placeholder="字段长度"/>
                 </el-form-item>
               </template>
             </el-table-column>
             <el-table-column label="可空" align="left">
               <template v-slot="{$index,row}">
                 <el-form-item :prop="`columns[${$index}].nullable`">
-                  <el-checkbox :disabled="row.idColumn" v-model="row.nullable" />
+                  <el-checkbox :disabled="row.idColumn" v-model="row.nullable"/>
                 </el-form-item>
               </template>
             </el-table-column>

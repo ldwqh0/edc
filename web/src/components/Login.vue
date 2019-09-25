@@ -4,10 +4,10 @@
     <el-form class="content" v-if="!useSso">
       <div class="title">枣庄智慧旅游云大数据平台</div>
       <el-form-item label="用户名：" label-width="80px">
-        <el-input v-model="data.username" />
+        <el-input v-model="data.username"/>
       </el-form-item>
       <el-form-item label="密码：" label-width="80px">
-        <el-input v-model="data.password" />
+        <el-input v-model="data.password"/>
       </el-form-item>
       <el-button @click="login" type="primary">登录</el-button>
     </el-form>

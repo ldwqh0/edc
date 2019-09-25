@@ -5,7 +5,7 @@
     <template slot="title"> {{ item.title }}</template>
     <menu-item v-for="(submenu,index) in item.submenus"
                :item="submenu"
-               :key="index" />
+               :key="index"/>
   </el-submenu>
   <el-menu-item v-else
                 @click="toTarget(item)"

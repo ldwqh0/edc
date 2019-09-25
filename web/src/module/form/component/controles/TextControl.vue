@@ -3,7 +3,7 @@
     <el-option v-for="option in options"
                :value="option[labelProps.value]"
                :label="option[labelProps.label]"
-               :key="option[labelProps.value]" />
+               :key="option[labelProps.value]"/>
   </el-select>
   <el-radio-group v-else-if="column.formAttributes.inputControl==='RADIO'" :value="value" @input="emitValue">
     <el-radio v-for="option in options"
@@ -16,10 +16,10 @@
                :value="value"
                @input="emitValue"
                :props="labelProps"
-               :options="optionsTree" />
+               :options="optionsTree"/>
   <el-input v-else
             :value="value"
-            @input="emitValue" />
+            @input="emitValue"/>
 </template>
 
 <script>

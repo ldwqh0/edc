@@ -10,22 +10,22 @@
             :rules="getRules(column)"
             :prop="column.name">
             <!--文本输入控件-->
-            <text-control v-if="column.type==='STRING'" :column="column" v-model="data[column.name]" />
+            <text-control v-if="column.type==='STRING'" :column="column" v-model="data[column.name]"/>
             <!--数字输入框有个问题即我们输入数字之后，再删除所有的输入内容，我们得到的值是"",即空字符串-->
             <number-control v-if="column.type==='DECIMAL' || column.type==='INTEGER'"
                             :column="column"
                             v-model="data[column.name]"
-                            style="width: 100%" />
+                            style="width: 100%"/>
             <date-control v-if="column.type==='DATE' || column.type==='DATETIME'"
                           :column="column"
                           style="width: 100%"
-                          v-model="data[column.name]" />
+                          v-model="data[column.name]"/>
             <!--            <el-date-picker type="datetime" v-if="column.type==='DATETIME'" v-model="data[column.name]" />-->
             <!--当数据类型为boolean时，控件的显示方式-->
             <template v-if="column.type==='BOOLEAN'">
               <el-select v-if="column.formAttributes.inputControl==='SELECT'" v-model="data[column.name]">
-                <el-option :value="true" :label="column.formAttributes.trueLabel" />
-                <el-option :value="false" :label="column.formAttributes.falseLabel" />
+                <el-option :value="true" :label="column.formAttributes.trueLabel"/>
+                <el-option :value="false" :label="column.formAttributes.falseLabel"/>
               </el-select>
               <el-radio-group v-else v-model="data[column.name]">
                 <el-radio :label="true">{{ column.formAttributes.trueLabel }}</el-radio>

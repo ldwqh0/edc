@@ -8,7 +8,7 @@
             <el-form-item style="width: 150px">
               <el-input type="text"
                         placeholder="输入表名称"
-                        v-model="tableFilter.keywords" />
+                        v-model="tableFilter.keywords"/>
             </el-form-item>
             <el-form-item>
               <el-button @click="newTable">新表</el-button>
@@ -33,7 +33,7 @@
     </el-aside>
     <el-main style="padding: 0 5px;">
       <el-scrollbar style="height: 100%;" wrap-class="table-columns-wrapper">
-        <router-view />
+        <router-view/>
       </el-scrollbar>
     </el-main>
   </el-container>

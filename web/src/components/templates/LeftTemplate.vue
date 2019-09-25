@@ -5,8 +5,8 @@
       <el-aside class="aside"
                 :width="collapse?'65px':'200px'">
         <a class="btn-collapse" @click="collapse=!collapse">
-          <i class="el-icon-s-fold" v-if="!collapse" />
-          <i class="el-icon-s-unfold" v-if="collapse" />
+          <i class="el-icon-s-fold" v-if="!collapse"/>
+          <i class="el-icon-s-unfold" v-if="collapse"/>
         </a>
         <el-menu background-color="#304156"
                  text-color="#FFFFFF"
@@ -14,7 +14,7 @@
                  style="border-right: none">
           <el-submenu index="1">
             <template v-slot:title>
-              <i class="el-icon-location" />
+              <i class="el-icon-location"/>
               <span slot="title"> 子菜单1</span>
             </template>
             <el-menu-item index="2">菜单已</el-menu-item>
@@ -22,7 +22,7 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <router-view />
+        <router-view/>
       </el-main>
     </el-container>
   </el-container>

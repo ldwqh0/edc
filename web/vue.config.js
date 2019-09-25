@@ -9,8 +9,8 @@ module.exports = {
       // 认证的地址，单独填写
       '/edc/d/': {
         changeOrigin: true,
-        target: 'http://localhost:8080:8080/',
-        path
+        target: 'http://127.0.0.1:8080/',
+        pathRewrite: { [`${process.env.CONTEXT_PATH}d/`]: '' }
       }
     },
   },

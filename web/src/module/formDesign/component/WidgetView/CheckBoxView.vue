@@ -1,5 +1,5 @@
 <template>
-  <el-checkbox-group />
+  <el-checkbox-group/>
 </template>
 
 <script>

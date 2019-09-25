@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <router-view/>
   <!--<left-theme-template v-if="theme==='left'"/>-->
   <!--<top-theme-template v-else-if="theme==='top'"/>-->
   <!--<div v-else>你没有选择任何主题</div>-->

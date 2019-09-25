@@ -6,7 +6,7 @@
                      v-for="menu in rootMenus"
                      tag="li"
                      :key="menu.id">
-          <div class="icon" />
+          <div class="icon"/>
           <div class="desc">{{ menu.title }}</div>
         </router-link>
       </ul>

@@ -4,14 +4,14 @@
                 :rules="rules">
     <el-input v-if="widget.type==='text'"
               type="text"
-              v-model="data[options.model]" />
+              v-model="data[options.model]"/>
     <el-input v-else-if="widget.type==='textarea'"
               type="textarea"
-              v-model="data[options.model]" />
+              v-model="data[options.model]"/>
     <el-input-number v-else-if="widget.type==='number'"
                      v-model="data[options.model]"
                      :min="options.min"
-                     :max="options.max" />
+                     :max="options.max"/>
   </el-form-item>
 </template>
 

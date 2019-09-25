@@ -3,12 +3,12 @@
              :value="value"
              @input="emitValue"
              :min="min"
-             :max="max" />
+             :max="max"/>
   <el-input-number v-else
                    :value="value"
                    @input="emitValue"
                    :min="min"
-                   :max="max" />
+                   :max="max"/>
 </template>
 
 <script>
