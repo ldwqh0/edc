@@ -40,7 +40,7 @@
       <el-button @click="vis=true">预览</el-button>
       <widget-properties :widget="activeItem"/>
     </el-aside>
-    <el-dialog :visible.sync="vis" v-if="vis">
+    <el-dialog :visible.sync="vis" v-if="vis" :close-on-click-modal="false">
       <form-view :form="data"/>
     </el-dialog>
   </el-container>

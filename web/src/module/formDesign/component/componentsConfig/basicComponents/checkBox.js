@@ -5,7 +5,8 @@ export default {
   name: '多选框组',
   icon: 'icon-check-box',
   options: {
-    ...commonOption
+    ...commonOption,
+    label: '多选框组：'
   },
   rules: {
     required: { required: true, message: '请输入值' }

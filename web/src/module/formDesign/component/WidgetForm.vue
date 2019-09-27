@@ -1,6 +1,6 @@
 <!--设计表单-->
 <template>
-  <el-form label-width="80px">
+  <el-form label-width="100px" :model="formData">
     <draggable class=""
                v-model="data.list"
                group="people"
@@ -35,7 +35,8 @@
                            :key="el.key"
                            @click.stop="select(el)"
                            :class="{active: selectWidget.key == el.key}">
-                        <widget-view/>
+                        <!--                        <widget-view/>-->
+                        <form-item :widget="{}"/>
                         <i class="iconfont icon-drag drag-widget"/>
                         <div class="widget-view-action">
                           <!--复制作为保留功能-->
@@ -60,7 +61,8 @@
                  :key="element.key"
                  @click="select(element)"
                  :class="{active: selectWidget.key == element.key}">
-              <widget-view :value="element"/>
+              <!--              <widget-view :value="element"/>-->
+              <form-item :widget="element" :data="formData"/>
               <i class="iconfont icon-drag drag-widget"/>
               <div class="widget-view-action" v-if="selectWidget.key == element.key">
                 <!--复制作为保留功能-->
@@ -80,17 +82,21 @@
   import Vue from 'vue'
   import { Component, Prop } from 'vue-property-decorator'
   import { randomKey } from './utils'
-  import WidgetView from './WidgetView'
+  import { FormItem } from '../../form-viewer'
 
   @Component({
     components: {
-      Draggable,
-      WidgetView
+      FormItem,
+      Draggable
     }
   })
   export default class WidgetForm extends Vue {
+    // 定义的表单数据
     @Prop({})
     data
+
+    formData = {
+    }
 
     selectWidget = {}
 

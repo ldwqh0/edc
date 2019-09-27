@@ -1,10 +1,10 @@
 <!--渲染表单-->
 <template>
-  <el-form :model="data" label-width="80px">
-    {{ form }}
+  <el-form ref="form" :model="data" label-width="80px">
     <template v-for="widget in form.list">
       <form-item :key="widget.key" :widget="widget" :data="data"/>
     </template>
+    <el-button @click="validate">校验</el-button>
   </el-form>
 </template>
 
@@ -24,6 +24,13 @@
      */
     @Prop()
     form
+
+    validate () {
+      alert(JSON.stringify(this.data))
+      this.$refs.form.validate().then(() => {
+
+      })
+    }
 
     /**
      * 表单保存的数据

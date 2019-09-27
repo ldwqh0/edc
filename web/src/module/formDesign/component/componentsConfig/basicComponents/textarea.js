@@ -6,7 +6,8 @@ export default {
   icon: 'icon-diy-com-textarea',
   options: {
     ...commonOption,
-    placeholder: ''
+    placeholder: '',
+    label: '多行文本：'
   },
   rules: {
     type: 'string',

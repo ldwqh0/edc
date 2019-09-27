@@ -9,7 +9,9 @@
         <el-form-item label="绑定属性" prop="model">
           <el-input type="text" v-model="options.model"/>
         </el-form-item>
-
+        <el-form-item label="可多选" prop="multiple">
+          <el-switch v-model="options.multiple"/>
+        </el-form-item>
         <el-form-item label="默认值" prop="defaultValue">
           <el-input type="text" v-model="options.defaultValue"/>
         </el-form-item>

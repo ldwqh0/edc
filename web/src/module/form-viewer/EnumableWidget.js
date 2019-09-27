@@ -3,7 +3,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import isEmpty from 'lodash/isEmpty'
 
 @Component
-export default class SelectWidgetView extends Vue {
+export default class EnumableWidget extends Vue {
   @Prop()
   widget
 

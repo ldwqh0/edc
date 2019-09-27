@@ -6,7 +6,8 @@ export default {
   icon: 'icon-input',
   options: {
     ...commonOption,
-    placeholder: ''
+    placeholder: '',
+    label: '单行文本：'
   },
   // 校验规则
   rules: {

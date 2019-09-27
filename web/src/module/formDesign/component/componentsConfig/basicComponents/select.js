@@ -1,33 +1,23 @@
+import commonOptions from '../common'
+
 export default {
   type: 'select',
   name: '下拉选择框',
   icon: 'icon-select',
+
   options: {
-    defaultValue: '',
-    multiple: false,
-    disabled: false,
-    clearable: false,
-    placeholder: '',
-    required: false,
-    showLabel: false,
-    width: '',
-    options: [
-      {
-        value: '下拉框1'
-      },
-      {
-        value: '下拉框2'
-      }, {
-        value: '下拉框3'
-      }
-    ],
-    remote: false,
-    filterable: false,
-    remoteOptions: [],
-    props: {
-      value: 'value',
-      label: 'label'
-    },
-    remoteFunc: ''
+    ...commonOptions,
+    label: '选择框',
+    multiple: false
+  },
+  rules: {
+    required: { required: true, message: '请输入值' }
+  },
+  dataSource: {
+    valueSourceType: 'FIXED_VALUE',
+    fixedValueType: 'VL',
+    fixedValue: '选项一', // 固定值
+    labelField: '', // 标签字段
+    valueField: ''// 值字段
   }
 }

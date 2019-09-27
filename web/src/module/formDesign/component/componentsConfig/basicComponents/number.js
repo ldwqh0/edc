@@ -7,7 +7,8 @@ export default {
   options: {
     ...commonOption,
     min: 0,
-    max: 10000
+    max: 10000,
+    label: '计数器：'
   },
   rules: {
     required: { required: true, message: '请输入值' }

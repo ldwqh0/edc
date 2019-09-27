@@ -58,40 +58,11 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component } from 'vue-property-decorator'
+  import EnumableProperty from './EnumableProperty'
 
   @Component
-  export default class RadioProperty extends Vue {
-    @Prop({ default: () => ({ options: {}, rules: {} }) })
-    widget
-
-    get options () {
-      return this.widget.options
-    }
-
-    get rules () {
-      return this.widget.rules
-    }
-
-    get dataSource () {
-      return this.widget.dataSource
-    }
-
-    get fields () {
-      const { fixedValue, fixedValueType } = this.dataSource
-      if (fixedValueType === 'JSON') {
-        try {
-          // 尝试进行json数据解析
-          const opts = JSON.parse(fixedValue)
-          if (opts && opts instanceof Array && opts.length > 0) {
-            return Object.keys(opts[0])
-          }
-        } catch (e) {
-        }
-      }
-      return []
-    }
+  export default class RadioProperty extends EnumableProperty {
   }
 </script>
 

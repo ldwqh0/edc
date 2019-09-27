@@ -5,7 +5,8 @@ export default {
   name: '单选框组',
   icon: 'icon-radio-active',
   options: {
-    ...commonOption
+    ...commonOption,
+    label: '单选框组：'
   },
   rules: {
     required: { required: true, message: '请输入值' }

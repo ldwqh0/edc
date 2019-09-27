@@ -1,12 +1,16 @@
+import commonOption from '../common'
+
 export default {
   type: 'rate',
   name: '评分',
   icon: 'icon-icon-test',
   options: {
-    defaultValue: null,
-    max: 5,
-    disabled: false,
+    ...commonOption,
+    label: '评分：',
     allowHalf: false,
-    required: false
+    showScore: false
+  },
+  rules: {
+    required: { required: true, message: '请输入值' }
   }
 }

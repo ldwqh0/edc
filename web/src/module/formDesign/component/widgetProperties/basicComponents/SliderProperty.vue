@@ -10,7 +10,7 @@
           <el-input type="text" v-model="options.model"/>
         </el-form-item>
         <el-form-item label="默认值" prop="defaultValue">
-          <el-input type="text" v-model="options.defaultValue"/>
+          <el-date-picker v-model="options.defaultValue"/>
         </el-form-item>
         <el-form-item label="最小值" prop="min">
           <el-input type="number" v-model.number="options.min"/>
@@ -20,15 +20,15 @@
         </el-form-item>
       </el-tab-pane>
       <el-tab-pane label="校验规则">
-        <el-form-item label="必填">
-          <el-switch v-model="rules.required.required"/>
-        </el-form-item>
-        <el-form-item label="校验触发">
-          <el-select v-model="rules.trigger">
-            <el-option value="blur" label="失去焦点"/>
-            <el-option value="change" label="值变更"/>
-          </el-select>
-        </el-form-item>
+        <!--        <el-form-item label="必填">-->
+        <!--          <el-switch v-model="rules.required.required"/>-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="校验触发">-->
+        <!--          <el-select v-model="rules.trigger">-->
+        <!--            <el-option value="blur" label="失去焦点"/>-->
+        <!--            <el-option value="change" label="值变更"/>-->
+        <!--          </el-select>-->
+        <!--        </el-form-item>-->
       </el-tab-pane>
     </el-tabs>
   </el-form>
@@ -39,7 +39,7 @@
   import BasicProperty from './BasicProperty'
 
   @Component
-  export default class NumberProperty extends BasicProperty {
+  export default class CheckBoxProperty extends BasicProperty {
 
   }
 </script>
