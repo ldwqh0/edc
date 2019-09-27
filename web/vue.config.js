@@ -1,6 +1,6 @@
 const webpack = require('webpack')
-
-module.exports = {
+const webpackProdConf = require('./config/webpack.prod.conf')
+const config = {
   publicPath: process.env.CONTEXT_PATH,
   assetsDir: 'static',
   devServer: {
@@ -24,3 +24,8 @@ module.exports = {
     ]
   }
 }
+
+if (process.env.BABEL_ENV === 'production') {
+  config.configureWebpack = webpackProdConf
+}
+module.exports = config
