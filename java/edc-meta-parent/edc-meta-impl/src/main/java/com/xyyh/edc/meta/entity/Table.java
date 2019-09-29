@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.xyyh.edc.common.entity.AbstractEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 

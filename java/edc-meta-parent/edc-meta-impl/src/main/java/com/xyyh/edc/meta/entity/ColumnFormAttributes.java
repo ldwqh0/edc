@@ -27,7 +27,7 @@ import lombok.Setter;
  * @author LiDong
  *
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 public class ColumnFormAttributes implements Persistable<Long> {

@@ -1,22 +1,26 @@
 <!--设计表单-->
 <template>
-  <el-form label-width="100px" :model="formData">
+  <el-form label-width="100px"
+           :model="formData"
+           class="design-form"
+           :class="{active: selectWidget.type == 'form'}"
+           @click.native.self="select({type:'form',form:data})">
     <draggable class=""
-               v-model="data.list"
+               v-model="data.widgets"
                group="people"
                ghost-class="ghost"
                :animation="200"
                handle=".drag-widget"
                @add="handleWidgetAdd">
       <transition-group name="fade" tag="div" class="widget-form-list">
-        <template v-for="(element, index) in data.list">
+        <template v-for="(element, index) in data.widgets">
           <template v-if="element.type === 'grid'">
             <el-row class="widget-row widget-view"
                     v-if="element.key"
                     :key="element.key"
                     type="flex"
-                    @click.native="select(element)"
-                    :class="{active: selectWidget.key == element.key}"
+                    @click.native.stop="select(element)"
+                    :class="{active: selectWidget.key === element.key}"
                     :gutter="element.options.gutter ? element.options.gutter : 0"
                     :justify="element.options.justify"
                     :align="element.options.align">
@@ -95,8 +99,7 @@
     @Prop({})
     data
 
-    formData = {
-    }
+    formData = {}
 
     selectWidget = {}
 
@@ -119,7 +122,7 @@
     handleWidgetAdd ({ newIndex }) {
       // 为拖拽到容器的元素添加唯一 key
       // 为新增的项目设置key
-      this.addWidgetToList(newIndex, this.data.list)
+      this.addWidgetToList(newIndex, this.data.widgets)
       // if (this.data.list[newIndex].type === 'radio' || this.data.list[newIndex].type === 'checkbox' || this.data.list[newIndex].type === 'select') {
       //   this.$set(this.data.list, newIndex, {
       //     ...this.data.list[newIndex],
@@ -178,6 +181,14 @@
   }
 </script>
 <style lang="less">
+  .design-form {
+    padding: 5px;
+    border: dashed 1px #999999;
+
+    &.active {
+      border: solid 3px #409EFF;
+    }
+  }
 
   .widget-form-list {
     min-height: 600px;

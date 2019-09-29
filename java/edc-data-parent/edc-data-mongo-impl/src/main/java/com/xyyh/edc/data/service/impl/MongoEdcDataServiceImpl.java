@@ -28,7 +28,6 @@ public class MongoEdcDataServiceImpl implements EdcDataService {
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	MongoClient c;
 
 	@Override
 	@Transactional

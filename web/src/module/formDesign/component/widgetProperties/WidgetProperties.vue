@@ -11,6 +11,7 @@
   <select-property v-else-if="widget.type==='select'" :widget="widget"/>
   <slider-property v-else-if="widget.type==='slider'" :widget="widget"/>
   <switch-property v-else-if="widget.type==='switch'" :widget="widget"/>
+  <form-properties v-else-if="widget.type==='form'" :widget="widget.form"/>
 </template>
 <script>
   import Vue from 'vue'
@@ -26,9 +27,11 @@
     SelectProperty,
     SliderProperty, SwitchProperty
   } from './basicComponents'
+  import FormProperties from './FormProperties'
 
   @Component({
     components: {
+      FormProperties,
       SwitchProperty,
       SliderProperty,
       SelectProperty,

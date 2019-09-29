@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.xyyh.edc.common.entity.AbstractEntity;
 import com.xyyh.edc.meta.api.ColumnTypes;
 
 import lombok.Getter;
@@ -57,8 +58,8 @@ public class Column extends AbstractEntity {
 	@javax.persistence.Column(name = "type_", length = 50)
 	private ColumnTypes type;
 
-	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private ColumnFormAttributes formAttributes;
+//	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	private ColumnFormAttributes formAttributes;
 
 }

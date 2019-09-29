@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.xyyh.edc.autoconfigure.EdcAutoConfiguration,\
-com.xyyh.edc.autoconfigure.EdcMetaAutoConfiguration
+com.xyyh.edc.autoconfigure.EdcMetaAutoConfiguration,\
+com.xyyh.edc.autoconfigure.EdcFormAutoConfiguration

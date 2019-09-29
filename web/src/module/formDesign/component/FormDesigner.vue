@@ -34,10 +34,18 @@
     </el-aside>
     <!--中间为表单设计页面-->
     <el-main>
+      <el-form>
+        <el-row>
+          <el-col>
+            <el-button size="mini" type="primary" @click="vis=true">预览</el-button>
+            <el-button size="mini" type="primary" @click="submit">保存</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
+      <!--      <el-button @click="vis=true">预览</el-button>-->
       <widget-form :data="data" @active-change="activeItem=$event"/>
     </el-main>
     <el-aside width="250px">
-      <el-button @click="vis=true">预览</el-button>
       <widget-properties :widget="activeItem"/>
     </el-aside>
     <el-dialog :visible.sync="vis" v-if="vis" :close-on-click-modal="false">
@@ -49,12 +57,14 @@
 <script>
   import Vue from 'vue'
   import Draggable from 'vuedraggable'
-  import { Component } from 'vue-property-decorator'
+  import { Component, Prop } from 'vue-property-decorator'
   import { basicComponents, layoutComponents } from './componentsConfig'
   import WidgetForm from './WidgetForm'
   import WidgetProperties from './widgetProperties'
   import FormView from '../../form-viewer/FormViewer'
+  import { namespace } from 'vuex-class'
 
+  const formModule = namespace('formDesign')
   @Component({
     components: {
       Draggable,
@@ -64,6 +74,8 @@
     }
   })
   export default class FormDesigner extends Vue {
+    @Prop({ default: () => 'new' })
+    id
     basicComponents = basicComponents
 
     layoutComponents = layoutComponents
@@ -76,11 +88,42 @@
      */
     vis = false
 
+    @formModule.Action('save')
+    save
+
+    @formModule.Action('update')
+    update
+
+    @formModule.Action('load')
+    load
+
     /**
      * 设计好的表单数据
      * @type {{list: []}}
      */
-    data = { list: [] }
+    data = {
+      name: '',
+      memo: '',
+      action: '',
+      options: {},
+      widgets: []
+    }
+
+    created () {
+      if (this.id === 'new') {
+
+      } else {
+        this.load(this.id).then(({ data }) => (this.data = data))
+      }
+    }
+
+    submit () {
+      if (this.id === 'new') {
+        this.save(this.data)
+      } else {
+        this.update(this.data)
+      }
+    }
   }
 </script>
 

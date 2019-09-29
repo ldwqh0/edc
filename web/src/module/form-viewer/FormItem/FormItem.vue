@@ -5,6 +5,7 @@
     <el-input v-if="widget.type==='text'"
               type="text"
               :value="options.defaultValue"
+              :placeholder="options.placeholder"
               v-model="data[options.model]"/>
     <el-input v-else-if="widget.type==='textarea'"
               type="textarea"

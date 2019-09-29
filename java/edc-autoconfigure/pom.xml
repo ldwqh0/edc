@@ -42,6 +42,11 @@
 			<artifactId>bson</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.xyyh.edc</groupId>
+			<artifactId>edc-form-design</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- <dependency> <groupId>com.xyyh.edc</groupId> <artifactId>edc-data-mysql-impl</artifactId> 
 			<optional>true</optional> </dependency> -->
 	</dependencies>

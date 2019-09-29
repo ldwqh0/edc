@@ -14,7 +14,8 @@
 		<version>0.2.1-SNAPSHOT</version> </parent> -->
 	<properties>
 		<java.version>1.8</java.version>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8
+		</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springboot.version>2.1.6.RELEASE</springboot.version>
 		<commons-collections4.version>4.3</commons-collections4.version>
@@ -34,6 +35,7 @@
 		<module>edc-app</module>
 		<module>edc-form-design</module>
 		<module>edc-search</module>
+		<module>edc-form-design-parent</module>
 	</modules>
 
 	<dependencyManagement>
@@ -106,6 +108,11 @@
 			<dependency>
 				<groupId>com.xyyh.edc.meta</groupId>
 				<artifactId>edc-meta-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xyyh.edc</groupId>
+				<artifactId>edc-form-design</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -186,7 +193,8 @@
 							</goals>
 							<configuration>
 								<outputDirectory>target/generated-sources/java</outputDirectory>
-								<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+								<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor
+								</processor>
 							</configuration>
 						</execution>
 					</executions>
@@ -234,8 +242,10 @@
 						<archive>
 							<manifest>
 								<mainClass>${start-class}</mainClass>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								<addDefaultImplementationEntries>true
+								</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true
+								</addDefaultSpecificationEntries>
 							</manifest>
 						</archive>
 					</configuration>
@@ -261,7 +271,8 @@
 						<archive>
 							<manifest>
 								<mainClass>${start-class}</mainClass>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultImplementationEntries>true
+								</addDefaultImplementationEntries>
 							</manifest>
 						</archive>
 					</configuration>
@@ -298,7 +309,8 @@
 						<verbose>true</verbose>
 						<dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
 						<generateGitPropertiesFile>true</generateGitPropertiesFile>
-						<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+						<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+						</generateGitPropertiesFilename>
 					</configuration>
 				</plugin>
 				<!-- Support our own plugin -->
@@ -330,7 +342,8 @@
 						</dependency>
 					</dependencies>
 					<configuration>
-						<keepDependenciesWithProvidedScope>true</keepDependenciesWithProvidedScope>
+						<keepDependenciesWithProvidedScope>true
+						</keepDependenciesWithProvidedScope>
 						<createDependencyReducedPom>true</createDependencyReducedPom>
 						<filters>
 							<filter>

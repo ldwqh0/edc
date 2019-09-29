@@ -1,7 +1,7 @@
 <!--渲染表单-->
 <template>
-  <el-form ref="form" :model="data" label-width="80px">
-    <template v-for="widget in form.list">
+  <el-form ref="form" :model="data" label-width="100px">
+    <template v-for="widget in form.widgets">
       <form-item :key="widget.key" :widget="widget" :data="data"/>
     </template>
     <el-button @click="validate">校验</el-button>

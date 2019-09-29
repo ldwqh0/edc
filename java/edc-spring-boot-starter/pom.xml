@@ -35,6 +35,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.xyyh.edc</groupId>
+			<artifactId>edc-form-design</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-spring-boot-starter-mongodb</artifactId>
 		</dependency>
 	</dependencies>
