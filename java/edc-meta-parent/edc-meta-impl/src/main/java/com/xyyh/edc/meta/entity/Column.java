@@ -1,13 +1,8 @@
 package com.xyyh.edc.meta.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-
 import com.xyyh.edc.common.entity.AbstractEntity;
 import com.xyyh.edc.meta.api.ColumnTypes;
 

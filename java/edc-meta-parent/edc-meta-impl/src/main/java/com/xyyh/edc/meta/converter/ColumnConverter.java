@@ -1,14 +1,10 @@
 package com.xyyh.edc.meta.converter;
 
-import java.util.Objects;
-
 import org.springframework.stereotype.Component;
 
 import com.xyyh.edc.common.converter.AbstractConverter;
 import com.xyyh.edc.meta.dto.ColumnDto;
-import com.xyyh.edc.meta.dto.ColumnFormAttributesDto;
 import com.xyyh.edc.meta.entity.Column;
-import com.xyyh.edc.meta.entity.ColumnFormAttributes;
 
 @Component
 public class ColumnConverter extends AbstractConverter<Column, ColumnDto> {

@@ -22,6 +22,7 @@ public class TableDto implements Serializable, TableDefine {
 	private String title;
 	private List<ColumnDto> columns;
 
+	@Override
 	public List<ColumnDefine> getColumns() {
 		if (CollectionUtils.isEmpty(columns)) {
 			return null;
