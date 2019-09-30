@@ -65,7 +65,7 @@
 				<datasource.driver>org.h2.Driver</datasource.driver>
 				<datasource.username>sa</datasource.username>
 				<datasource.password></datasource.password>
-				
+				<datasource.platform>org.hibernate.dialect.H2Dialect</datasource.platform>
 			</properties>
 		</profile>
 		<profile>
@@ -75,17 +75,16 @@
 			</activation>
 			<properties>
 				<profiles.active>localhost-mariadb</profiles.active>
-
+				<datasource.url>jdbc:mariadb://localhost:3306/edc?createDatabaseIfNotExist=true</datasource.url>
 				<datasource.driver>org.mariadb.jdbc.Driver</datasource.driver>
 				<datasource.username>root</datasource.username>
 				<datasource.password>admin123456!@#</datasource.password>
-
+				<datasource.platform>org.hibernate.dialect.MariaDB103Dialect</datasource.platform>
 			</properties>
 		</profile>
 		<profile>
 			<id>mysql@local</id>
 			<properties>
-				
 				<datasource.url>jdbc:mysql://localhost:3306/edc?serverTimezone=Asia/Shanghai&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;useSSL=false</datasource.url>
 				<datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
 				<datasource.username>root</datasource.username>
