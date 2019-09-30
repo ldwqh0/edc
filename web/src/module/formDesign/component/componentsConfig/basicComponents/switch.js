@@ -6,7 +6,7 @@ export default {
   icon: 'icon-switch',
   options: {
     ...commonOptions,
-    label: '开关'
+    label: '开关：'
   },
   rules: {
     // required: {}

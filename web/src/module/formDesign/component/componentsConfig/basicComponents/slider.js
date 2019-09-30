@@ -6,7 +6,7 @@ export default {
   icon: 'icon-slider',
   options: {
     ...commonOptions,
-    label: '滑块',
+    label: '滑块：',
     min: 0,
     max: 100
   },

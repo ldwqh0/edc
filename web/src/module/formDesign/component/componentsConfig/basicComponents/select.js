@@ -7,7 +7,7 @@ export default {
 
   options: {
     ...commonOptions,
-    label: '选择框',
+    label: '选择框：',
     multiple: false
   },
   rules: {
