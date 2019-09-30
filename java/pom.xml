@@ -34,8 +34,7 @@
 		<module>edc-spring-boot-starter-mysql</module>
 		<module>edc-app</module>
 		<module>edc-form-design</module>
-		<module>edc-search</module>
-		<module>edc-form-design-parent</module>
+		<module>edc-search-parent</module>
 	</modules>
 
 	<dependencyManagement>
