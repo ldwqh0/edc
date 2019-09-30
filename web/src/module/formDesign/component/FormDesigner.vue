@@ -37,23 +37,21 @@
       <el-form>
         <el-row>
           <el-col>
-            <el-button size="mini" type="primary" @click="vis=true">预览</el-button>
+            <el-button size="mini" type="primary" @click="previewerVisible=true">预览</el-button>
             <el-button size="mini" type="primary" @click="submit">保存</el-button>
           </el-col>
         </el-row>
       </el-form>
-      <!--      <el-button @click="vis=true">预览</el-button>-->
-      <widget-form :data="data" @active-change="activeItem=$event"/>
+      <widget-form :data="data" :active.sync="active"/>
     </el-main>
     <el-aside width="250px">
-      <widget-properties :widget="activeItem"/>
+      <widget-properties :widget="active"/>
     </el-aside>
-    <el-dialog :visible.sync="vis" v-if="vis" :close-on-click-modal="false">
+    <el-dialog :visible.sync="previewerVisible" v-if="previewerVisible" :close-on-click-modal="false">
       <form-view :form="data"/>
     </el-dialog>
   </el-container>
 </template>
-
 <script>
   import Vue from 'vue'
   import Draggable from 'vuedraggable'
@@ -76,17 +74,25 @@
   export default class FormDesigner extends Vue {
     @Prop({ default: () => 'new' })
     id
+    /**
+     * 基础组件列表
+     */
     basicComponents = basicComponents
-
+    /**
+     * 布局组件组件列表
+     */
     layoutComponents = layoutComponents
 
-    activeItem = {}
+    /**
+     * 当前选中的组件
+     */
+    active = {}
 
     /**
      * 表单预览是否可见
      * @type {boolean}
      */
-    vis = false
+    previewerVisible = false
 
     @formModule.Action('save')
     save
@@ -99,7 +105,7 @@
 
     /**
      * 设计好的表单数据
-     * @type {{list: []}}
+     * @type {{widgets: []}}
      */
     data = {
       name: '',
@@ -111,7 +117,12 @@
 
     created () {
       if (this.id !== 'new') {
-        this.load(this.id).then(({ data }) => (this.data = data))
+        this.load(this.id).then(({ data }) => {
+          this.data = data
+          this.active = ({ type: 'form', form: data })
+        })
+      } else {
+        this.active = ({ type: 'form', form: this.data })
       }
     }
 

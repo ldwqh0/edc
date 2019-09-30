@@ -14,6 +14,7 @@ module.exports = {
     // ],
     // 在babel转码的时候，有些语法会转换为一些特殊函数，这个插件提供了这些公共函数，用以解决打包之后的体积
     '@babel/plugin-transform-runtime',
+    '@babel/plugin-proposal-nullish-coalescing-operator',
     // 这个插件编译@import('')语法
     '@babel/plugin-syntax-dynamic-import',
     // 处理对象的解构语法，即{...a}模式

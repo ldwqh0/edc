@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import isEmpty from 'lodash/isEmpty'
 import cloneDeep from 'lodash/cloneDeep'
-import el from 'element-ui/src/locale/lang/el'
 
 function transformWidgetResponse (widgetResponse) {
   if (widgetResponse.options) {
@@ -18,6 +17,11 @@ function transformWidgetResponse (widgetResponse) {
     widgetResponse.dataSource = JSON.parse(widgetResponse.dataSource)
   } else {
     widgetResponse.dataSource = {}
+  }
+  if (widgetResponse.columns) {
+    widgetResponse.columns = JSON.parse(widgetResponse.columns)
+  } else {
+    widgetResponse.columns = {}
   }
   return widgetResponse
 }
@@ -50,6 +54,9 @@ function transformWidgetRequest (widget) {
   }
   if (widget.dataSource) {
     widget.dataSource = JSON.stringify(widget.dataSource)
+  }
+  if (widget.columns) {
+    widget.columns = JSON.stringify(widget.columns)
   }
   return widget
 }

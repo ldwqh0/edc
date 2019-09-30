@@ -23,16 +23,6 @@
 		<dependency>
 			<groupId>com.xyyh.edc</groupId>
 			<artifactId>edc-spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.xyyh.edc</groupId>
-					<artifactId>edc-spring-boot-starter-mongodb</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.xyyh.edc</groupId>
-			<artifactId>edc-spring-boot-starter-mysql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>

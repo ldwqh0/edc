@@ -52,6 +52,7 @@ public class FormDefineConverter extends AbstractConverter<FormDefine, FormDefin
 		model.setRules(widgetDto.getRules());
 		model.setType(widgetDto.getType());
 		model.setDataSource(widgetDto.getDataSource());
+		model.setColumns(widgetDto.getColumns());
 		return model;
 	}
 
@@ -72,6 +73,7 @@ public class FormDefineConverter extends AbstractConverter<FormDefine, FormDefin
 		dto.setRules(widget.getRules());
 		dto.setType(widget.getType());
 		dto.setDataSource(widget.getDataSource());
+		dto.setColumns(widget.getColumns());
 		return dto;
 	}
 

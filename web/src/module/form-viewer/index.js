@@ -1,4 +1,4 @@
 import FormViewer from './FormViewer'
 
-export FormItem from './FormItem'
+export WidgetItem from './WidgetItem'
 export default FormViewer

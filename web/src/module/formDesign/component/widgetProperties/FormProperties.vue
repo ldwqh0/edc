@@ -21,7 +21,7 @@
         </el-form-item>
       </el-tab-pane>
     </el-tabs>
-    {{ widget }}
+    <!--    {{ widget }}-->
   </el-form>
 </template>
 <script>

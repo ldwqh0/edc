@@ -2,7 +2,7 @@
 <template>
   <el-form ref="form" :model="data" label-width="100px">
     <template v-for="widget in form.widgets">
-      <form-item :key="widget.key" :widget="widget" :data="data"/>
+      <widget-item :key="widget.key" :widget="widget" :data="data"/>
     </template>
     <el-button @click="validate">校验</el-button>
   </el-form>
@@ -11,11 +11,11 @@
 <script>
   import Vue from 'vue'
   import { Component, Prop } from 'vue-property-decorator'
-  import FormItem from './FormItem'
+  import WidgetItem from './WidgetItem'
 
   @Component({
     components: {
-      FormItem
+      WidgetItem
     }
   })
   export default class FormView extends Vue {

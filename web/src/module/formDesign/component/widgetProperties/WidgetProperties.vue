@@ -12,6 +12,7 @@
   <slider-property v-else-if="widget.type==='slider'" :widget="widget"/>
   <switch-property v-else-if="widget.type==='switch'" :widget="widget"/>
   <form-properties v-else-if="widget.type==='form'" :widget="widget.form"/>
+  <grid-property v-else-if="widget.type==='grid'" :widget="widget"/>
 </template>
 <script>
   import Vue from 'vue'
@@ -28,6 +29,7 @@
     SliderProperty, SwitchProperty
   } from './basicComponents'
   import FormProperties from './FormProperties'
+  import { GridProperty } from './layoutComponents'
 
   @Component({
     components: {
@@ -41,7 +43,8 @@
       CheckBoxProperty,
       TextProperty,
       NumberProperty,
-      RadioProperty
+      RadioProperty,
+      GridProperty
     }
   })
   export default class WidgetProperties extends Vue {

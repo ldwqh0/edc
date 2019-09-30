@@ -5,11 +5,11 @@ export default {
   columns: [
     {
       span: 12,
-      list: []
+      widgets: []
     },
     {
       span: 12,
-      list: []
+      widgets: []
     }
   ],
   options: {

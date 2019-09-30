@@ -3,7 +3,7 @@
   <el-form label-width="100px"
            :model="formData"
            class="design-form"
-           :class="{active: selectWidget.type == 'form'}"
+           :class="{active: selectedWidget.type == 'form'}"
            @click.native.self="select({type:'form',form:data})">
     <draggable class=""
                v-model="data.widgets"
@@ -20,12 +20,12 @@
                     :key="element.key"
                     type="flex"
                     @click.native.stop="select(element)"
-                    :class="{active: selectWidget.key === element.key}"
+                    :class="{active: selectedWidget.key === element.key}"
                     :gutter="element.options.gutter ? element.options.gutter : 0"
                     :justify="element.options.justify"
                     :align="element.options.align">
               <el-col v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
-                <draggable v-model="col.list"
+                <draggable v-model="col.widgets"
                            :no-transition-on-drag="true"
                            group="people"
                            ghost-class="ghost"
@@ -33,14 +33,14 @@
                            handle=".drag-widget"
                            @add="handleWidgetColAdd($event, element, colIndex)">
                   <transition-group name="fade" tag="div" class="widget-col-list">
-                    <template v-for="(el) in col.list">
+                    <template v-for="(el) in col.widgets">
                       <div class="widget-view item-view"
                            v-if="el.key"
                            :key="el.key"
                            @click.stop="select(el)"
-                           :class="{active: selectWidget.key == el.key}">
+                           :class="{active: selectedWidget.key == el.key}">
                         <!--                        <widget-view/>-->
-                        <form-item :widget="{}"/>
+                        <widget-item :widget="el" :data="formData"/>
                         <i class="iconfont icon-drag drag-widget"/>
                         <div class="widget-view-action">
                           <!--复制作为保留功能-->
@@ -64,11 +64,10 @@
                  v-if="element.key"
                  :key="element.key"
                  @click="select(element)"
-                 :class="{active: selectWidget.key == element.key}">
-              <!--              <widget-view :value="element"/>-->
-              <form-item :widget="element" :data="formData"/>
+                 :class="{active: selectedWidget.key == element.key}">
+              <widget-item :widget="element" :data="formData"/>
               <i class="iconfont icon-drag drag-widget"/>
-              <div class="widget-view-action" v-if="selectWidget.key == element.key">
+              <div class="widget-view-action" v-if="selectedWidget.key == element.key">
                 <!--复制作为保留功能-->
                 <!--<i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>-->
                 <i class="iconfont icon-trash"/>
@@ -84,13 +83,14 @@
 <script>
   import Draggable from 'vuedraggable'
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, PropSync } from 'vue-property-decorator'
   import { randomKey } from './utils'
-  import { FormItem } from '../../form-viewer'
+  import { WidgetItem } from '../../form-viewer'
+  import cloneDeep from 'lodash/cloneDeep'
 
   @Component({
     components: {
-      FormItem,
+      WidgetItem,
       Draggable
     }
   })
@@ -101,22 +101,18 @@
 
     formData = {}
 
-    selectWidget = {}
+    @PropSync('active')
+    selectedWidget
 
     select (v) {
-      this.selectWidget = v
-      this.$emit('active-change', v)
-    }
-
-    created () {
-      console.log(this.data)
+      this.selectedWidget = v
     }
 
     /**
      * 将对象添加到指定位置之后，数字中存储的是之前的对象引用，这里生成一个新的对象拷贝，并生成一个唯一KEY
      */
     addWidgetToList (index, list) {
-      const item = JSON.parse(JSON.stringify(list[index]))
+      const item = cloneDeep(list[index])
       Object.assign(item, { key: randomKey() })
       this.$set(list, index, item)
       this.select(item)
@@ -161,7 +157,7 @@
      */
     handleWidgetColAdd ({ newIndex, oldIndex, item }, { columns }, colIndex) {
       // 获取对象
-      this.addWidgetToList(newIndex, columns[colIndex].list)
+      this.addWidgetToList(newIndex, columns[colIndex].widgets)
       // 防止布局元素的嵌套拖拽
       // if (item.className.indexOf('data-grid') >= 0) {
       //   // 如果是列表中拖拽的元素需要还原到原来位置
@@ -206,6 +202,8 @@
     .widget-view {
       position: relative;
 
+      // 组件里面给一个遮罩，防止选中里面的内容
+
       // 拖动柄和操作柄在默认情况下不可见
       .drag-widget, .widget-view-action {
         display: none;
@@ -213,6 +211,7 @@
         background-color: #409EFF;
         padding: 3px;
         color: white;
+        z-index: 2;
       }
 
       .drag-widget {
@@ -244,7 +243,14 @@
     /*控件显示组件的样式*/
 
     .item-view {
-
+      &:before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        display: block;
+        position: absolute;
+        z-index: 1;
+      }
     }
 
     .widget-row {

@@ -14,4 +14,5 @@ public class WidgetDto {
 	private String options;
 	private String rules;
 	private String dataSource;
+	private String columns;
 }
