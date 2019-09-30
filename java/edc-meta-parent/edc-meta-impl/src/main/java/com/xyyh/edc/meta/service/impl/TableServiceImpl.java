@@ -111,7 +111,7 @@ public class TableServiceImpl implements JpaTableService {
 				copyProperties(result, table);
 				result = tableRepository.save(result);
 				args.setNewData(tableConverter.toDto(result));
-				tableDdlEventListenere.updated(args);
+				tableDdlEventListenere.created(args);
 				return result;
 			}
 		} catch (Exception e) {

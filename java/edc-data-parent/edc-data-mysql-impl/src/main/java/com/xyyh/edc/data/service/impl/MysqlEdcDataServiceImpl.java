@@ -4,11 +4,12 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.xyyh.edc.data.service.EdcDataService;
 import com.xyyh.edc.meta.api.TableDefine;
 
-//@Service
+@Service
 public class MysqlEdcDataServiceImpl implements EdcDataService {
 
 	@Override
