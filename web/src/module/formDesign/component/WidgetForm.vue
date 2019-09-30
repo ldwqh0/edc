@@ -108,6 +108,10 @@
       this.$emit('active-change', v)
     }
 
+    created () {
+      console.log(this.data)
+    }
+
     /**
      * 将对象添加到指定位置之后，数字中存储的是之前的对象引用，这里生成一个新的对象拷贝，并生成一个唯一KEY
      */

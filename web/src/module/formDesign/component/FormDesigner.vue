@@ -110,9 +110,7 @@
     }
 
     created () {
-      if (this.id === 'new') {
-
-      } else {
+      if (this.id !== 'new') {
         this.load(this.id).then(({ data }) => (this.data = data))
       }
     }
