@@ -1,11 +1,16 @@
 spring:
   datasource:
-    url: '@datasource.url@'
+    jdbc-url: '@datasource.url@'
     username: '@datasource.username@'
     driver-class-name: '@datasource.driver@'
     password: '@datasource.password@'
     hikari:
       connection-test-query: select 1
+  datasource2:
+    jdbc-url: '@datasource2.url@'
+    username: '@datasource.username@'
+    driver-class-name: '@datasource.driver@'
+    password: '@datasource.password@'
   jpa:
     show-sql: true
     generate-ddl: true
