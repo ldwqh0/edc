@@ -1,9 +1,8 @@
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import BasicProperty from './BasicProperty'
 
 @Component
 export default class EnaumableProperty extends BasicProperty {
-
   get dataSource () {
     return this.widget.dataSource
   }
