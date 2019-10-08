@@ -41,8 +41,8 @@
 
 <script>
   import Vue from 'vue'
-  import {Component} from 'vue-property-decorator'
-  import {namespace} from 'vuex-class'
+  import { Component } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
 
   const tableModule = namespace('table')
   @Component
@@ -61,7 +61,7 @@
     del
 
     get visibleTables () {
-      return this.tables.filter(({name}) => name.indexOf(this.tableFilter.keywords) > -1)
+      return this.tables.filter(({ name }) => name.indexOf(this.tableFilter.keywords) > -1)
     }
 
     created () {
@@ -69,15 +69,15 @@
     }
 
     newTable () {
-      this.$router.replace({name: 'table', params: {id: 'new'}})
+      this.$router.replace({ name: 'table', params: { id: 'new' } })
     }
 
     toTable (id) {
-      this.$router.replace({name: 'table', params: {id}})
+      this.$router.replace({ name: 'table', params: { id } })
     }
 
     delTable (id) {
-      this.del({id}).then(() => {
+      this.del({ id }).then(() => {
         this.loadTables()
       })
     }

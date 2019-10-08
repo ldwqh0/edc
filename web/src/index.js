@@ -20,9 +20,9 @@ import { Component } from 'vue-property-decorator'
 import './iconfont/iconfont.css'
 
 import {
-  table,
+  tableDesigner,
   form,
-  formDesign
+  formDesigner
 } from './module'
 
 Vue.config.productionTip = false
@@ -32,9 +32,9 @@ Vue.use(EleDataTables, { httpInstance: tableHttpInstance }) // 注入表格实�
 Vue.use(VueRouter)
 Vue.use(AjaxPlugin, httpInstance)
 Vue.use(EleDateFormater)
-Vue.use(table, { store, router })
+Vue.use(tableDesigner, { store, router })
 Vue.use(form, { store, router })
-Vue.use(formDesign, { store, router })
+Vue.use(formDesigner, { store, router })
 
 console.log('Created By ldwqh0@outlook.com')
 

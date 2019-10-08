@@ -1,3 +1,3 @@
-export table from './table'
+export tableDesigner from './table-designer'
 export form from './form'
-export formDesign from './form-designer'
+export formDesigner from './form-designer'
