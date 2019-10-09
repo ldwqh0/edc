@@ -20,6 +20,7 @@ public class TableConverter extends AbstractConverter<Table, TableDto> {
 		dto.setName(model.getName());
 		dto.setTitle(model.getTitle());
 		dto.setColumns(columnConverter.toDto(model.getColumns()));
+		dto.setFormId(model.getFormId());
 		return dto;
 	}
 

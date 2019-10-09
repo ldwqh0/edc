@@ -51,13 +51,6 @@ public interface ColumnDefine extends Serializable {
 	public ColumnTypes getType();
 
 	/**
-	 * 字段的表单属性
-	 * 
-	 * @return
-	 */
-	public ColumnFormAttributes getFormAttributes();
-
-	/**
 	 * 是否新列
 	 * 
 	 * @return

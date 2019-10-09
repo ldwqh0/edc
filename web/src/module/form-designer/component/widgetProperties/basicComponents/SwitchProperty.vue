@@ -23,15 +23,15 @@
         </el-form-item>
       </el-tab-pane>
       <el-tab-pane label="校验规则">
-        <!--        <el-form-item label="必填">-->
+        <!--        <el-table-viewer-item label="必填">-->
         <!--          <el-switch v-model="rules.required.required"/>-->
-        <!--        </el-form-item>-->
-        <!--        <el-form-item label="校验触发">-->
+        <!--        </el-table-viewer-item>-->
+        <!--        <el-table-viewer-item label="校验触发">-->
         <!--          <el-select v-model="rules.trigger">-->
         <!--            <el-option value="blur" label="失去焦点"/>-->
         <!--            <el-option value="change" label="值变更"/>-->
         <!--          </el-select>-->
-        <!--        </el-form-item>-->
+        <!--        </el-table-viewer-item>-->
       </el-tab-pane>
     </el-tabs>
   </el-form>

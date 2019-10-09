@@ -53,7 +53,7 @@ public class DataController {
 		if (tableDefine.isPresent()) {
 			TableDefine table = tableDefine.get();
 			String dataId = generateId(table, data);
-			return dataService.save(tableDefine.get(), dataId, data);
+			return dataService.save(table, dataId, data);
 		} else {
 			// TODO 异常处理
 			return null;

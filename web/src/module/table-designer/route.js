@@ -11,5 +11,10 @@ export default [{
       props: true,
       component: () => import('./component/Table')
     }]
+  }, {
+    name: 'tableForm',
+    path: '/tables/:tableId/form',
+    props: true,
+    component: () => import('./component/TableFormDesigner')
   }]
 }]

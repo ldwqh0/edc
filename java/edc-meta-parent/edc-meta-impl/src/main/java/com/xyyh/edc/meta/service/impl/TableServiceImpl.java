@@ -202,6 +202,14 @@ public class TableServiceImpl implements JpaTableService {
 		return table;
 	}
 
+	@Override
+	@Transactional
+	public Table updateForm(Long tableId, Long formId) {
+		Table table = tableRepository.getOne(tableId);
+		table.setFormId(formId);
+		return table;
+	}
+
 	private static class EmptyTableDdlEventListener implements TableDdlEventListener {
 
 		@Override

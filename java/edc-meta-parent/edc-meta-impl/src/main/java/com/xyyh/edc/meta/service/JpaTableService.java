@@ -20,6 +20,8 @@ public interface JpaTableService extends TableService {
 
 	public void delete(Long id);
 
+	public Table updateForm(Long tableId, Long formId);
+
 //	public Optional<Table> findByName(String collection);
 
 }

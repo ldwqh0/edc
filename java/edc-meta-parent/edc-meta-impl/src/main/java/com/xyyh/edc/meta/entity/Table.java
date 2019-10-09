@@ -25,6 +25,9 @@ public class Table extends AbstractEntity {
 	@javax.persistence.Column(name = "title_", nullable = false)
 	private String title;
 
+	@javax.persistence.Column(name = "form_id_")
+	private Long formId;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@OrderBy("order ASC")
 	@JoinColumn(name = "table_id_")

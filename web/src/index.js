@@ -21,7 +21,7 @@ import './iconfont/iconfont.css'
 
 import {
   tableDesigner,
-  form,
+  tableViewer,
   formDesigner
 } from './module'
 
@@ -33,7 +33,7 @@ Vue.use(VueRouter)
 Vue.use(AjaxPlugin, httpInstance)
 Vue.use(EleDateFormater)
 Vue.use(tableDesigner, { store, router })
-Vue.use(form, { store, router })
+Vue.use(tableViewer, { store, router })
 Vue.use(formDesigner, { store, router })
 
 console.log('Created By ldwqh0@outlook.com')

@@ -53,8 +53,4 @@ public class Column extends AbstractEntity {
 	@javax.persistence.Column(name = "type_", length = 50)
 	private ColumnTypes type;
 
-//	@OneToOne(mappedBy = "column", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn
-//	private ColumnFormAttributes formAttributes;
-
 }

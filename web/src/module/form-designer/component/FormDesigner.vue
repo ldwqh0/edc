@@ -55,7 +55,7 @@
 <script>
   import Vue from 'vue'
   import Draggable from 'vuedraggable'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
   import { basicComponents, layoutComponents } from './componentsConfig'
   import WidgetForm from './WidgetForm'
   import WidgetProperties from './widgetProperties'
@@ -72,8 +72,8 @@
     }
   })
   export default class FormDesigner extends Vue {
-    @Prop({ default: () => 'new' })
-    id
+    @Prop({ default: () => 'new', required: false })
+    formId
     /**
      * 基础组件列表
      */
@@ -116,22 +116,24 @@
     }
 
     created () {
-      if (this.id !== 'new') {
-        this.load(this.id).then(({ data }) => {
+      this.active = ({ type: 'form', form: this.data })
+    }
+
+    @Watch('formId', { immediate: true })
+    loadData (newValue, oldValue) {
+      if (newValue && (newValue !== 'new')) {
+        this.load(this.formId).then(({ data }) => {
           this.data = data
           this.active = ({ type: 'form', form: data })
         })
-      } else {
-        this.active = ({ type: 'form', form: this.data })
       }
     }
 
     submit () {
-      if (this.id === 'new') {
-        this.save(this.data)
-      } else {
-        this.update(this.data)
-      }
+      let p = this.formId === 'new' ? this.save(this.data) : this.update(this.data)
+      p.then(({ data }) => {
+        this.$emit('submit', data)
+      })
     }
   }
 </script>

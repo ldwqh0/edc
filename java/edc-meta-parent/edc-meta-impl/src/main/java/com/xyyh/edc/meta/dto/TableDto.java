@@ -1,6 +1,7 @@
 package com.xyyh.edc.meta.dto;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +22,12 @@ public class TableDto implements Serializable, TableDefine {
 	private String name;
 	private String title;
 	private List<ColumnDto> columns;
+	private Long formId;
 
 	@Override
 	public List<ColumnDefine> getColumns() {
 		if (CollectionUtils.isEmpty(columns)) {
-			return null;
+			return Collections.emptyList();
 		} else {
 			return columns.stream().map(a -> a).collect(Collectors.toList());
 		}

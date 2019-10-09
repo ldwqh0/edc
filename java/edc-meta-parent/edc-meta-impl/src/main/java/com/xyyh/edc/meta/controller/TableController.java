@@ -65,4 +65,11 @@ public class TableController {
 			return TableResult.failure(draw, pageable, e.getMessage());
 		}
 	}
+
+	@PutMapping("{tableId}/form")
+	public TableDto saveForm(
+			@PathVariable("tableId") Long tableId,
+			@RequestParam("formId") Long formId) {
+		return tableConverter.toDto(tableService.updateForm(tableId, formId));
+	}
 }

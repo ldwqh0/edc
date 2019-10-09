@@ -6,7 +6,7 @@
              label-position="left"
              label-width="80px"
              :model="table">
-      <el-row>
+      <el-row type="flex">
         <el-col :span="24">
           <el-form-item label="表名称"
                         prop="name">
@@ -17,6 +17,9 @@
             <el-input type="text" v-model="table.title"/>
           </el-form-item>
         </el-col>
+        <el-form-item v-if="id!=='new'" size="mini">
+          <el-button>设计表单</el-button>
+        </el-form-item>
       </el-row>
       <el-row>
         <el-col :span="24">
