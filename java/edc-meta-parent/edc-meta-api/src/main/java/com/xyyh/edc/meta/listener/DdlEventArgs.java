@@ -1,6 +1,8 @@
 package com.xyyh.edc.meta.listener;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 import com.xyyh.edc.meta.api.TableDefine;
 
@@ -27,6 +29,16 @@ public class DdlEventArgs implements Serializable {
 	 * 如果发生错误时，相应的错误信息
 	 */
 	private Throwable thorwable;
+	
+	/**
+	 * 备份创建表SQL，以便恢复
+	 */
+	private String oldCreateSql;
+	
+	/**备份旧数据，以便恢复
+	 * 
+	 */
+	private List<Map<String, Object>> oldDatas;
 
 	public TableDefine getOldData() {
 		return oldData;
@@ -58,6 +70,22 @@ public class DdlEventArgs implements Serializable {
 
 	public void setThorwable(Throwable thorwable) {
 		this.thorwable = thorwable;
+	}
+
+	public String getOldCreateSql() {
+		return oldCreateSql;
+	}
+
+	public void setOldCreateSql(String oldCreateSql) {
+		this.oldCreateSql = oldCreateSql;
+	}
+
+	public List<Map<String, Object>> getOldDatas() {
+		return oldDatas;
+	}
+
+	public void setOldDatas(List<Map<String, Object>> oldDatas) {
+		this.oldDatas = oldDatas;
 	}
 
 }
