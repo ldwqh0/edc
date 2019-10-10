@@ -1,9 +1,15 @@
 <template>
   <el-form ref="form" :model="data" label-width="100px">
+    <el-row>
+      <el-col :span="24">
+        <el-form-item>
+          <el-button @click="submit" type="primary" style="float: right">提交</el-button>
+        </el-form-item>
+      </el-col>
+    </el-row>
     <template v-for="widget in formDefinition.widgets">
       <widget-item :key="widget.key" :widget="widget" :data="data"/>
     </template>
-    <el-button @click="submit">提交</el-button>
   </el-form>
 </template>
 

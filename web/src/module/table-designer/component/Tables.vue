@@ -1,20 +1,16 @@
 <template>
   <el-container class="edc-tables" style="height: 100%;">
     <el-aside width="280px">
-      <el-row>
-        <el-col :span="24">
-          <el-form inline>
-            <el-form-item style="width: 150px">
-              <el-input type="text"
-                        placeholder="输入表名称"
-                        v-model="tableFilter.keywords"/>
-            </el-form-item>
-            <el-form-item>
-              <el-button @click="newTable">新表</el-button>
-            </el-form-item>
-          </el-form>
-        </el-col>
-      </el-row>
+      <el-form inline>
+        <el-form-item style="width: 150px" inline>
+          <el-input type="text"
+                    placeholder="输入表名称"
+                    v-model="tableFilter.keywords"/>
+        </el-form-item>
+        <el-form-item inline>
+          <el-button @click="newTable">新表</el-button>
+        </el-form-item>
+      </el-form>
       <!--      <el-scrollbar style="flex: 1;" wrap-class="table-list-wrapper">-->
       <el-row>
         <el-col :span="24">

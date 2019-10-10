@@ -20,7 +20,7 @@
       </el-table-column>
       <el-table-column label="操作">
         <template v-slot="{row}">
-          <router-link :to="{name:'dataForm',params:{tableId:table.id,dataId:row._id}}">编辑</router-link>
+          <router-link :to="{name:'dataForm',params:{tableId:table.id,dataId:row._id}}">编辑</router-link>&nbsp;
           <a href="javascript:void(0)" @click="del(scope.row)">删除</a>
         </template>
       </el-table-column>

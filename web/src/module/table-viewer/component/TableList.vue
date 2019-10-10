@@ -1,7 +1,7 @@
 <template>
   <el-container class="table-list" style="height: 100%;">
     <el-aside style="padding: 10px;">
-      <el-form>
+      <el-form inline>
         <el-form-item>
           <el-input placeholder="请输入表名称" v-model="tableFilter.keywords"/>
         </el-form-item>
