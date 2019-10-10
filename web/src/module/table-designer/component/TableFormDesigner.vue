@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <form-designer @submit="saveFormDefinition" :form-id="formId"/>
-  </div>
+  <form-designer @submit="saveFormDefinition" :form-id="formId"/>
 </template>
 
 <script>

@@ -4,6 +4,6 @@ import routes from './route'
 export default {
   install (Vue, { store, router }) {
     router.addRoutes(routes)
-    store.registerModule('form', storeModule)
+    store.registerModule('data', storeModule)
   }
 }

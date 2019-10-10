@@ -26,7 +26,6 @@
     form
 
     validate () {
-      alert(JSON.stringify(this.data))
       this.$refs.form.validate().then(() => {
       })
     }

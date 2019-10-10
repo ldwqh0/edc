@@ -6,5 +6,10 @@ export default [{
     path: ':tableId',
     props: true,
     component: () => import('./component/DataList')
+  }, {
+    name: 'dataForm',
+    path: ':tableId/:dataId',
+    props: true,
+    component: () => import('./component/EdcForm')
   }]
 }]

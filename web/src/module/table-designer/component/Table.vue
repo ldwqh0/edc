@@ -18,7 +18,7 @@
           </el-form-item>
         </el-col>
         <el-form-item v-if="id!=='new'" size="mini">
-          <el-button>设计表单</el-button>
+          <el-button @click="$router.push({name:'tableForm',params:{tableId:id}})">设计表单</el-button>
         </el-form-item>
       </el-row>
       <el-row>

@@ -10,7 +10,7 @@
       </el-col>
     </el-row>
     <el-datatables :ajax="ajax" v-if="table" ref="table">
-      <template v-for="{name, order, type, formAttributes:{title,trueLabel,falseLabel}} in table.columns">
+      <template v-for="{name, order, type,title} in table.columns">
         <el-table-column v-if="type==='BOOLEAN'"
                          :key="order"
                          :label="title||name">
@@ -26,7 +26,7 @@
       </template>
       <el-table-column>
         <template v-slot="scope">
-          <router-link :to="{name:'form',params:{tableId:table.id,dataId:scope.row._id}}">编辑</router-link>
+          <router-link :to="{name:'dataForm',params:{tableId:table.id,dataId:scope.row._id}}">编辑</router-link>
           <a href="javascript:void(0)" @click="del(scope.row)">删除</a>
         </template>
       </el-table-column>
@@ -80,9 +80,9 @@
 
     add () {
       this.$router.push({
-        name: 'form',
+        name: 'dataForm',
         params: {
-          tableId: this.tableId,
+          tableId: this.table.id,
           dataId: 'new'
         }
       })
