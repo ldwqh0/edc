@@ -1,7 +1,6 @@
 <template>
   <el-container class="edc-tables" style="height: 100%;">
-    <el-aside style="display: flex;flex-direction: column;"
-              width="250px">
+    <el-aside width="280px">
       <el-row>
         <el-col :span="24">
           <el-form inline>
@@ -16,25 +15,25 @@
           </el-form>
         </el-col>
       </el-row>
-      <el-scrollbar style="flex: 1;" wrap-class="table-list-wrapper">
-        <el-row>
-          <el-col :span="24">
-            <ul class="tables">
-              <li class="table-li"
-                  v-for="{id,name} in visibleTables"
-                  :key="id">
-                <el-link @click="toTable(id)">{{ name }}</el-link>
-                <el-link class="table-delete" @click="delTable(id)">删除</el-link>
-              </li>
-            </ul>
-          </el-col>
-        </el-row>
-      </el-scrollbar>
+      <!--      <el-scrollbar style="flex: 1;" wrap-class="table-list-wrapper">-->
+      <el-row>
+        <el-col :span="24">
+          <ul class="tables">
+            <li class="table-li"
+                v-for="{id,name} in visibleTables"
+                :key="id">
+              <el-link @click="toTable(id)">{{ name }}</el-link>
+              <el-link class="table-delete" @click="delTable(id)">删除</el-link>
+            </li>
+          </ul>
+        </el-col>
+      </el-row>
+      <!--      </el-scrollbar>-->
     </el-aside>
-    <el-main style="padding: 0 5px;">
-      <el-scrollbar style="height: 100%;" wrap-class="table-columns-wrapper">
-        <router-view/>
-      </el-scrollbar>
+    <el-main>
+      <!--      <el-scrollbar style="height: 100%;" wrap-class="table-columns-wrapper">-->
+      <router-view/>
+      <!--      </el-scrollbar>-->
     </el-main>
   </el-container>
 </template>
@@ -107,5 +106,13 @@
       }
     }
   }
-
+</style>
+<style lang="less">
+  .edc-tables {
+    > .el-aside {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+  }
 </style>

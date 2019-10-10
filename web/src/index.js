@@ -22,7 +22,8 @@ import './iconfont/iconfont.css'
 import {
   tableDesigner,
   tableViewer,
-  formDesigner
+  formDesigner,
+  security
 } from './module'
 
 Vue.config.productionTip = false
@@ -35,10 +36,11 @@ Vue.use(EleDateFormater)
 Vue.use(tableDesigner, { store, router })
 Vue.use(tableViewer, { store, router })
 Vue.use(formDesigner, { store, router })
+Vue.use(security, { store, router })
 
 console.log('Created By ldwqh0@outlook.com')
 
-Component.registerHooks(['beforeRouteEnter', 'beforeRouteUpdate'])
+Component.registerHooks(['beforeRouteEnter', 'beforeRouteUpdate', 'beforeRouteLeave'])
 
 /**
  *  一定要使用 render函数创建app,这样就不需要依赖完整的esm，也就是不需要打包vue的编译模块了，

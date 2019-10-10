@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "表管理",
+    "type": "COMPONENT",
+    "url": "/tables"
+  },
+  {
+    "id": 2,
+    "title": "数据管理",
+    "type": "COMPONENT",
+    "url": "/datas"
+  }
+]

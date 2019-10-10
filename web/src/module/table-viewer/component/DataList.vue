@@ -10,23 +10,17 @@
       </el-col>
     </el-row>
     <el-datatables :ajax="ajax" v-if="table" ref="table">
-      <template v-for="{name, order, type,title} in table.columns">
-        <el-table-column v-if="type==='BOOLEAN'"
-                         :key="order"
-                         :label="title||name">
-          <template v-slot="{row}">
-            <!--对于Boolean的类型要单独处理-->
-            {{ (row[name]===null || row[name]===undefined)?'':( row[name]?trueLabel:falseLabel) }}
-          </template>
-        </el-table-column>
-        <el-table-column v-else
-                         :prop="name"
-                         :label="title||name"
-                         :key="order"/>
-      </template>
-      <el-table-column>
-        <template v-slot="scope">
-          <router-link :to="{name:'dataForm',params:{tableId:table.id,dataId:scope.row._id}}">编辑</router-link>
+      <el-table-column v-for="{name, order, type,title} in table.columns"
+                       :prop="name"
+                       :label="title||name"
+                       :key="order">
+        <template v-if="type==='BOOLEAN'" v-slot="{row}">
+          {{ (row[name]===null || row[name]===undefined)?'':( row[name]?trueLabel:falseLabel) }}
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template v-slot="{row}">
+          <router-link :to="{name:'dataForm',params:{tableId:table.id,dataId:row._id}}">编辑</router-link>
           <a href="javascript:void(0)" @click="del(scope.row)">删除</a>
         </template>
       </el-table-column>
@@ -35,7 +29,7 @@
 </template>
 <script>
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import ElDatatables from 'element-datatables'
 
@@ -67,6 +61,10 @@
     delData
 
     created () {
+    }
+
+    @Watch('tableId', { immediate: true })
+    watchForLoad () {
       this.loadTable({ id: this.tableId }).then(({ data }) => {
         this.table = data
       })

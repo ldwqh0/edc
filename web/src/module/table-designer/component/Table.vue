@@ -148,6 +148,14 @@
     }
 
     beforeRouteUpdate (to, from, next) {
+      this.leaveConfirm(next)
+    }
+
+    beforeRouteLeave (to, from, next) {
+      this.leaveConfirm(next)
+    }
+
+    leaveConfirm (next) {
       const p = this.saveState ? Promise.resolve() : this.$confirm('是否离开当前页面?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

@@ -1,7 +1,7 @@
 <template xmlns:el-col="http://www.w3.org/1999/html">
   <el-container id="app" class="app" v-loading="loading">
-    <el-header class="app-header">
-      <el-row>
+    <el-header class="app-header" height="94px">
+      <el-row class="header-wrapper">
         <el-col :span="24" class="title-context">
           <el-menu mode="horizontal"
                    background-color="#1d2023"
@@ -29,8 +29,6 @@
           </el-menu>
         </el-col>
       </el-row>
-    </el-header>
-    <el-main class="app-main">
       <el-breadcrumb separator="/"
                      v-if="crumbs && crumbs.length>0">
         <el-breadcrumb-item v-for="crumb in crumbs"
@@ -38,6 +36,8 @@
           {{ crumb.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
+    </el-header>
+    <el-main class="app-main">
       <router-view/>
     </el-main>
   </el-container>
@@ -45,8 +45,8 @@
 
 <script>
   import Vue from 'vue'
-  import {Component} from 'vue-property-decorator'
-  import {State, Getter, namespace} from 'vuex-class'
+  import { Component } from 'vue-property-decorator'
+  import { State, Getter, namespace } from 'vuex-class'
   import MenuItem from '@/components/theme/MenuItem'
 
   const securityModule = namespace('security')
@@ -77,26 +77,27 @@
     @securityModule.Action('loadUserInfo')
     loadUserInfo
 
-    @securityModule.State('user')
+    @securityModule.State('currentUser')
     currentUser
 
     get systemMenus () {
-      const menus = this.menus.filter(menu => menu.name === '数据中心')
-      if (menus !== null && menus !== undefined && menus.length > 0) {
-        return menus[0].submenus
-      } else {
-        return []
-      }
+      return this.menus
+      // const menus = this.menus.filter(menu => menu.name === '数据中心')
+      // if (menus !== null && menus !== undefined && menus.length > 0) {
+      //   return menus[0].submenus
+      // } else {
+      //   return []
+      // }
     }
 
     get displayUsername () {
-      const {fullname, username} = this.currentUser
+      const { fullname, username } = this.currentUser
       return fullname === undefined || fullname === null ? username : fullname
     }
 
     doLogout () {
       this.logout().then(() => {
-        this.$router.push({name: 'login'})
+        this.$router.push({ name: 'login' })
       })
     }
 
@@ -110,10 +111,22 @@
 <style lang="less">
 
   .app {
+    height: 100%;
+
     .app-header {
-      background: #1D2023;
       overflow: hidden;
       padding: 0 10px;
+      background: #1D2023;
+
+      .el-breadcrumb { /*重新定义导航面包屑的样式*/
+        margin: 0 -10px;
+        padding: 10px;
+        background: #D9DBDB;
+      }
+
+      .header-wrapper {
+        background: #1D2023;
+      }
 
       .title-context > * {
         vertical-align: middle;
@@ -150,11 +163,7 @@
     }
 
     .app-main {
-      .el-breadcrumb { /*重新定义导航面包屑的样式*/
-        margin: -20px -20px 10px -20px;
-        padding: 10px;
-        background: #D9DBDB;
-      }
+      padding: 0;
     }
   }
 

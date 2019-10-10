@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
-import security from './security'
+// import security from './security'
 
 const CTX = CONTEXT_PATH + 'd'
 
@@ -105,6 +105,6 @@ export default new Store({
   },
   actions: {},
   modules: {
-    security
+    // security
   }
 })
