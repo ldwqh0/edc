@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xyyh.edc.common.dto.TableResult;
 import com.xyyh.edc.common.utils.StreamUtils;
 import com.xyyh.edc.data.service.EdcDataService;
 import com.xyyh.edc.meta.api.ColumnDefine;
@@ -114,13 +114,14 @@ public class DataController {
 	 * @return
 	 */
 	@GetMapping(value = "{collection}", params = "draw")
-	public TableResult<?> list(@PathVariable("collection") String collection, @RequestParam("draw") Long draw,
+	public Page<?> list(@PathVariable("collection") String collection, @RequestParam("draw") Long draw,
 			@PageableDefault Pageable pageable) {
 		Optional<TableDefine> tableDefine = tableService.findByName(collection);
 		if (tableDefine.isPresent()) {
-			return TableResult.success(draw, dataService.list(tableDefine.get(), pageable));
+			return dataService.list(tableDefine.get(), pageable);
 		} else {
-			return TableResult.failure(draw, pageable, "指定数据定义不存在");
+			throw new RuntimeException("指定数据定义不存在");
+//			return TableResult.failure(draw, pageable, "指定数据定义不存在");
 		}
 	}
 

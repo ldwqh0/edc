@@ -7,7 +7,7 @@ const instance = axios.create()
 
 instance.interceptors.request.use(config => {
   config.paramsSerializer = (params) => {
-    return qs.stringify(params, {arrayFormat: 'repeat'})
+    return qs.stringify(params, { arrayFormat: 'repeat' })
   }
   const authorization = store.getters['security/token']
   if (authorization !== null) {
@@ -19,10 +19,10 @@ instance.interceptors.request.use(config => {
   return Promise.reject(error)
 })
 
-instance.interceptors.response.use(response => {
+instance.interceptors.response.use((response) => {
   store.commit('loadingComplete')
   let err = '与服务器交互时出现错误'
-  const {status, error} = response
+  const { status, error } = response
 
   if (status >= 200 && status < 300) {
     return response
@@ -33,14 +33,14 @@ instance.interceptors.response.use(response => {
   return Promise.reject(response)
 }, error => {
   store.commit('loadingComplete')
-  const {response: {status}} = error
+  const { response: { status } } = error
   if (status === 401) {
-    const {name, query, params} = router.history.current
+    const { name, query, params } = router.history.current
     if (name === 'login') {
       // 如果当前页面是login,什么都不做
     } else {
-      const redirect = {name, query, params}
-      router.replace({name: 'login', query: {redirect: JSON.stringify(redirect)}})
+      const redirect = { name, query, params }
+      router.replace({ name: 'login', query: { redirect: JSON.stringify(redirect) } })
     }
   } else {
     store.commit('addError', error)

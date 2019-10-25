@@ -3,6 +3,7 @@
   <el-container>
     <!--左侧为控件列表-->
     <el-aside width="250px">
+      <div class="widget-cate">基本组件</div>
       <draggable tag="ul"
                  :list="basicComponents"
                  :group="{ name:'people', pull:'clone',put:false}"
@@ -18,7 +19,7 @@
           </a>
         </li>
       </draggable>
-      <div class="widget-cate">布局字段</div>
+      <div class="widget-cate">布局组件</div>
       <draggable tag="ul"
                  :list="layoutComponents"
                  v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">

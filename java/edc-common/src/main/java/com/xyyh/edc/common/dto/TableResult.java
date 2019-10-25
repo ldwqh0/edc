@@ -10,6 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+@Deprecated
 public interface TableResult<T> extends Serializable {
 	public Long getDraw();
 

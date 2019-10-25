@@ -31,7 +31,7 @@
   import Vue from 'vue'
   import { Component, Prop, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import ElDatatables from 'element-datatables'
+  import ElDatatables from './ele-data-tables'
 
   const tableModule = namespace('table')
   const formModule = namespace('form')

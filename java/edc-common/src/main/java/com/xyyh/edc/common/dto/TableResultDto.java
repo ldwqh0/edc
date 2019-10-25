@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @param <T> 列表的数据类型
  */
 @JsonInclude(Include.NON_NULL)
+@Deprecated
 class TableResultDto<T> implements TableResult<T> {
 	private static final long serialVersionUID = -7642770441688089769L;
 
