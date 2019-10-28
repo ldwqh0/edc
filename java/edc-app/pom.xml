@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -53,33 +54,4 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>h2@local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<profiles.active>-</profiles.active>
-				<datasource.url>jdbc:h2:~/edc</datasource.url>
-				<datasource.driver>org.h2.Driver</datasource.driver>
-				<datasource.username>sa</datasource.username>
-				<datasource.password></datasource.password>
-				<datasource.platform>org.hibernate.dialect.H2Dialect
-				</datasource.platform>
-			</properties>
-		</profile>
-		<profile>
-			<id>mysql@local</id>
-			<properties>
-				<datasource.url>jdbc:mysql://localhost:3306/edc?serverTimezone=Asia/Shanghai&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;allowPublicKeyRetrieval=true
-				</datasource.url>
-				<datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
-				<datasource.username>root</datasource.username>
-				<datasource.password>admin123456!@#</datasource.password>
-				<datasource.platform>org.hibernate.dialect.MySQL8Dialect
-				</datasource.platform>
-			</properties>
-		</profile>
-	</profiles>
 </project>
